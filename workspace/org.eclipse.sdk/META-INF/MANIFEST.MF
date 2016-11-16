@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.sdk;singleton:=true
+Bundle-Version: 4.6.1.v20160907-1200
+Bundle-ClassPath: org.eclipse.sdk_4.6.1.v20160907-1200
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.help.ui;bundle-version="[4.0.0,5.0.0)",
+ org.eclipse.help.base;bundle-version="[4.0.0,5.0.0)",
+ org.eclipse.ui.cheatsheets;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.ui.ide.application;bundle-version="[1.0.0,2.0.0)"
+Archiver-Version: Plexus Archiver
+Build-Jdk: 1.8.0_51
+Eclipse-SourceReferences: scm:git:git://git.eclipse.org/gitroot/platform/eclipse.platform.git;path="platform/org.eclipse.sdk";tag="M20160629-1300";commitId=b715ac9cd058efbe6acfe86b38e4366ddef6b88b
+Eclipse-BundleShape: dir
+Created-By: Apache Maven 3.3.3
+Built-By: genie.releng

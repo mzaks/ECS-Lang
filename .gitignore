@@ -1,0 +1,9 @@
+Eclipse.app
+.DS_Store
+bin/
+target/
+xtext-gen/
+xtend-gen/
+*._trace
+*.xtendbin
+workspace/.metadata/

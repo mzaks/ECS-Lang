@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="lang" nsURI="http://www.Lang.ecs" nsPrefix="lang">
+  <eClassifiers xsi:type="ecore:EClass" name="Project">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="platformDefinition" eType="#//Platforms"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="#//Namespace"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeAliases" upperBound="-1"
+        eType="#//Alias" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//Component" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="systems" upperBound="-1"
+        eType="#//System" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentSystems" upperBound="-1"
+        eType="#//ParentSystem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDefinitions" upperBound="-1"
+        eType="#//ContextDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" unique="false"
+        upperBound="-1" eType="#//AComponent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Platforms">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ids" upperBound="-1" eType="#//PlatformID"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformID">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Namespace">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Alias" eSuperTypes="#//AComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listOfAliases" eType="#//AliasList"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="singleAlias" eType="#//SingleAlias"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleAlias">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AliasList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+        eType="#//AliasRule" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AliasRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="platform" eType="#//PlatformID"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//AComponent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueType" eType="#//Alias"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//ComponentProperty" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentProperty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Alias"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//AComponent #//ASystem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="init" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" eType="#//Input"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueComp" upperBound="-1"
+        eType="#//UniqueComponentAccess" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
+        eType="#//Group" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="createRules" upperBound="-1"
+        eType="#//CreateRule" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Input">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unqiue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" upperBound="-1"
+        eType="#//InputTrigger" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ensureComponents" unique="false"
+        upperBound="-1" eType="#//AComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="excludeComponents" unique="false"
+        upperBound="-1" eType="#//AComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="apiRules" upperBound="-1"
+        eType="#//ApiRule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="destroy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputTrigger">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enterComponents" unique="false"
+        upperBound="-1" eType="#//AComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" unique="false" upperBound="-1"
+        eType="#//AComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enteredOrLeft" unique="false"
+        upperBound="-1" eType="#//AComponent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CreateRule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" unique="false"
+        upperBound="-1" eType="#//AComponent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UniqueComponentAccess">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="apiRule" eType="#//ApiRule"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Group">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="group" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allOfComponents" unique="false"
+        upperBound="-1" eType="#//AComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="anyOfComponents" unique="false"
+        upperBound="-1" eType="#//AComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="noneOfComponents" unique="false"
+        upperBound="-1" eType="#//AComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="apiRules" upperBound="-1"
+        eType="#//ApiRule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="destroy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApiRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="#//AComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="accesors" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ASystem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParentSystem" eSuperTypes="#//AComponent #//ASystem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Alias"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" unique="false"
+        upperBound="-1" eType="#//ASystem"/>
+  </eClassifiers>
+</ecore:EPackage>

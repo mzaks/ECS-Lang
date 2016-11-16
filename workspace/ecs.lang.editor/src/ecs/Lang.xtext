@@ -1,0 +1,120 @@
+grammar ecs.Lang with org.eclipse.xtext.common.Terminals
+
+generate lang "http://www.Lang.ecs"
+
+Project:
+	platformDefinition = Platforms
+	namespace = Namespace?
+	typeAliases += Alias*
+	components += Component*
+	systems += System*
+	parentSystems += ParentSystem*
+	contextDefinitions += ContextDefinition*
+;
+
+ContextDefinition:
+	'ctx' name += ValidID+ '{'
+		components += [AComponent]+
+	'}'
+;
+
+Platforms:
+	'platform' ids += PlatformID+
+;
+
+PlatformID:
+	name = ValidID
+;
+
+Namespace:
+	"namespace" name=QualifiedName
+;
+
+Alias:
+	'alias' (componentAlias ?= 'comp')? (unique ?= 'unique')? name = ValidID (listOfAliases = AliasList | singleAlias = SingleAlias)
+;
+
+SingleAlias:
+	'=' typeAlias = STRING size=INT?
+;
+
+AliasList:
+	'{' rules += AliasRule+ '}'
+;
+
+AliasRule:
+	platform = [PlatformID] ':' typeAlias = STRING (size=INT variableSize?='*'?)?
+;
+
+AComponent:
+	Component | Alias | System | ParentSystem
+;
+
+Component:
+	'comp' (unique ?= 'unique')? name = ValidID (( (':' valueType = [Alias])? | ('{' properties += ComponentProperty+ '}')) | '/' prefix = STRING)
+;
+
+ComponentProperty:
+	name = ValidID ':' type = [Alias]
+;
+
+System:
+	'sys' (componentAlias ?= 'comp')? (unique ?= 'unique')? (init ?= 'init')? name = ValidID '{'
+		input = Input?
+		uniqueComp += UniqueComponentAccess*
+		groups += Group*
+		createRules += CreateRule*
+	'}'
+;
+
+Input:
+	'input' unqiue ?= 'unique'? '{'
+		'trigger' ':' triggers += InputTrigger+
+		 ('ensure' ':' ensureComponents += [AComponent]+)?
+		 ('exclude' ':' excludeComponents += [AComponent]+)?
+		 'api' ':' apiRules += ApiRule+ (destroy ?= 'destroy')?
+	'}'
+;
+
+InputTrigger:
+	'enteredGroup' '(' enterComponents += [AComponent]+ ')' |
+	'leftGroup' '(' left += [AComponent]+ ')' |
+	'enteredOrLeftGroup' '(' enteredOrLeft += [AComponent]+ ')'	
+;
+
+CreateRule:
+	'create' name = ValidID ':' componentTypes += [AComponent]+
+;
+
+UniqueComponentAccess:
+	'unique' ':' apiRule = ApiRule
+;
+
+Group:
+	(group?='group' | unique?='unique') name = ValidID '{'
+		'matcher' ':' ('allOf' '(' allOfComponents += [AComponent]+ ')')? ('anyOf' '(' anyOfComponents += [AComponent]+ ')')? ('noneOf' '(' noneOfComponents += [AComponent]+ ')')?
+		'api' ':' apiRules += ApiRule+ (destroy ?= 'destroy')?
+	'}'
+;
+
+ApiRule:
+	component = [AComponent] ('(' accesors += ComponentApiAccessor+ ')')?
+;
+
+ComponentApiAccessor:
+	'add' | 'get' | 'has' | 'replace' | 'remove'
+;
+
+ASystem:
+	System | ParentSystem
+;
+
+ParentSystem:
+	'parent_sys' (componentAlias ?= 'comp')? (unique ?= 'unique')? name = ValidID ('extends' parent = [Alias])? '{' children += [ASystem]+ '}' 
+;
+
+QualifiedName:
+  ValidID ('.' ValidID)*;
+  
+ValidID:
+  ID;
