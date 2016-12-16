@@ -16,8 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.ContextDefinition#getName <em>Name</em>}</li>
- *   <li>{@link ecs.lang.ContextDefinition#getComponents <em>Components</em>}</li>
+ *   <li>{@link ecs.lang.ContextDefinition#getNames <em>Names</em>}</li>
  * </ul>
  *
  * @see ecs.lang.LangPackage#getContextDefinition()
@@ -27,35 +26,19 @@ import org.eclipse.emf.ecore.EObject;
 public interface ContextDefinition extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
+   * Returns the value of the '<em><b>Names</b></em>' containment reference list.
+   * The list contents are of type {@link ecs.lang.ContextName}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Name</em>' attribute list isn't clear,
+   * If the meaning of the '<em>Names</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute list.
-   * @see ecs.lang.LangPackage#getContextDefinition_Name()
-   * @model unique="false"
+   * @return the value of the '<em>Names</em>' containment reference list.
+   * @see ecs.lang.LangPackage#getContextDefinition_Names()
+   * @model containment="true"
    * @generated
    */
-  EList<String> getName();
-
-  /**
-   * Returns the value of the '<em><b>Components</b></em>' reference list.
-   * The list contents are of type {@link ecs.lang.AComponent}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Components</em>' reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Components</em>' reference list.
-   * @see ecs.lang.LangPackage#getContextDefinition_Components()
-   * @model
-   * @generated
-   */
-  EList<AComponent> getComponents();
+  EList<ContextName> getNames();
 
 } // ContextDefinition

@@ -18,11 +18,13 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link ecs.lang.Project#getPlatformDefinition <em>Platform Definition</em>}</li>
  *   <li>{@link ecs.lang.Project#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link ecs.lang.Project#getContextDefinition <em>Context Definition</em>}</li>
  *   <li>{@link ecs.lang.Project#getTypeAliases <em>Type Aliases</em>}</li>
  *   <li>{@link ecs.lang.Project#getComponents <em>Components</em>}</li>
+ *   <li>{@link ecs.lang.Project#getProcedures <em>Procedures</em>}</li>
+ *   <li>{@link ecs.lang.Project#getObservers <em>Observers</em>}</li>
  *   <li>{@link ecs.lang.Project#getSystems <em>Systems</em>}</li>
- *   <li>{@link ecs.lang.Project#getParentSystems <em>Parent Systems</em>}</li>
- *   <li>{@link ecs.lang.Project#getContextDefinitions <em>Context Definitions</em>}</li>
+ *   <li>{@link ecs.lang.Project#getChains <em>Chains</em>}</li>
  * </ul>
  *
  * @see ecs.lang.LangPackage#getProject()
@@ -84,6 +86,32 @@ public interface Project extends EObject
   void setNamespace(Namespace value);
 
   /**
+   * Returns the value of the '<em><b>Context Definition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Context Definition</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Context Definition</em>' containment reference.
+   * @see #setContextDefinition(ContextDefinition)
+   * @see ecs.lang.LangPackage#getProject_ContextDefinition()
+   * @model containment="true"
+   * @generated
+   */
+  ContextDefinition getContextDefinition();
+
+  /**
+   * Sets the value of the '{@link ecs.lang.Project#getContextDefinition <em>Context Definition</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Context Definition</em>' containment reference.
+   * @see #getContextDefinition()
+   * @generated
+   */
+  void setContextDefinition(ContextDefinition value);
+
+  /**
    * Returns the value of the '<em><b>Type Aliases</b></em>' containment reference list.
    * The list contents are of type {@link ecs.lang.Alias}.
    * <!-- begin-user-doc -->
@@ -116,6 +144,38 @@ public interface Project extends EObject
   EList<Component> getComponents();
 
   /**
+   * Returns the value of the '<em><b>Procedures</b></em>' containment reference list.
+   * The list contents are of type {@link ecs.lang.Procedure}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Procedures</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Procedures</em>' containment reference list.
+   * @see ecs.lang.LangPackage#getProject_Procedures()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Procedure> getProcedures();
+
+  /**
+   * Returns the value of the '<em><b>Observers</b></em>' containment reference list.
+   * The list contents are of type {@link ecs.lang.Observer}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Observers</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Observers</em>' containment reference list.
+   * @see ecs.lang.LangPackage#getProject_Observers()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Observer> getObservers();
+
+  /**
    * Returns the value of the '<em><b>Systems</b></em>' containment reference list.
    * The list contents are of type {@link ecs.lang.System}.
    * <!-- begin-user-doc -->
@@ -132,35 +192,19 @@ public interface Project extends EObject
   EList<ecs.lang.System> getSystems();
 
   /**
-   * Returns the value of the '<em><b>Parent Systems</b></em>' containment reference list.
-   * The list contents are of type {@link ecs.lang.ParentSystem}.
+   * Returns the value of the '<em><b>Chains</b></em>' containment reference list.
+   * The list contents are of type {@link ecs.lang.Chain}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Parent Systems</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Chains</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Parent Systems</em>' containment reference list.
-   * @see ecs.lang.LangPackage#getProject_ParentSystems()
+   * @return the value of the '<em>Chains</em>' containment reference list.
+   * @see ecs.lang.LangPackage#getProject_Chains()
    * @model containment="true"
    * @generated
    */
-  EList<ParentSystem> getParentSystems();
-
-  /**
-   * Returns the value of the '<em><b>Context Definitions</b></em>' containment reference list.
-   * The list contents are of type {@link ecs.lang.ContextDefinition}.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Context Definitions</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Context Definitions</em>' containment reference list.
-   * @see ecs.lang.LangPackage#getProject_ContextDefinitions()
-   * @model containment="true"
-   * @generated
-   */
-  EList<ContextDefinition> getContextDefinitions();
+  EList<Chain> getChains();
 
 } // Project

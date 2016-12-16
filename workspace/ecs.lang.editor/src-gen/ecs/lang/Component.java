@@ -15,6 +15,8 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link ecs.lang.Component#getValueType <em>Value Type</em>}</li>
+ *   <li>{@link ecs.lang.Component#isIndex <em>Index</em>}</li>
+ *   <li>{@link ecs.lang.Component#isMultiIndex <em>Multi Index</em>}</li>
  *   <li>{@link ecs.lang.Component#getProperties <em>Properties</em>}</li>
  *   <li>{@link ecs.lang.Component#getPrefix <em>Prefix</em>}</li>
  * </ul>
@@ -50,6 +52,58 @@ public interface Component extends AComponent
    * @generated
    */
   void setValueType(Alias value);
+
+  /**
+   * Returns the value of the '<em><b>Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Index</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Index</em>' attribute.
+   * @see #setIndex(boolean)
+   * @see ecs.lang.LangPackage#getComponent_Index()
+   * @model
+   * @generated
+   */
+  boolean isIndex();
+
+  /**
+   * Sets the value of the '{@link ecs.lang.Component#isIndex <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Index</em>' attribute.
+   * @see #isIndex()
+   * @generated
+   */
+  void setIndex(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Multi Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Multi Index</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Multi Index</em>' attribute.
+   * @see #setMultiIndex(boolean)
+   * @see ecs.lang.LangPackage#getComponent_MultiIndex()
+   * @model
+   * @generated
+   */
+  boolean isMultiIndex();
+
+  /**
+   * Sets the value of the '{@link ecs.lang.Component#isMultiIndex <em>Multi Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Multi Index</em>' attribute.
+   * @see #isMultiIndex()
+   * @generated
+   */
+  void setMultiIndex(boolean value);
 
   /**
    * Returns the value of the '<em><b>Properties</b></em>' containment reference list.

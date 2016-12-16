@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link ecs.lang.AComponent#getContextRef <em>Context Ref</em>}</li>
  *   <li>{@link ecs.lang.AComponent#isUnique <em>Unique</em>}</li>
  *   <li>{@link ecs.lang.AComponent#getName <em>Name</em>}</li>
  * </ul>
@@ -24,6 +25,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface AComponent extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Context Ref</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Context Ref</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Context Ref</em>' containment reference.
+   * @see #setContextRef(ContextReference)
+   * @see ecs.lang.LangPackage#getAComponent_ContextRef()
+   * @model containment="true"
+   * @generated
+   */
+  ContextReference getContextRef();
+
+  /**
+   * Sets the value of the '{@link ecs.lang.AComponent#getContextRef <em>Context Ref</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Context Ref</em>' containment reference.
+   * @see #getContextRef()
+   * @generated
+   */
+  void setContextRef(ContextReference value);
+
   /**
    * Returns the value of the '<em><b>Unique</b></em>' attribute.
    * <!-- begin-user-doc -->

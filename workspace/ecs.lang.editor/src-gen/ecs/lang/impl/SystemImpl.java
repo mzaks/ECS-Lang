@@ -5,6 +5,7 @@ package ecs.lang.impl;
 
 import ecs.lang.CreateRule;
 import ecs.lang.Group;
+import ecs.lang.Index;
 import ecs.lang.Input;
 import ecs.lang.LangPackage;
 import ecs.lang.UniqueComponentAccess;
@@ -34,9 +35,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link ecs.lang.impl.SystemImpl#isComponentAlias <em>Component Alias</em>}</li>
  *   <li>{@link ecs.lang.impl.SystemImpl#isInit <em>Init</em>}</li>
+ *   <li>{@link ecs.lang.impl.SystemImpl#isCleanup <em>Cleanup</em>}</li>
+ *   <li>{@link ecs.lang.impl.SystemImpl#isTeardown <em>Teardown</em>}</li>
  *   <li>{@link ecs.lang.impl.SystemImpl#getInput <em>Input</em>}</li>
  *   <li>{@link ecs.lang.impl.SystemImpl#getUniqueComp <em>Unique Comp</em>}</li>
  *   <li>{@link ecs.lang.impl.SystemImpl#getGroups <em>Groups</em>}</li>
+ *   <li>{@link ecs.lang.impl.SystemImpl#getIndex <em>Index</em>}</li>
  *   <li>{@link ecs.lang.impl.SystemImpl#getCreateRules <em>Create Rules</em>}</li>
  * </ul>
  *
@@ -85,6 +89,46 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
   protected boolean init = INIT_EDEFAULT;
 
   /**
+   * The default value of the '{@link #isCleanup() <em>Cleanup</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isCleanup()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean CLEANUP_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isCleanup() <em>Cleanup</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isCleanup()
+   * @generated
+   * @ordered
+   */
+  protected boolean cleanup = CLEANUP_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #isTeardown() <em>Teardown</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isTeardown()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean TEARDOWN_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isTeardown() <em>Teardown</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isTeardown()
+   * @generated
+   * @ordered
+   */
+  protected boolean teardown = TEARDOWN_EDEFAULT;
+
+  /**
    * The cached value of the '{@link #getInput() <em>Input</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -113,6 +157,16 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
    * @ordered
    */
   protected EList<Group> groups;
+
+  /**
+   * The cached value of the '{@link #getIndex() <em>Index</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getIndex()
+   * @generated
+   * @ordered
+   */
+  protected EList<Index> index;
 
   /**
    * The cached value of the '{@link #getCreateRules() <em>Create Rules</em>}' containment reference list.
@@ -196,6 +250,52 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isCleanup()
+  {
+    return cleanup;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setCleanup(boolean newCleanup)
+  {
+    boolean oldCleanup = cleanup;
+    cleanup = newCleanup;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.SYSTEM__CLEANUP, oldCleanup, cleanup));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isTeardown()
+  {
+    return teardown;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setTeardown(boolean newTeardown)
+  {
+    boolean oldTeardown = teardown;
+    teardown = newTeardown;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.SYSTEM__TEARDOWN, oldTeardown, teardown));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Input getInput()
   {
     return input;
@@ -272,6 +372,20 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Index> getIndex()
+  {
+    if (index == null)
+    {
+      index = new EObjectContainmentEList<Index>(Index.class, this, LangPackage.SYSTEM__INDEX);
+    }
+    return index;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<CreateRule> getCreateRules()
   {
     if (createRules == null)
@@ -297,6 +411,8 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
         return ((InternalEList<?>)getUniqueComp()).basicRemove(otherEnd, msgs);
       case LangPackage.SYSTEM__GROUPS:
         return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
+      case LangPackage.SYSTEM__INDEX:
+        return ((InternalEList<?>)getIndex()).basicRemove(otherEnd, msgs);
       case LangPackage.SYSTEM__CREATE_RULES:
         return ((InternalEList<?>)getCreateRules()).basicRemove(otherEnd, msgs);
     }
@@ -317,12 +433,18 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
         return isComponentAlias();
       case LangPackage.SYSTEM__INIT:
         return isInit();
+      case LangPackage.SYSTEM__CLEANUP:
+        return isCleanup();
+      case LangPackage.SYSTEM__TEARDOWN:
+        return isTeardown();
       case LangPackage.SYSTEM__INPUT:
         return getInput();
       case LangPackage.SYSTEM__UNIQUE_COMP:
         return getUniqueComp();
       case LangPackage.SYSTEM__GROUPS:
         return getGroups();
+      case LangPackage.SYSTEM__INDEX:
+        return getIndex();
       case LangPackage.SYSTEM__CREATE_RULES:
         return getCreateRules();
     }
@@ -346,6 +468,12 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
       case LangPackage.SYSTEM__INIT:
         setInit((Boolean)newValue);
         return;
+      case LangPackage.SYSTEM__CLEANUP:
+        setCleanup((Boolean)newValue);
+        return;
+      case LangPackage.SYSTEM__TEARDOWN:
+        setTeardown((Boolean)newValue);
+        return;
       case LangPackage.SYSTEM__INPUT:
         setInput((Input)newValue);
         return;
@@ -356,6 +484,10 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
       case LangPackage.SYSTEM__GROUPS:
         getGroups().clear();
         getGroups().addAll((Collection<? extends Group>)newValue);
+        return;
+      case LangPackage.SYSTEM__INDEX:
+        getIndex().clear();
+        getIndex().addAll((Collection<? extends Index>)newValue);
         return;
       case LangPackage.SYSTEM__CREATE_RULES:
         getCreateRules().clear();
@@ -381,6 +513,12 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
       case LangPackage.SYSTEM__INIT:
         setInit(INIT_EDEFAULT);
         return;
+      case LangPackage.SYSTEM__CLEANUP:
+        setCleanup(CLEANUP_EDEFAULT);
+        return;
+      case LangPackage.SYSTEM__TEARDOWN:
+        setTeardown(TEARDOWN_EDEFAULT);
+        return;
       case LangPackage.SYSTEM__INPUT:
         setInput((Input)null);
         return;
@@ -389,6 +527,9 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
         return;
       case LangPackage.SYSTEM__GROUPS:
         getGroups().clear();
+        return;
+      case LangPackage.SYSTEM__INDEX:
+        getIndex().clear();
         return;
       case LangPackage.SYSTEM__CREATE_RULES:
         getCreateRules().clear();
@@ -411,12 +552,18 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
         return componentAlias != COMPONENT_ALIAS_EDEFAULT;
       case LangPackage.SYSTEM__INIT:
         return init != INIT_EDEFAULT;
+      case LangPackage.SYSTEM__CLEANUP:
+        return cleanup != CLEANUP_EDEFAULT;
+      case LangPackage.SYSTEM__TEARDOWN:
+        return teardown != TEARDOWN_EDEFAULT;
       case LangPackage.SYSTEM__INPUT:
         return input != null;
       case LangPackage.SYSTEM__UNIQUE_COMP:
         return uniqueComp != null && !uniqueComp.isEmpty();
       case LangPackage.SYSTEM__GROUPS:
         return groups != null && !groups.isEmpty();
+      case LangPackage.SYSTEM__INDEX:
+        return index != null && !index.isEmpty();
       case LangPackage.SYSTEM__CREATE_RULES:
         return createRules != null && !createRules.isEmpty();
     }
@@ -438,6 +585,10 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
     result.append(componentAlias);
     result.append(", init: ");
     result.append(init);
+    result.append(", cleanup: ");
+    result.append(cleanup);
+    result.append(", teardown: ");
+    result.append(teardown);
     result.append(')');
     return result.toString();
   }

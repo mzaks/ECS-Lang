@@ -9,18 +9,24 @@ import ecs.lang.Alias;
 import ecs.lang.AliasList;
 import ecs.lang.AliasRule;
 import ecs.lang.ApiRule;
+import ecs.lang.Chain;
 import ecs.lang.Component;
 import ecs.lang.ComponentProperty;
 import ecs.lang.ContextDefinition;
+import ecs.lang.ContextName;
+import ecs.lang.ContextReference;
 import ecs.lang.CreateRule;
 import ecs.lang.Group;
+import ecs.lang.Index;
 import ecs.lang.Input;
 import ecs.lang.InputTrigger;
 import ecs.lang.LangPackage;
 import ecs.lang.Namespace;
-import ecs.lang.ParentSystem;
+import ecs.lang.Observer;
+import ecs.lang.Parameter;
 import ecs.lang.PlatformID;
 import ecs.lang.Platforms;
+import ecs.lang.Procedure;
 import ecs.lang.Project;
 import ecs.lang.SingleAlias;
 import ecs.lang.UniqueComponentAccess;
@@ -106,6 +112,16 @@ public class LangAdapterFactory extends AdapterFactoryImpl
         return createContextDefinitionAdapter();
       }
       @Override
+      public Adapter caseContextName(ContextName object)
+      {
+        return createContextNameAdapter();
+      }
+      @Override
+      public Adapter caseContextReference(ContextReference object)
+      {
+        return createContextReferenceAdapter();
+      }
+      @Override
       public Adapter casePlatforms(Platforms object)
       {
         return createPlatformsAdapter();
@@ -176,6 +192,11 @@ public class LangAdapterFactory extends AdapterFactoryImpl
         return createCreateRuleAdapter();
       }
       @Override
+      public Adapter caseIndex(Index object)
+      {
+        return createIndexAdapter();
+      }
+      @Override
       public Adapter caseUniqueComponentAccess(UniqueComponentAccess object)
       {
         return createUniqueComponentAccessAdapter();
@@ -196,9 +217,24 @@ public class LangAdapterFactory extends AdapterFactoryImpl
         return createASystemAdapter();
       }
       @Override
-      public Adapter caseParentSystem(ParentSystem object)
+      public Adapter caseChain(Chain object)
       {
-        return createParentSystemAdapter();
+        return createChainAdapter();
+      }
+      @Override
+      public Adapter caseProcedure(Procedure object)
+      {
+        return createProcedureAdapter();
+      }
+      @Override
+      public Adapter caseObserver(Observer object)
+      {
+        return createObserverAdapter();
+      }
+      @Override
+      public Adapter caseParameter(Parameter object)
+      {
+        return createParameterAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -248,6 +284,36 @@ public class LangAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createContextDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ecs.lang.ContextName <em>Context Name</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ecs.lang.ContextName
+   * @generated
+   */
+  public Adapter createContextNameAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ecs.lang.ContextReference <em>Context Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ecs.lang.ContextReference
+   * @generated
+   */
+  public Adapter createContextReferenceAdapter()
   {
     return null;
   }
@@ -463,6 +529,21 @@ public class LangAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link ecs.lang.Index <em>Index</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ecs.lang.Index
+   * @generated
+   */
+  public Adapter createIndexAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link ecs.lang.UniqueComponentAccess <em>Unique Component Access</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -523,16 +604,61 @@ public class LangAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link ecs.lang.ParentSystem <em>Parent System</em>}'.
+   * Creates a new adapter for an object of class '{@link ecs.lang.Chain <em>Chain</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see ecs.lang.ParentSystem
+   * @see ecs.lang.Chain
    * @generated
    */
-  public Adapter createParentSystemAdapter()
+  public Adapter createChainAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ecs.lang.Procedure <em>Procedure</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ecs.lang.Procedure
+   * @generated
+   */
+  public Adapter createProcedureAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ecs.lang.Observer <em>Observer</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ecs.lang.Observer
+   * @generated
+   */
+  public Adapter createObserverAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ecs.lang.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ecs.lang.Parameter
+   * @generated
+   */
+  public Adapter createParameterAdapter()
   {
     return null;
   }

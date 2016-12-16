@@ -42,6 +42,24 @@ public interface LangFactory extends EFactory
   ContextDefinition createContextDefinition();
 
   /**
+   * Returns a new object of class '<em>Context Name</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Context Name</em>'.
+   * @generated
+   */
+  ContextName createContextName();
+
+  /**
+   * Returns a new object of class '<em>Context Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Context Reference</em>'.
+   * @generated
+   */
+  ContextReference createContextReference();
+
+  /**
    * Returns a new object of class '<em>Platforms</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -168,6 +186,15 @@ public interface LangFactory extends EFactory
   CreateRule createCreateRule();
 
   /**
+   * Returns a new object of class '<em>Index</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Index</em>'.
+   * @generated
+   */
+  Index createIndex();
+
+  /**
    * Returns a new object of class '<em>Unique Component Access</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -204,13 +231,40 @@ public interface LangFactory extends EFactory
   ASystem createASystem();
 
   /**
-   * Returns a new object of class '<em>Parent System</em>'.
+   * Returns a new object of class '<em>Chain</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Parent System</em>'.
+   * @return a new object of class '<em>Chain</em>'.
    * @generated
    */
-  ParentSystem createParentSystem();
+  Chain createChain();
+
+  /**
+   * Returns a new object of class '<em>Procedure</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Procedure</em>'.
+   * @generated
+   */
+  Procedure createProcedure();
+
+  /**
+   * Returns a new object of class '<em>Observer</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Observer</em>'.
+   * @generated
+   */
+  Observer createObserver();
+
+  /**
+   * Returns a new object of class '<em>Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter</em>'.
+   * @generated
+   */
+  Parameter createParameter();
 
   /**
    * Returns the package supported by this factory.

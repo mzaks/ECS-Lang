@@ -32,6 +32,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link ecs.lang.impl.ComponentImpl#getValueType <em>Value Type</em>}</li>
+ *   <li>{@link ecs.lang.impl.ComponentImpl#isIndex <em>Index</em>}</li>
+ *   <li>{@link ecs.lang.impl.ComponentImpl#isMultiIndex <em>Multi Index</em>}</li>
  *   <li>{@link ecs.lang.impl.ComponentImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link ecs.lang.impl.ComponentImpl#getPrefix <em>Prefix</em>}</li>
  * </ul>
@@ -49,6 +51,46 @@ public class ComponentImpl extends AComponentImpl implements Component
    * @ordered
    */
   protected Alias valueType;
+
+  /**
+   * The default value of the '{@link #isIndex() <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isIndex()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean INDEX_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isIndex() <em>Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isIndex()
+   * @generated
+   * @ordered
+   */
+  protected boolean index = INDEX_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #isMultiIndex() <em>Multi Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isMultiIndex()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean MULTI_INDEX_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isMultiIndex() <em>Multi Index</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isMultiIndex()
+   * @generated
+   * @ordered
+   */
+  protected boolean multiIndex = MULTI_INDEX_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
@@ -149,6 +191,52 @@ public class ComponentImpl extends AComponentImpl implements Component
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isIndex()
+  {
+    return index;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setIndex(boolean newIndex)
+  {
+    boolean oldIndex = index;
+    index = newIndex;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.COMPONENT__INDEX, oldIndex, index));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isMultiIndex()
+  {
+    return multiIndex;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setMultiIndex(boolean newMultiIndex)
+  {
+    boolean oldMultiIndex = multiIndex;
+    multiIndex = newMultiIndex;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.COMPONENT__MULTI_INDEX, oldMultiIndex, multiIndex));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<ComponentProperty> getProperties()
   {
     if (properties == null)
@@ -210,6 +298,10 @@ public class ComponentImpl extends AComponentImpl implements Component
       case LangPackage.COMPONENT__VALUE_TYPE:
         if (resolve) return getValueType();
         return basicGetValueType();
+      case LangPackage.COMPONENT__INDEX:
+        return isIndex();
+      case LangPackage.COMPONENT__MULTI_INDEX:
+        return isMultiIndex();
       case LangPackage.COMPONENT__PROPERTIES:
         return getProperties();
       case LangPackage.COMPONENT__PREFIX:
@@ -231,6 +323,12 @@ public class ComponentImpl extends AComponentImpl implements Component
     {
       case LangPackage.COMPONENT__VALUE_TYPE:
         setValueType((Alias)newValue);
+        return;
+      case LangPackage.COMPONENT__INDEX:
+        setIndex((Boolean)newValue);
+        return;
+      case LangPackage.COMPONENT__MULTI_INDEX:
+        setMultiIndex((Boolean)newValue);
         return;
       case LangPackage.COMPONENT__PROPERTIES:
         getProperties().clear();
@@ -256,6 +354,12 @@ public class ComponentImpl extends AComponentImpl implements Component
       case LangPackage.COMPONENT__VALUE_TYPE:
         setValueType((Alias)null);
         return;
+      case LangPackage.COMPONENT__INDEX:
+        setIndex(INDEX_EDEFAULT);
+        return;
+      case LangPackage.COMPONENT__MULTI_INDEX:
+        setMultiIndex(MULTI_INDEX_EDEFAULT);
+        return;
       case LangPackage.COMPONENT__PROPERTIES:
         getProperties().clear();
         return;
@@ -278,6 +382,10 @@ public class ComponentImpl extends AComponentImpl implements Component
     {
       case LangPackage.COMPONENT__VALUE_TYPE:
         return valueType != null;
+      case LangPackage.COMPONENT__INDEX:
+        return index != INDEX_EDEFAULT;
+      case LangPackage.COMPONENT__MULTI_INDEX:
+        return multiIndex != MULTI_INDEX_EDEFAULT;
       case LangPackage.COMPONENT__PROPERTIES:
         return properties != null && !properties.isEmpty();
       case LangPackage.COMPONENT__PREFIX:
@@ -297,7 +405,11 @@ public class ComponentImpl extends AComponentImpl implements Component
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (prefix: ");
+    result.append(" (index: ");
+    result.append(index);
+    result.append(", multiIndex: ");
+    result.append(multiIndex);
+    result.append(", prefix: ");
     result.append(prefix);
     result.append(')');
     return result.toString();

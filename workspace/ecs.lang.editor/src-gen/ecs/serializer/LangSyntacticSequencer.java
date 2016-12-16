@@ -11,6 +11,9 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
@@ -18,10 +21,46 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class LangSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected LangGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_ApiRule_CommaKeyword_1_1_1_q;
+	protected AbstractElementAlias match_Chain_CommaKeyword_5_1_q;
+	protected AbstractElementAlias match_Chain___LeftCurlyBracketKeyword_4_1_0_RightCurlyBracketKeyword_4_1_3__q;
+	protected AbstractElementAlias match_Component_CommaKeyword_4_0_1_1_1_q;
+	protected AbstractElementAlias match_ContextDefinition_CommaKeyword_1_1_q;
+	protected AbstractElementAlias match_ContextReference_CommaKeyword_1_1_q;
+	protected AbstractElementAlias match_CreateRule_CommaKeyword_3_1_q;
+	protected AbstractElementAlias match_Group_CommaKeyword_5_2_1_q;
+	protected AbstractElementAlias match_Group_CommaKeyword_8_2_1_q;
+	protected AbstractElementAlias match_Index_CommaKeyword_6_2_1_q;
+	protected AbstractElementAlias match_InputTrigger_CommaKeyword_0_2_1_q;
+	protected AbstractElementAlias match_InputTrigger_CommaKeyword_1_2_1_q;
+	protected AbstractElementAlias match_InputTrigger_CommaKeyword_2_2_1_q;
+	protected AbstractElementAlias match_Input_CommaKeyword_5_1_q;
+	protected AbstractElementAlias match_Input_CommaKeyword_6_2_1_q;
+	protected AbstractElementAlias match_Input_CommaKeyword_7_2_1_q;
+	protected AbstractElementAlias match_Input_CommaKeyword_8_2_1_q;
+	protected AbstractElementAlias match_Platforms_CommaKeyword_1_1_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (LangGrammarAccess) access;
+		match_ApiRule_CommaKeyword_1_1_1_q = new TokenAlias(false, true, grammarAccess.getApiRuleAccess().getCommaKeyword_1_1_1());
+		match_Chain_CommaKeyword_5_1_q = new TokenAlias(false, true, grammarAccess.getChainAccess().getCommaKeyword_5_1());
+		match_Chain___LeftCurlyBracketKeyword_4_1_0_RightCurlyBracketKeyword_4_1_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getChainAccess().getLeftCurlyBracketKeyword_4_1_0()), new TokenAlias(false, false, grammarAccess.getChainAccess().getRightCurlyBracketKeyword_4_1_3()));
+		match_Component_CommaKeyword_4_0_1_1_1_q = new TokenAlias(false, true, grammarAccess.getComponentAccess().getCommaKeyword_4_0_1_1_1());
+		match_ContextDefinition_CommaKeyword_1_1_q = new TokenAlias(false, true, grammarAccess.getContextDefinitionAccess().getCommaKeyword_1_1());
+		match_ContextReference_CommaKeyword_1_1_q = new TokenAlias(false, true, grammarAccess.getContextReferenceAccess().getCommaKeyword_1_1());
+		match_CreateRule_CommaKeyword_3_1_q = new TokenAlias(false, true, grammarAccess.getCreateRuleAccess().getCommaKeyword_3_1());
+		match_Group_CommaKeyword_5_2_1_q = new TokenAlias(false, true, grammarAccess.getGroupAccess().getCommaKeyword_5_2_1());
+		match_Group_CommaKeyword_8_2_1_q = new TokenAlias(false, true, grammarAccess.getGroupAccess().getCommaKeyword_8_2_1());
+		match_Index_CommaKeyword_6_2_1_q = new TokenAlias(false, true, grammarAccess.getIndexAccess().getCommaKeyword_6_2_1());
+		match_InputTrigger_CommaKeyword_0_2_1_q = new TokenAlias(false, true, grammarAccess.getInputTriggerAccess().getCommaKeyword_0_2_1());
+		match_InputTrigger_CommaKeyword_1_2_1_q = new TokenAlias(false, true, grammarAccess.getInputTriggerAccess().getCommaKeyword_1_2_1());
+		match_InputTrigger_CommaKeyword_2_2_1_q = new TokenAlias(false, true, grammarAccess.getInputTriggerAccess().getCommaKeyword_2_2_1());
+		match_Input_CommaKeyword_5_1_q = new TokenAlias(false, true, grammarAccess.getInputAccess().getCommaKeyword_5_1());
+		match_Input_CommaKeyword_6_2_1_q = new TokenAlias(false, true, grammarAccess.getInputAccess().getCommaKeyword_6_2_1());
+		match_Input_CommaKeyword_7_2_1_q = new TokenAlias(false, true, grammarAccess.getInputAccess().getCommaKeyword_7_2_1());
+		match_Input_CommaKeyword_8_2_1_q = new TokenAlias(false, true, grammarAccess.getInputAccess().getCommaKeyword_8_2_1());
+		match_Platforms_CommaKeyword_1_1_q = new TokenAlias(false, true, grammarAccess.getPlatformsAccess().getCommaKeyword_1_1());
 	}
 	
 	@Override
@@ -36,8 +75,283 @@ public class LangSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			acceptNodes(getLastNavigableState(), syntaxNodes);
+			if (match_ApiRule_CommaKeyword_1_1_1_q.equals(syntax))
+				emit_ApiRule_CommaKeyword_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Chain_CommaKeyword_5_1_q.equals(syntax))
+				emit_Chain_CommaKeyword_5_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Chain___LeftCurlyBracketKeyword_4_1_0_RightCurlyBracketKeyword_4_1_3__q.equals(syntax))
+				emit_Chain___LeftCurlyBracketKeyword_4_1_0_RightCurlyBracketKeyword_4_1_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Component_CommaKeyword_4_0_1_1_1_q.equals(syntax))
+				emit_Component_CommaKeyword_4_0_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ContextDefinition_CommaKeyword_1_1_q.equals(syntax))
+				emit_ContextDefinition_CommaKeyword_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ContextReference_CommaKeyword_1_1_q.equals(syntax))
+				emit_ContextReference_CommaKeyword_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_CreateRule_CommaKeyword_3_1_q.equals(syntax))
+				emit_CreateRule_CommaKeyword_3_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Group_CommaKeyword_5_2_1_q.equals(syntax))
+				emit_Group_CommaKeyword_5_2_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Group_CommaKeyword_8_2_1_q.equals(syntax))
+				emit_Group_CommaKeyword_8_2_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Index_CommaKeyword_6_2_1_q.equals(syntax))
+				emit_Index_CommaKeyword_6_2_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_InputTrigger_CommaKeyword_0_2_1_q.equals(syntax))
+				emit_InputTrigger_CommaKeyword_0_2_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_InputTrigger_CommaKeyword_1_2_1_q.equals(syntax))
+				emit_InputTrigger_CommaKeyword_1_2_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_InputTrigger_CommaKeyword_2_2_1_q.equals(syntax))
+				emit_InputTrigger_CommaKeyword_2_2_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Input_CommaKeyword_5_1_q.equals(syntax))
+				emit_Input_CommaKeyword_5_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Input_CommaKeyword_6_2_1_q.equals(syntax))
+				emit_Input_CommaKeyword_6_2_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Input_CommaKeyword_7_2_1_q.equals(syntax))
+				emit_Input_CommaKeyword_7_2_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Input_CommaKeyword_8_2_1_q.equals(syntax))
+				emit_Input_CommaKeyword_8_2_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Platforms_CommaKeyword_1_1_q.equals(syntax))
+				emit_Platforms_CommaKeyword_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     accesors+=ComponentApiAccessor (ambiguity) ')' (rule end)
+	 *     accesors+=ComponentApiAccessor (ambiguity) accesors+=ComponentApiAccessor
+	 */
+	protected void emit_ApiRule_CommaKeyword_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     children+=[ASystem|ID] (ambiguity) '}' (rule end)
+	 *     children+=[ASystem|ID] (ambiguity) children+=[ASystem|ID]
+	 */
+	protected void emit_Chain_CommaKeyword_5_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     precondition?='precondition' (ambiguity) children+=[ASystem|ID]
+	 */
+	protected void emit_Chain___LeftCurlyBracketKeyword_4_1_0_RightCurlyBracketKeyword_4_1_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     properties+=ComponentProperty (ambiguity) '}' (rule end)
+	 *     properties+=ComponentProperty (ambiguity) properties+=ComponentProperty
+	 */
+	protected void emit_Component_CommaKeyword_4_0_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     names+=ContextName (ambiguity) (rule end)
+	 *     names+=ContextName (ambiguity) names+=ContextName
+	 */
+	protected void emit_ContextDefinition_CommaKeyword_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     context+=[ContextName|ID] (ambiguity) ']' (rule end)
+	 *     context+=[ContextName|ID] (ambiguity) context+=[ContextName|ID]
+	 */
+	protected void emit_ContextReference_CommaKeyword_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     componentTypes+=[AComponent|ID] (ambiguity) '@' contextRef=[ContextName|ID]
+	 *     componentTypes+=[AComponent|ID] (ambiguity) (rule end)
+	 *     componentTypes+=[AComponent|ID] (ambiguity) componentTypes+=[AComponent|ID]
+	 */
+	protected void emit_CreateRule_CommaKeyword_3_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     allOfComponents+=[AComponent|ID] (ambiguity) ')' 'anyOf' '(' anyOfComponents+=[AComponent|ID]
+	 *     allOfComponents+=[AComponent|ID] (ambiguity) ')' 'api' ':' apiRules+=ApiRule
+	 *     allOfComponents+=[AComponent|ID] (ambiguity) ')' 'noneOf' '(' noneOfComponents+=[AComponent|ID]
+	 *     allOfComponents+=[AComponent|ID] (ambiguity) ')' '}' '@' contextRef=[ContextName|ID]
+	 *     allOfComponents+=[AComponent|ID] (ambiguity) ')' '}' (rule end)
+	 *     allOfComponents+=[AComponent|ID] (ambiguity) ')' destroy?='destroy'
+	 *     allOfComponents+=[AComponent|ID] (ambiguity) allOfComponents+=[AComponent|ID]
+	 */
+	protected void emit_Group_CommaKeyword_5_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     apiRules+=ApiRule (ambiguity) '}' '@' contextRef=[ContextName|ID]
+	 *     apiRules+=ApiRule (ambiguity) '}' (rule end)
+	 *     apiRules+=ApiRule (ambiguity) apiRules+=ApiRule
+	 *     apiRules+=ApiRule (ambiguity) destroy?='destroy'
+	 */
+	protected void emit_Group_CommaKeyword_8_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     apiRules+=ApiRule (ambiguity) '}' '@' contextRef=[ContextName|ID]
+	 *     apiRules+=ApiRule (ambiguity) '}' (rule end)
+	 *     apiRules+=ApiRule (ambiguity) apiRules+=ApiRule
+	 *     apiRules+=ApiRule (ambiguity) destroy?='destroy'
+	 */
+	protected void emit_Index_CommaKeyword_6_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     enterComponents+=[AComponent|ID] (ambiguity) ')' (rule end)
+	 *     enterComponents+=[AComponent|ID] (ambiguity) enterComponents+=[AComponent|ID]
+	 */
+	protected void emit_InputTrigger_CommaKeyword_0_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     left+=[AComponent|ID] (ambiguity) ')' (rule end)
+	 *     left+=[AComponent|ID] (ambiguity) left+=[AComponent|ID]
+	 */
+	protected void emit_InputTrigger_CommaKeyword_1_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     enteredOrLeft+=[AComponent|ID] (ambiguity) ')' (rule end)
+	 *     enteredOrLeft+=[AComponent|ID] (ambiguity) enteredOrLeft+=[AComponent|ID]
+	 */
+	protected void emit_InputTrigger_CommaKeyword_2_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     triggers+=InputTrigger (ambiguity) 'api' ':' apiRules+=ApiRule
+	 *     triggers+=InputTrigger (ambiguity) 'ensure' ':' ensureComponents+=[AComponent|ID]
+	 *     triggers+=InputTrigger (ambiguity) 'exclude' ':' excludeComponents+=[AComponent|ID]
+	 *     triggers+=InputTrigger (ambiguity) '}' '@' contextRef=[ContextName|ID]
+	 *     triggers+=InputTrigger (ambiguity) '}' (rule end)
+	 *     triggers+=InputTrigger (ambiguity) destroy?='destroy'
+	 *     triggers+=InputTrigger (ambiguity) triggers+=InputTrigger
+	 */
+	protected void emit_Input_CommaKeyword_5_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     ensureComponents+=[AComponent|ID] (ambiguity) 'api' ':' apiRules+=ApiRule
+	 *     ensureComponents+=[AComponent|ID] (ambiguity) 'exclude' ':' excludeComponents+=[AComponent|ID]
+	 *     ensureComponents+=[AComponent|ID] (ambiguity) '}' '@' contextRef=[ContextName|ID]
+	 *     ensureComponents+=[AComponent|ID] (ambiguity) '}' (rule end)
+	 *     ensureComponents+=[AComponent|ID] (ambiguity) destroy?='destroy'
+	 *     ensureComponents+=[AComponent|ID] (ambiguity) ensureComponents+=[AComponent|ID]
+	 */
+	protected void emit_Input_CommaKeyword_6_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     excludeComponents+=[AComponent|ID] (ambiguity) 'api' ':' apiRules+=ApiRule
+	 *     excludeComponents+=[AComponent|ID] (ambiguity) '}' '@' contextRef=[ContextName|ID]
+	 *     excludeComponents+=[AComponent|ID] (ambiguity) '}' (rule end)
+	 *     excludeComponents+=[AComponent|ID] (ambiguity) destroy?='destroy'
+	 *     excludeComponents+=[AComponent|ID] (ambiguity) excludeComponents+=[AComponent|ID]
+	 */
+	protected void emit_Input_CommaKeyword_7_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     apiRules+=ApiRule (ambiguity) '}' '@' contextRef=[ContextName|ID]
+	 *     apiRules+=ApiRule (ambiguity) '}' (rule end)
+	 *     apiRules+=ApiRule (ambiguity) apiRules+=ApiRule
+	 *     apiRules+=ApiRule (ambiguity) destroy?='destroy'
+	 */
+	protected void emit_Input_CommaKeyword_8_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ','?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     ids+=PlatformID (ambiguity) (rule end)
+	 *     ids+=PlatformID (ambiguity) ids+=PlatformID
+	 */
+	protected void emit_Platforms_CommaKeyword_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 }

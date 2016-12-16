@@ -16,9 +16,12 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link ecs.lang.System#isComponentAlias <em>Component Alias</em>}</li>
  *   <li>{@link ecs.lang.System#isInit <em>Init</em>}</li>
+ *   <li>{@link ecs.lang.System#isCleanup <em>Cleanup</em>}</li>
+ *   <li>{@link ecs.lang.System#isTeardown <em>Teardown</em>}</li>
  *   <li>{@link ecs.lang.System#getInput <em>Input</em>}</li>
  *   <li>{@link ecs.lang.System#getUniqueComp <em>Unique Comp</em>}</li>
  *   <li>{@link ecs.lang.System#getGroups <em>Groups</em>}</li>
+ *   <li>{@link ecs.lang.System#getIndex <em>Index</em>}</li>
  *   <li>{@link ecs.lang.System#getCreateRules <em>Create Rules</em>}</li>
  * </ul>
  *
@@ -81,6 +84,58 @@ public interface System extends AComponent, ASystem
   void setInit(boolean value);
 
   /**
+   * Returns the value of the '<em><b>Cleanup</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Cleanup</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Cleanup</em>' attribute.
+   * @see #setCleanup(boolean)
+   * @see ecs.lang.LangPackage#getSystem_Cleanup()
+   * @model
+   * @generated
+   */
+  boolean isCleanup();
+
+  /**
+   * Sets the value of the '{@link ecs.lang.System#isCleanup <em>Cleanup</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Cleanup</em>' attribute.
+   * @see #isCleanup()
+   * @generated
+   */
+  void setCleanup(boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Teardown</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Teardown</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Teardown</em>' attribute.
+   * @see #setTeardown(boolean)
+   * @see ecs.lang.LangPackage#getSystem_Teardown()
+   * @model
+   * @generated
+   */
+  boolean isTeardown();
+
+  /**
+   * Sets the value of the '{@link ecs.lang.System#isTeardown <em>Teardown</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Teardown</em>' attribute.
+   * @see #isTeardown()
+   * @generated
+   */
+  void setTeardown(boolean value);
+
+  /**
    * Returns the value of the '<em><b>Input</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
@@ -137,6 +192,22 @@ public interface System extends AComponent, ASystem
    * @generated
    */
   EList<Group> getGroups();
+
+  /**
+   * Returns the value of the '<em><b>Index</b></em>' containment reference list.
+   * The list contents are of type {@link ecs.lang.Index}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Index</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Index</em>' containment reference list.
+   * @see ecs.lang.LangPackage#getSystem_Index()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Index> getIndex();
 
   /**
    * Returns the value of the '<em><b>Create Rules</b></em>' containment reference list.

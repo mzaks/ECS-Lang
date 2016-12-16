@@ -3,16 +3,11 @@
  */
 package ecs.lang.impl;
 
-import ecs.lang.AComponent;
-import ecs.lang.ContextName;
-import ecs.lang.CreateRule;
+import ecs.lang.Alias;
 import ecs.lang.LangPackage;
-
-import java.util.Collection;
+import ecs.lang.Parameter;
 
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -20,24 +15,21 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Create Rule</b></em>'.
+ * An implementation of the model object '<em><b>Parameter</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.impl.CreateRuleImpl#getName <em>Name</em>}</li>
- *   <li>{@link ecs.lang.impl.CreateRuleImpl#getComponentTypes <em>Component Types</em>}</li>
- *   <li>{@link ecs.lang.impl.CreateRuleImpl#getContextRef <em>Context Ref</em>}</li>
+ *   <li>{@link ecs.lang.impl.ParameterImpl#getName <em>Name</em>}</li>
+ *   <li>{@link ecs.lang.impl.ParameterImpl#getType <em>Type</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CreateRuleImpl extends MinimalEObjectImpl.Container implements CreateRule
+public class ParameterImpl extends MinimalEObjectImpl.Container implements Parameter
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -60,31 +52,21 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getComponentTypes() <em>Component Types</em>}' reference list.
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getComponentTypes()
+   * @see #getType()
    * @generated
    * @ordered
    */
-  protected EList<AComponent> componentTypes;
-
-  /**
-   * The cached value of the '{@link #getContextRef() <em>Context Ref</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getContextRef()
-   * @generated
-   * @ordered
-   */
-  protected ContextName contextRef;
+  protected Alias type;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected CreateRuleImpl()
+  protected ParameterImpl()
   {
     super();
   }
@@ -97,7 +79,7 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
   @Override
   protected EClass eStaticClass()
   {
-    return LangPackage.Literals.CREATE_RULE;
+    return LangPackage.Literals.PARAMETER;
   }
 
   /**
@@ -120,7 +102,7 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.CREATE_RULE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.PARAMETER__NAME, oldName, name));
   }
 
   /**
@@ -128,33 +110,19 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AComponent> getComponentTypes()
+  public Alias getType()
   {
-    if (componentTypes == null)
+    if (type != null && type.eIsProxy())
     {
-      componentTypes = new EObjectResolvingEList<AComponent>(AComponent.class, this, LangPackage.CREATE_RULE__COMPONENT_TYPES);
-    }
-    return componentTypes;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ContextName getContextRef()
-  {
-    if (contextRef != null && contextRef.eIsProxy())
-    {
-      InternalEObject oldContextRef = (InternalEObject)contextRef;
-      contextRef = (ContextName)eResolveProxy(oldContextRef);
-      if (contextRef != oldContextRef)
+      InternalEObject oldType = (InternalEObject)type;
+      type = (Alias)eResolveProxy(oldType);
+      if (type != oldType)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, LangPackage.CREATE_RULE__CONTEXT_REF, oldContextRef, contextRef));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, LangPackage.PARAMETER__TYPE, oldType, type));
       }
     }
-    return contextRef;
+    return type;
   }
 
   /**
@@ -162,9 +130,9 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
    * <!-- end-user-doc -->
    * @generated
    */
-  public ContextName basicGetContextRef()
+  public Alias basicGetType()
   {
-    return contextRef;
+    return type;
   }
 
   /**
@@ -172,12 +140,12 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setContextRef(ContextName newContextRef)
+  public void setType(Alias newType)
   {
-    ContextName oldContextRef = contextRef;
-    contextRef = newContextRef;
+    Alias oldType = type;
+    type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.CREATE_RULE__CONTEXT_REF, oldContextRef, contextRef));
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.PARAMETER__TYPE, oldType, type));
   }
 
   /**
@@ -190,13 +158,11 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
   {
     switch (featureID)
     {
-      case LangPackage.CREATE_RULE__NAME:
+      case LangPackage.PARAMETER__NAME:
         return getName();
-      case LangPackage.CREATE_RULE__COMPONENT_TYPES:
-        return getComponentTypes();
-      case LangPackage.CREATE_RULE__CONTEXT_REF:
-        if (resolve) return getContextRef();
-        return basicGetContextRef();
+      case LangPackage.PARAMETER__TYPE:
+        if (resolve) return getType();
+        return basicGetType();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -206,21 +172,16 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case LangPackage.CREATE_RULE__NAME:
+      case LangPackage.PARAMETER__NAME:
         setName((String)newValue);
         return;
-      case LangPackage.CREATE_RULE__COMPONENT_TYPES:
-        getComponentTypes().clear();
-        getComponentTypes().addAll((Collection<? extends AComponent>)newValue);
-        return;
-      case LangPackage.CREATE_RULE__CONTEXT_REF:
-        setContextRef((ContextName)newValue);
+      case LangPackage.PARAMETER__TYPE:
+        setType((Alias)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -236,14 +197,11 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
   {
     switch (featureID)
     {
-      case LangPackage.CREATE_RULE__NAME:
+      case LangPackage.PARAMETER__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case LangPackage.CREATE_RULE__COMPONENT_TYPES:
-        getComponentTypes().clear();
-        return;
-      case LangPackage.CREATE_RULE__CONTEXT_REF:
-        setContextRef((ContextName)null);
+      case LangPackage.PARAMETER__TYPE:
+        setType((Alias)null);
         return;
     }
     super.eUnset(featureID);
@@ -259,12 +217,10 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
   {
     switch (featureID)
     {
-      case LangPackage.CREATE_RULE__NAME:
+      case LangPackage.PARAMETER__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case LangPackage.CREATE_RULE__COMPONENT_TYPES:
-        return componentTypes != null && !componentTypes.isEmpty();
-      case LangPackage.CREATE_RULE__CONTEXT_REF:
-        return contextRef != null;
+      case LangPackage.PARAMETER__TYPE:
+        return type != null;
     }
     return super.eIsSet(featureID);
   }
@@ -286,4 +242,4 @@ public class CreateRuleImpl extends MinimalEObjectImpl.Container implements Crea
     return result.toString();
   }
 
-} //CreateRuleImpl
+} //ParameterImpl

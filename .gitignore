@@ -7,3 +7,5 @@ xtend-gen/
 *._trace
 *.xtendbin
 workspace/.metadata/
+.metadata
+runtime-ECSEditor.product

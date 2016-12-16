@@ -9,18 +9,24 @@ import ecs.lang.Alias;
 import ecs.lang.AliasList;
 import ecs.lang.AliasRule;
 import ecs.lang.ApiRule;
+import ecs.lang.Chain;
 import ecs.lang.Component;
 import ecs.lang.ComponentProperty;
 import ecs.lang.ContextDefinition;
+import ecs.lang.ContextName;
+import ecs.lang.ContextReference;
 import ecs.lang.CreateRule;
 import ecs.lang.Group;
+import ecs.lang.Index;
 import ecs.lang.Input;
 import ecs.lang.InputTrigger;
 import ecs.lang.LangPackage;
 import ecs.lang.Namespace;
-import ecs.lang.ParentSystem;
+import ecs.lang.Observer;
+import ecs.lang.Parameter;
 import ecs.lang.PlatformID;
 import ecs.lang.Platforms;
+import ecs.lang.Procedure;
 import ecs.lang.Project;
 import ecs.lang.SingleAlias;
 import ecs.lang.UniqueComponentAccess;
@@ -104,6 +110,20 @@ public class LangSwitch<T> extends Switch<T>
       {
         ContextDefinition contextDefinition = (ContextDefinition)theEObject;
         T result = caseContextDefinition(contextDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LangPackage.CONTEXT_NAME:
+      {
+        ContextName contextName = (ContextName)theEObject;
+        T result = caseContextName(contextName);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LangPackage.CONTEXT_REFERENCE:
+      {
+        ContextReference contextReference = (ContextReference)theEObject;
+        T result = caseContextReference(contextReference);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -209,6 +229,13 @@ public class LangSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case LangPackage.INDEX:
+      {
+        Index index = (Index)theEObject;
+        T result = caseIndex(index);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case LangPackage.UNIQUE_COMPONENT_ACCESS:
       {
         UniqueComponentAccess uniqueComponentAccess = (UniqueComponentAccess)theEObject;
@@ -237,12 +264,33 @@ public class LangSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case LangPackage.PARENT_SYSTEM:
+      case LangPackage.CHAIN:
       {
-        ParentSystem parentSystem = (ParentSystem)theEObject;
-        T result = caseParentSystem(parentSystem);
-        if (result == null) result = caseAComponent(parentSystem);
-        if (result == null) result = caseASystem(parentSystem);
+        Chain chain = (Chain)theEObject;
+        T result = caseChain(chain);
+        if (result == null) result = caseAComponent(chain);
+        if (result == null) result = caseASystem(chain);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LangPackage.PROCEDURE:
+      {
+        Procedure procedure = (Procedure)theEObject;
+        T result = caseProcedure(procedure);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LangPackage.OBSERVER:
+      {
+        Observer observer = (Observer)theEObject;
+        T result = caseObserver(observer);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LangPackage.PARAMETER:
+      {
+        Parameter parameter = (Parameter)theEObject;
+        T result = caseParameter(parameter);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -278,6 +326,38 @@ public class LangSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseContextDefinition(ContextDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Context Name</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Context Name</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseContextName(ContextName object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Context Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Context Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseContextReference(ContextReference object)
   {
     return null;
   }
@@ -507,6 +587,22 @@ public class LangSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Index</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Index</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIndex(Index object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Unique Component Access</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -571,17 +667,65 @@ public class LangSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Parent System</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Chain</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Parent System</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Chain</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseParentSystem(ParentSystem object)
+  public T caseChain(Chain object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Procedure</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Procedure</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseProcedure(Procedure object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Observer</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Observer</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseObserver(Observer object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParameter(Parameter object)
   {
     return null;
   }

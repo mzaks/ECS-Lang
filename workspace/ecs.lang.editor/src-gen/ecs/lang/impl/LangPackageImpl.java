@@ -9,19 +9,25 @@ import ecs.lang.Alias;
 import ecs.lang.AliasList;
 import ecs.lang.AliasRule;
 import ecs.lang.ApiRule;
+import ecs.lang.Chain;
 import ecs.lang.Component;
 import ecs.lang.ComponentProperty;
 import ecs.lang.ContextDefinition;
+import ecs.lang.ContextName;
+import ecs.lang.ContextReference;
 import ecs.lang.CreateRule;
 import ecs.lang.Group;
+import ecs.lang.Index;
 import ecs.lang.Input;
 import ecs.lang.InputTrigger;
 import ecs.lang.LangFactory;
 import ecs.lang.LangPackage;
 import ecs.lang.Namespace;
-import ecs.lang.ParentSystem;
+import ecs.lang.Observer;
+import ecs.lang.Parameter;
 import ecs.lang.PlatformID;
 import ecs.lang.Platforms;
+import ecs.lang.Procedure;
 import ecs.lang.Project;
 import ecs.lang.SingleAlias;
 import ecs.lang.UniqueComponentAccess;
@@ -54,6 +60,20 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * @generated
    */
   private EClass contextDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass contextNameEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass contextReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -158,6 +178,13 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass indexEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass uniqueComponentAccessEClass = null;
 
   /**
@@ -186,7 +213,28 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass parentSystemEClass = null;
+  private EClass chainEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass procedureEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass observerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parameterEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -286,7 +334,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProject_TypeAliases()
+  public EReference getProject_ContextDefinition()
   {
     return (EReference)projectEClass.getEStructuralFeatures().get(2);
   }
@@ -296,7 +344,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProject_Components()
+  public EReference getProject_TypeAliases()
   {
     return (EReference)projectEClass.getEStructuralFeatures().get(3);
   }
@@ -306,7 +354,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProject_Systems()
+  public EReference getProject_Components()
   {
     return (EReference)projectEClass.getEStructuralFeatures().get(4);
   }
@@ -316,7 +364,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProject_ParentSystems()
+  public EReference getProject_Procedures()
   {
     return (EReference)projectEClass.getEStructuralFeatures().get(5);
   }
@@ -326,9 +374,29 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProject_ContextDefinitions()
+  public EReference getProject_Observers()
   {
     return (EReference)projectEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProject_Systems()
+  {
+    return (EReference)projectEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProject_Chains()
+  {
+    return (EReference)projectEClass.getEStructuralFeatures().get(8);
   }
 
   /**
@@ -346,9 +414,9 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getContextDefinition_Name()
+  public EReference getContextDefinition_Names()
   {
-    return (EAttribute)contextDefinitionEClass.getEStructuralFeatures().get(0);
+    return (EReference)contextDefinitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -356,9 +424,39 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getContextDefinition_Components()
+  public EClass getContextName()
   {
-    return (EReference)contextDefinitionEClass.getEStructuralFeatures().get(1);
+    return contextNameEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getContextName_Name()
+  {
+    return (EAttribute)contextNameEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getContextReference()
+  {
+    return contextReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getContextReference_Context()
+  {
+    return (EReference)contextReferenceEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -576,9 +674,19 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getAComponent_ContextRef()
+  {
+    return (EReference)aComponentEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EAttribute getAComponent_Unique()
   {
-    return (EAttribute)aComponentEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)aComponentEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -588,7 +696,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    */
   public EAttribute getAComponent_Name()
   {
-    return (EAttribute)aComponentEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)aComponentEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -616,9 +724,29 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getComponent_Index()
+  {
+    return (EAttribute)componentEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getComponent_MultiIndex()
+  {
+    return (EAttribute)componentEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getComponent_Properties()
   {
-    return (EReference)componentEClass.getEStructuralFeatures().get(1);
+    return (EReference)componentEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -628,7 +756,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    */
   public EAttribute getComponent_Prefix()
   {
-    return (EAttribute)componentEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)componentEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -696,27 +824,27 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getSystem_Cleanup()
+  {
+    return (EAttribute)systemEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSystem_Teardown()
+  {
+    return (EAttribute)systemEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getSystem_Input()
-  {
-    return (EReference)systemEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getSystem_UniqueComp()
-  {
-    return (EReference)systemEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getSystem_Groups()
   {
     return (EReference)systemEClass.getEStructuralFeatures().get(4);
   }
@@ -726,9 +854,39 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSystem_CreateRules()
+  public EReference getSystem_UniqueComp()
   {
     return (EReference)systemEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSystem_Groups()
+  {
+    return (EReference)systemEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSystem_Index()
+  {
+    return (EReference)systemEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSystem_CreateRules()
+  {
+    return (EReference)systemEClass.getEStructuralFeatures().get(8);
   }
 
   /**
@@ -806,6 +964,16 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getInput_ContextRef()
+  {
+    return (EReference)inputEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getInputTrigger()
   {
     return inputTriggerEClass;
@@ -876,6 +1044,76 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getCreateRule_ContextRef()
+  {
+    return (EReference)createRuleEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getIndex()
+  {
+    return indexEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIndex_Name()
+  {
+    return (EAttribute)indexEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIndex_ComponentRef()
+  {
+    return (EReference)indexEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIndex_ApiRules()
+  {
+    return (EReference)indexEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIndex_Destroy()
+  {
+    return (EAttribute)indexEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIndex_ContextRef()
+  {
+    return (EReference)indexEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getUniqueComponentAccess()
   {
     return uniqueComponentAccessEClass;
@@ -889,6 +1127,16 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
   public EReference getUniqueComponentAccess_ApiRule()
   {
     return (EReference)uniqueComponentAccessEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUniqueComponentAccess_ContextRef()
+  {
+    return (EReference)uniqueComponentAccessEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -986,6 +1234,16 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getGroup_ContextRef()
+  {
+    return (EReference)groupEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getApiRule()
   {
     return apiRuleEClass;
@@ -1026,9 +1284,9 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getParentSystem()
+  public EClass getChain()
   {
-    return parentSystemEClass;
+    return chainEClass;
   }
 
   /**
@@ -1036,9 +1294,9 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getParentSystem_ComponentAlias()
+  public EAttribute getChain_ComponentAlias()
   {
-    return (EAttribute)parentSystemEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)chainEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1046,9 +1304,9 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getParentSystem_Parent()
+  public EAttribute getChain_Precondition()
   {
-    return (EReference)parentSystemEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)chainEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1056,9 +1314,229 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getParentSystem_Children()
+  public EReference getChain_UniqueComp()
   {
-    return (EReference)parentSystemEClass.getEStructuralFeatures().get(2);
+    return (EReference)chainEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getChain_Groups()
+  {
+    return (EReference)chainEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getChain_Children()
+  {
+    return (EReference)chainEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getProcedure()
+  {
+    return procedureEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getProcedure_ComponentAlias()
+  {
+    return (EAttribute)procedureEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProcedure_ContextRef()
+  {
+    return (EReference)procedureEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getProcedure_Unique()
+  {
+    return (EAttribute)procedureEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getProcedure_Name()
+  {
+    return (EAttribute)procedureEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProcedure_Params()
+  {
+    return (EReference)procedureEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProcedure_UniqueComp()
+  {
+    return (EReference)procedureEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProcedure_Groups()
+  {
+    return (EReference)procedureEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProcedure_Index()
+  {
+    return (EReference)procedureEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProcedure_CreateRules()
+  {
+    return (EReference)procedureEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getProcedure_Type()
+  {
+    return (EReference)procedureEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getObserver()
+  {
+    return observerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getObserver_Name()
+  {
+    return (EAttribute)observerEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getObserver_ObservedGroup()
+  {
+    return (EReference)observerEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getObserver_UniqueComp()
+  {
+    return (EReference)observerEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getObserver_Groups()
+  {
+    return (EReference)observerEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getObserver_CreateRules()
+  {
+    return (EReference)observerEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getParameter()
+  {
+    return parameterEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParameter_Name()
+  {
+    return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getParameter_Type()
+  {
+    return (EReference)parameterEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1094,15 +1572,22 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     projectEClass = createEClass(PROJECT);
     createEReference(projectEClass, PROJECT__PLATFORM_DEFINITION);
     createEReference(projectEClass, PROJECT__NAMESPACE);
+    createEReference(projectEClass, PROJECT__CONTEXT_DEFINITION);
     createEReference(projectEClass, PROJECT__TYPE_ALIASES);
     createEReference(projectEClass, PROJECT__COMPONENTS);
+    createEReference(projectEClass, PROJECT__PROCEDURES);
+    createEReference(projectEClass, PROJECT__OBSERVERS);
     createEReference(projectEClass, PROJECT__SYSTEMS);
-    createEReference(projectEClass, PROJECT__PARENT_SYSTEMS);
-    createEReference(projectEClass, PROJECT__CONTEXT_DEFINITIONS);
+    createEReference(projectEClass, PROJECT__CHAINS);
 
     contextDefinitionEClass = createEClass(CONTEXT_DEFINITION);
-    createEAttribute(contextDefinitionEClass, CONTEXT_DEFINITION__NAME);
-    createEReference(contextDefinitionEClass, CONTEXT_DEFINITION__COMPONENTS);
+    createEReference(contextDefinitionEClass, CONTEXT_DEFINITION__NAMES);
+
+    contextNameEClass = createEClass(CONTEXT_NAME);
+    createEAttribute(contextNameEClass, CONTEXT_NAME__NAME);
+
+    contextReferenceEClass = createEClass(CONTEXT_REFERENCE);
+    createEReference(contextReferenceEClass, CONTEXT_REFERENCE__CONTEXT);
 
     platformsEClass = createEClass(PLATFORMS);
     createEReference(platformsEClass, PLATFORMS__IDS);
@@ -1132,11 +1617,14 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     createEAttribute(aliasRuleEClass, ALIAS_RULE__VARIABLE_SIZE);
 
     aComponentEClass = createEClass(ACOMPONENT);
+    createEReference(aComponentEClass, ACOMPONENT__CONTEXT_REF);
     createEAttribute(aComponentEClass, ACOMPONENT__UNIQUE);
     createEAttribute(aComponentEClass, ACOMPONENT__NAME);
 
     componentEClass = createEClass(COMPONENT);
     createEReference(componentEClass, COMPONENT__VALUE_TYPE);
+    createEAttribute(componentEClass, COMPONENT__INDEX);
+    createEAttribute(componentEClass, COMPONENT__MULTI_INDEX);
     createEReference(componentEClass, COMPONENT__PROPERTIES);
     createEAttribute(componentEClass, COMPONENT__PREFIX);
 
@@ -1147,9 +1635,12 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     systemEClass = createEClass(SYSTEM);
     createEAttribute(systemEClass, SYSTEM__COMPONENT_ALIAS);
     createEAttribute(systemEClass, SYSTEM__INIT);
+    createEAttribute(systemEClass, SYSTEM__CLEANUP);
+    createEAttribute(systemEClass, SYSTEM__TEARDOWN);
     createEReference(systemEClass, SYSTEM__INPUT);
     createEReference(systemEClass, SYSTEM__UNIQUE_COMP);
     createEReference(systemEClass, SYSTEM__GROUPS);
+    createEReference(systemEClass, SYSTEM__INDEX);
     createEReference(systemEClass, SYSTEM__CREATE_RULES);
 
     inputEClass = createEClass(INPUT);
@@ -1159,6 +1650,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     createEReference(inputEClass, INPUT__EXCLUDE_COMPONENTS);
     createEReference(inputEClass, INPUT__API_RULES);
     createEAttribute(inputEClass, INPUT__DESTROY);
+    createEReference(inputEClass, INPUT__CONTEXT_REF);
 
     inputTriggerEClass = createEClass(INPUT_TRIGGER);
     createEReference(inputTriggerEClass, INPUT_TRIGGER__ENTER_COMPONENTS);
@@ -1168,9 +1660,18 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     createRuleEClass = createEClass(CREATE_RULE);
     createEAttribute(createRuleEClass, CREATE_RULE__NAME);
     createEReference(createRuleEClass, CREATE_RULE__COMPONENT_TYPES);
+    createEReference(createRuleEClass, CREATE_RULE__CONTEXT_REF);
+
+    indexEClass = createEClass(INDEX);
+    createEAttribute(indexEClass, INDEX__NAME);
+    createEReference(indexEClass, INDEX__COMPONENT_REF);
+    createEReference(indexEClass, INDEX__API_RULES);
+    createEAttribute(indexEClass, INDEX__DESTROY);
+    createEReference(indexEClass, INDEX__CONTEXT_REF);
 
     uniqueComponentAccessEClass = createEClass(UNIQUE_COMPONENT_ACCESS);
     createEReference(uniqueComponentAccessEClass, UNIQUE_COMPONENT_ACCESS__API_RULE);
+    createEReference(uniqueComponentAccessEClass, UNIQUE_COMPONENT_ACCESS__CONTEXT_REF);
 
     groupEClass = createEClass(GROUP);
     createEAttribute(groupEClass, GROUP__GROUP);
@@ -1181,6 +1682,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     createEReference(groupEClass, GROUP__NONE_OF_COMPONENTS);
     createEReference(groupEClass, GROUP__API_RULES);
     createEAttribute(groupEClass, GROUP__DESTROY);
+    createEReference(groupEClass, GROUP__CONTEXT_REF);
 
     apiRuleEClass = createEClass(API_RULE);
     createEReference(apiRuleEClass, API_RULE__COMPONENT);
@@ -1188,10 +1690,35 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
 
     aSystemEClass = createEClass(ASYSTEM);
 
-    parentSystemEClass = createEClass(PARENT_SYSTEM);
-    createEAttribute(parentSystemEClass, PARENT_SYSTEM__COMPONENT_ALIAS);
-    createEReference(parentSystemEClass, PARENT_SYSTEM__PARENT);
-    createEReference(parentSystemEClass, PARENT_SYSTEM__CHILDREN);
+    chainEClass = createEClass(CHAIN);
+    createEAttribute(chainEClass, CHAIN__COMPONENT_ALIAS);
+    createEAttribute(chainEClass, CHAIN__PRECONDITION);
+    createEReference(chainEClass, CHAIN__UNIQUE_COMP);
+    createEReference(chainEClass, CHAIN__GROUPS);
+    createEReference(chainEClass, CHAIN__CHILDREN);
+
+    procedureEClass = createEClass(PROCEDURE);
+    createEAttribute(procedureEClass, PROCEDURE__COMPONENT_ALIAS);
+    createEReference(procedureEClass, PROCEDURE__CONTEXT_REF);
+    createEAttribute(procedureEClass, PROCEDURE__UNIQUE);
+    createEAttribute(procedureEClass, PROCEDURE__NAME);
+    createEReference(procedureEClass, PROCEDURE__PARAMS);
+    createEReference(procedureEClass, PROCEDURE__UNIQUE_COMP);
+    createEReference(procedureEClass, PROCEDURE__GROUPS);
+    createEReference(procedureEClass, PROCEDURE__INDEX);
+    createEReference(procedureEClass, PROCEDURE__CREATE_RULES);
+    createEReference(procedureEClass, PROCEDURE__TYPE);
+
+    observerEClass = createEClass(OBSERVER);
+    createEAttribute(observerEClass, OBSERVER__NAME);
+    createEReference(observerEClass, OBSERVER__OBSERVED_GROUP);
+    createEReference(observerEClass, OBSERVER__UNIQUE_COMP);
+    createEReference(observerEClass, OBSERVER__GROUPS);
+    createEReference(observerEClass, OBSERVER__CREATE_RULES);
+
+    parameterEClass = createEClass(PARAMETER);
+    createEAttribute(parameterEClass, PARAMETER__NAME);
+    createEReference(parameterEClass, PARAMETER__TYPE);
   }
 
   /**
@@ -1227,22 +1754,29 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     componentEClass.getESuperTypes().add(this.getAComponent());
     systemEClass.getESuperTypes().add(this.getAComponent());
     systemEClass.getESuperTypes().add(this.getASystem());
-    parentSystemEClass.getESuperTypes().add(this.getAComponent());
-    parentSystemEClass.getESuperTypes().add(this.getASystem());
+    chainEClass.getESuperTypes().add(this.getAComponent());
+    chainEClass.getESuperTypes().add(this.getASystem());
 
     // Initialize classes and features; add operations and parameters
     initEClass(projectEClass, Project.class, "Project", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getProject_PlatformDefinition(), this.getPlatforms(), null, "platformDefinition", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProject_Namespace(), this.getNamespace(), null, "namespace", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProject_ContextDefinition(), this.getContextDefinition(), null, "contextDefinition", null, 0, 1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProject_TypeAliases(), this.getAlias(), null, "typeAliases", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProject_Components(), this.getComponent(), null, "components", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProject_Procedures(), this.getProcedure(), null, "procedures", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProject_Observers(), this.getObserver(), null, "observers", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getProject_Systems(), this.getSystem(), null, "systems", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getProject_ParentSystems(), this.getParentSystem(), null, "parentSystems", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getProject_ContextDefinitions(), this.getContextDefinition(), null, "contextDefinitions", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProject_Chains(), this.getChain(), null, "chains", null, 0, -1, Project.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(contextDefinitionEClass, ContextDefinition.class, "ContextDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getContextDefinition_Name(), ecorePackage.getEString(), "name", null, 0, -1, ContextDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getContextDefinition_Components(), this.getAComponent(), null, "components", null, 0, -1, ContextDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getContextDefinition_Names(), this.getContextName(), null, "names", null, 0, -1, ContextDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(contextNameEClass, ContextName.class, "ContextName", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getContextName_Name(), ecorePackage.getEString(), "name", null, 0, 1, ContextName.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(contextReferenceEClass, ContextReference.class, "ContextReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getContextReference_Context(), this.getContextName(), null, "context", null, 0, -1, ContextReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(platformsEClass, Platforms.class, "Platforms", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPlatforms_Ids(), this.getPlatformID(), null, "ids", null, 0, -1, Platforms.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1272,11 +1806,14 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     initEAttribute(getAliasRule_VariableSize(), ecorePackage.getEBoolean(), "variableSize", null, 0, 1, AliasRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(aComponentEClass, AComponent.class, "AComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAComponent_ContextRef(), this.getContextReference(), null, "contextRef", null, 0, 1, AComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAComponent_Unique(), ecorePackage.getEBoolean(), "unique", null, 0, 1, AComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAComponent_Name(), ecorePackage.getEString(), "name", null, 0, 1, AComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(componentEClass, Component.class, "Component", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getComponent_ValueType(), this.getAlias(), null, "valueType", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getComponent_Index(), ecorePackage.getEBoolean(), "index", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getComponent_MultiIndex(), ecorePackage.getEBoolean(), "multiIndex", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getComponent_Properties(), this.getComponentProperty(), null, "properties", null, 0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getComponent_Prefix(), ecorePackage.getEString(), "prefix", null, 0, 1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1287,9 +1824,12 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     initEClass(systemEClass, ecs.lang.System.class, "System", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSystem_ComponentAlias(), ecorePackage.getEBoolean(), "componentAlias", null, 0, 1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getSystem_Init(), ecorePackage.getEBoolean(), "init", null, 0, 1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSystem_Cleanup(), ecorePackage.getEBoolean(), "cleanup", null, 0, 1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSystem_Teardown(), ecorePackage.getEBoolean(), "teardown", null, 0, 1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSystem_Input(), this.getInput(), null, "input", null, 0, 1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSystem_UniqueComp(), this.getUniqueComponentAccess(), null, "uniqueComp", null, 0, -1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSystem_Groups(), this.getGroup(), null, "groups", null, 0, -1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSystem_Index(), this.getIndex(), null, "index", null, 0, -1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSystem_CreateRules(), this.getCreateRule(), null, "createRules", null, 0, -1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(inputEClass, Input.class, "Input", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1299,6 +1839,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     initEReference(getInput_ExcludeComponents(), this.getAComponent(), null, "excludeComponents", null, 0, -1, Input.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getInput_ApiRules(), this.getApiRule(), null, "apiRules", null, 0, -1, Input.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getInput_Destroy(), ecorePackage.getEBoolean(), "destroy", null, 0, 1, Input.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getInput_ContextRef(), this.getContextName(), null, "contextRef", null, 0, 1, Input.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(inputTriggerEClass, InputTrigger.class, "InputTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getInputTrigger_EnterComponents(), this.getAComponent(), null, "enterComponents", null, 0, -1, InputTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1308,9 +1849,18 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     initEClass(createRuleEClass, CreateRule.class, "CreateRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getCreateRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, CreateRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCreateRule_ComponentTypes(), this.getAComponent(), null, "componentTypes", null, 0, -1, CreateRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCreateRule_ContextRef(), this.getContextName(), null, "contextRef", null, 0, 1, CreateRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(indexEClass, Index.class, "Index", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIndex_Name(), ecorePackage.getEString(), "name", null, 0, 1, Index.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIndex_ComponentRef(), this.getComponent(), null, "componentRef", null, 0, 1, Index.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIndex_ApiRules(), this.getApiRule(), null, "apiRules", null, 0, -1, Index.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getIndex_Destroy(), ecorePackage.getEBoolean(), "destroy", null, 0, 1, Index.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIndex_ContextRef(), this.getContextName(), null, "contextRef", null, 0, 1, Index.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(uniqueComponentAccessEClass, UniqueComponentAccess.class, "UniqueComponentAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getUniqueComponentAccess_ApiRule(), this.getApiRule(), null, "apiRule", null, 0, 1, UniqueComponentAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getUniqueComponentAccess_ContextRef(), this.getContextName(), null, "contextRef", null, 0, 1, UniqueComponentAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getGroup_Group(), ecorePackage.getEBoolean(), "group", null, 0, 1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1321,6 +1871,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     initEReference(getGroup_NoneOfComponents(), this.getAComponent(), null, "noneOfComponents", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getGroup_ApiRules(), this.getApiRule(), null, "apiRules", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGroup_Destroy(), ecorePackage.getEBoolean(), "destroy", null, 0, 1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getGroup_ContextRef(), this.getContextName(), null, "contextRef", null, 0, 1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(apiRuleEClass, ApiRule.class, "ApiRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getApiRule_Component(), this.getAComponent(), null, "component", null, 0, 1, ApiRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1328,10 +1879,35 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
 
     initEClass(aSystemEClass, ASystem.class, "ASystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(parentSystemEClass, ParentSystem.class, "ParentSystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getParentSystem_ComponentAlias(), ecorePackage.getEBoolean(), "componentAlias", null, 0, 1, ParentSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getParentSystem_Parent(), this.getAlias(), null, "parent", null, 0, 1, ParentSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getParentSystem_Children(), this.getASystem(), null, "children", null, 0, -1, ParentSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(chainEClass, Chain.class, "Chain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getChain_ComponentAlias(), ecorePackage.getEBoolean(), "componentAlias", null, 0, 1, Chain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getChain_Precondition(), ecorePackage.getEBoolean(), "precondition", null, 0, 1, Chain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getChain_UniqueComp(), this.getUniqueComponentAccess(), null, "uniqueComp", null, 0, -1, Chain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getChain_Groups(), this.getGroup(), null, "groups", null, 0, -1, Chain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getChain_Children(), this.getASystem(), null, "children", null, 0, -1, Chain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(procedureEClass, Procedure.class, "Procedure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getProcedure_ComponentAlias(), ecorePackage.getEBoolean(), "componentAlias", null, 0, 1, Procedure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProcedure_ContextRef(), this.getContextReference(), null, "contextRef", null, 0, 1, Procedure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getProcedure_Unique(), ecorePackage.getEBoolean(), "unique", null, 0, 1, Procedure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getProcedure_Name(), ecorePackage.getEString(), "name", null, 0, 1, Procedure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProcedure_Params(), this.getParameter(), null, "params", null, 0, -1, Procedure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProcedure_UniqueComp(), this.getUniqueComponentAccess(), null, "uniqueComp", null, 0, -1, Procedure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProcedure_Groups(), this.getGroup(), null, "groups", null, 0, -1, Procedure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProcedure_Index(), this.getIndex(), null, "index", null, 0, -1, Procedure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProcedure_CreateRules(), this.getCreateRule(), null, "createRules", null, 0, -1, Procedure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getProcedure_Type(), this.getAlias(), null, "type", null, 0, 1, Procedure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(observerEClass, Observer.class, "Observer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getObserver_Name(), ecorePackage.getEString(), "name", null, 0, 1, Observer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getObserver_ObservedGroup(), this.getGroup(), null, "observedGroup", null, 0, 1, Observer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getObserver_UniqueComp(), this.getUniqueComponentAccess(), null, "uniqueComp", null, 0, -1, Observer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getObserver_Groups(), this.getGroup(), null, "groups", null, 0, -1, Observer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getObserver_CreateRules(), this.getCreateRule(), null, "createRules", null, 0, -1, Observer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getParameter_Type(), this.getAlias(), null, "type", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

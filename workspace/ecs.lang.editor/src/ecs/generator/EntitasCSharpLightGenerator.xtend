@@ -6,7 +6,8 @@ package ecs.generator
 import ecs.lang.AComponent
 import ecs.lang.Alias
 import ecs.lang.Component
-import ecs.lang.ParentSystem
+import ecs.lang.ContextDefinition
+import ecs.lang.Chain
 import ecs.lang.Project
 import ecs.lang.System
 import ecs.model.ComponentModel
@@ -17,6 +18,12 @@ import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import ecs.lang.ContextName
+import ecs.lang.CreateRule
+import static extension ecs.model.ContextNameExtractor.*
+import ecs.lang.Input
+import ecs.lang.Group
+import ecs.lang.UniqueComponentAccess
 
 /**
  * Generates code from your model files on save.
@@ -24,26 +31,50 @@ import org.eclipse.xtext.generator.IGeneratorContext
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 class EntitasCSharpLightGenerator implements ILangGenerator {
-
-	override void generate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		val namespace = resource.namespace
-		val allComponents = resource.collectAllComponents()
+	
+	val components = <Component>newHashSet()
+	val contextDefinitions = <ContextDefinition>newHashSet()
+	val typeAliases = <Alias>newHashSet()
+	val systems = <System>newHashSet()
+	val chains = <Chain>newHashSet()
+	val namespaces = <String>newHashSet()
+	
+	override void generate(Set<Project> projects, Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+		setupModels(projects)
+		if (namespaces.size > 1){
+			throw new Exception("multiple namespaces are defined")
+		}
+		val namespace = namespaces.last
+		val allComponents = collectAllComponents()
 		for (component : allComponents) {
 			fsa.generateFile("components/" + component.name.toFirstUpper + "Component.cs", component.generate(namespace))
 		}
-		val project = resource.contents.filter(typeof(Project)).get(0) as Project
 		
-		if (project.contextDefinitions.isEmpty){
-			fsa.generateFile("componentIds/ComponentIds.cs", generateComponentsFile(allComponents, namespace))
-		} else {
-			val contextNameToComponentModel = computeContextNameToComponentModel(allComponents)
-			for (contextName : contextNameToComponentModel.keySet){
-				fsa.generateFile('''componentIds/«contextName»ComponentIds.cs''', generateComponentIdsFile(contextName, contextNameToComponentModel.get(contextName).sortBy[it.name], namespace))
-				//fsa.generateFile('''attributes/«contextName»Attribute.cs''', generateAttributeFile(contextName, namespace))
-			}
-			fsa.generateFile('''pools/Pools.cs''', generatePoolsFile(contextNameToComponentModel.keySet.sortBy[it], namespace))
+		val contextNameToComponentModel = computeContextNameToComponentModel(allComponents)
+		for (contextName : contextNameToComponentModel.keySet){
+			fsa.generateFile('''componentIds/«contextName»ComponentIds.cs''', generateComponentIdsFile(contextName, contextNameToComponentModel.get(contextName).sortBy[it.name], namespace))
+			//fsa.generateFile('''attributes/«contextName»Attribute.cs''', generateAttributeFile(contextName, namespace))
+		}
+		for (system : systems){
+			fsa.generateFile('''systems/«system.name.toFirstUpper»System.cs''', system.generateSystemFileContent.surroundWithNamespace(namespace))
 		}
 		
+		fsa.generateFile('''pools/Pools.cs''', generatePoolsFile(contextNameToComponentModel.keySet.sortBy[it], namespace))
+	}
+	
+	public def setupModels(Set<Project> projects){
+		components.clear()
+		projects.forEach[components.addAll(it.components)]
+		contextDefinitions.clear()
+		projects.forEach[contextDefinitions.add(it.contextDefinition)]
+		typeAliases.clear()
+		projects.forEach[typeAliases.addAll(it.typeAliases)]
+		systems.clear()
+		projects.forEach[systems.addAll(it.systems)]
+		chains.clear()
+		projects.forEach[chains.addAll(it.chains)]
+		namespaces.clear()
+		projects.forEach[if (it.namespace!=null) namespaces.add(it.namespace.name)]
 	}
 	
 	private def HashMap<String, Set<ComponentModel>> computeContextNameToComponentModel(List<ComponentModel> allComponents) {
@@ -69,7 +100,7 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		namespace «namespace» {
 		«ENDIF»
 		using Entitas;
-		public class «model.name.toFirstUpper»Component : IComponent {
+		public partial class «model.name.toFirstUpper»Component : IComponent {
 			«FOR propertyName : model.properties.keySet»
 			public «model.properties.get(propertyName)» «propertyName»;
 			«ENDFOR»
@@ -112,13 +143,6 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 					component.«propertyName» = new«propertyName.toFirstUpper»;
 					«ENDFOR»
 					return AddComponent(«model.componentIdByName», component);
-				}
-				public void Add«model.name.toFirstUpper»_(«FOR propertyName : model.properties.keySet SEPARATOR ', '»«model.properties.get(propertyName)» new«propertyName.toFirstUpper»«ENDFOR») {
-					var component = CreateComponent<«model.name.toFirstUpper»Component>(«model.componentIdByName»);
-					«FOR propertyName : model.properties.keySet»
-					component.«propertyName» = new«propertyName.toFirstUpper»;
-					«ENDFOR»
-					AddComponent(«model.componentIdByName», component);
 				}
 				public Entity Replace«model.name.toFirstUpper»(«FOR propertyName : model.properties.keySet SEPARATOR ', '»«model.properties.get(propertyName)» new«propertyName.toFirstUpper»«ENDFOR») {
 					var component = CreateComponent<«model.name.toFirstUpper»Component>(«model.componentIdByName»);
@@ -244,48 +268,26 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		return project.namespace?.name
 	}
 	
-	def List<ComponentModel> collectAllComponents(Resource resource) {
-		val project = resource.contents.filter(typeof(Project)).get(0) as Project
-		return project.collectAllComponents
-	}
-	
-	public def List<ComponentModel> collectAllComponents(Project project) {
+	public def List<ComponentModel> collectAllComponents() {
 		val result = newLinkedList()
-		project.components.forEach [
+		components.forEach [
 			val model = it.toComponentModel
 			result.add(model)
 		]
-		project.typeAliases.filter[it.componentAlias].forEach [
+		typeAliases.filter[it.componentAlias].forEach [
 			val model = it.toComponentModel
 			result.add(model)
 		]
-		project.systems.filter[it.componentAlias].forEach [
+		systems.filter[it.componentAlias].forEach [
 			val model = it.toComponentModel
 			result.add(model)
 		]
-		project.parentSystems.filter[it.componentAlias].forEach [
-			val model = new ComponentModel()
-			model.name = it.name
-			model.unique = it.unique
-			model.properties = newHashMap("value" -> "Entitas.Systems")
+		chains.filter[it.componentAlias].forEach [
+			val model = it.toComponentModel
 			result.add(model)
 		]
 		
-		val lookupComponentNameToCtxName = <String, Set<String>>newHashMap()
-		for(contextDef : project.contextDefinitions) {
-			for(componentName : contextDef.components.map[name]) {
-				var set = lookupComponentNameToCtxName.get(componentName)
-				if (set == null){
-					set = <String>newHashSet() 
-				}
-				for(contextName : contextDef.name){
-					set.add(contextName)
-				}
-				lookupComponentNameToCtxName.put(componentName, set)
-			}
-		}
-		
-		result.addIndexAndContextNames(project)
+		result.addIndexAndContextNames()
 		
 		return result
 	}
@@ -295,11 +297,11 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		int count
 		double weight
 	
-	new(String string, int i, double d) {
-		name = string
-		count = i
-		weight = d
-	}
+		new(String string, int i, double d) {
+			name = string
+			count = i
+			weight = d
+		}
 		
 		override compareTo(NameCountWeight o) {
 			if (o == null){
@@ -317,28 +319,21 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		
 	}
 	
-	def addIndexAndContextNames(List<ComponentModel> components, Project project){
-		val lookupComponentNameToCtxName = <String, Set<String>>newHashMap()
+	def addIndexAndContextNames(List<ComponentModel> components){
+		val lookupComponentNameToNumberOfCtx = <String, Integer>newHashMap()
 		val lookupCtxNameByComponentName = <String, Set<String>>newHashMap()
 		val lookupComponentNameToWeight = <String, Double>newHashMap()
 		val lookupComponentNameByIndex = <String, Integer>newHashMap()
-		for(contextDef : project.contextDefinitions) {
-			for(componentName : contextDef.components.map[name]) {
-				var set1 = lookupComponentNameToCtxName.get(componentName)
-				if (set1 == null){
-					set1 = <String>newHashSet()
+		
+		for (component : components){
+			lookupComponentNameToNumberOfCtx.put(component.name, component.contexNames.size)
+			for (ctxName : component.contexNames){
+				var set = lookupCtxNameByComponentName.get(ctxName)
+				if (set == null){
+					set = <String>newHashSet()
 				}
-				
-				for(contextName : contextDef.name){
-					var set2 = lookupCtxNameByComponentName.get(contextName)
-					if (set2 == null){
-						set2 = <String>newHashSet()
-					}
-					set1.add(contextName)
-					set2.add(componentName)
-					lookupCtxNameByComponentName.put(contextName, set2)
-				}
-				lookupComponentNameToCtxName.put(componentName, set1)
+				set.add(component.name)
+				lookupCtxNameByComponentName.put(ctxName, set)
 			}
 		}
 		for (contextName : lookupCtxNameByComponentName.keySet){
@@ -356,7 +351,7 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		for (contextName : contextNamesBySize){
 			var index = 0
 			var Set<Integer> assignedIndexies = newHashSet()
-			val componentNamesSortedByOccurence = lookupCtxNameByComponentName.get(contextName).sortBy[new NameCountWeight(it, lookupComponentNameToCtxName.get(it).size, lookupComponentNameToWeight.get(it))]
+			val componentNamesSortedByOccurence = lookupCtxNameByComponentName.get(contextName).sortBy[new NameCountWeight(it, lookupComponentNameToNumberOfCtx.get(it), lookupComponentNameToWeight.get(it))]
 			for (componentName : componentNamesSortedByOccurence){
 				if (lookupComponentNameByIndex.get(componentName) != null){
 					val addedToSet = assignedIndexies.add(lookupComponentNameByIndex.get(componentName))
@@ -377,7 +372,7 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		}
 		
 		for(model : components) {
-			model.contexNames = lookupComponentNameToCtxName.get(model.name)
+			//model.contexNames = lookupComponentNameToCtxName.get(model.name)
 			model.index = lookupComponentNameByIndex.get(model.name)
 		}
 		
@@ -388,7 +383,7 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		switch component {
 			Component case component: return component.toComponentModel 
 			System case component: return component.toComponentModel
-			ParentSystem case component: return component.toComponentModel
+			Chain case component: return component.toComponentModel
 			Alias case component : return component.toComponentModel
 		}
 		
@@ -412,6 +407,10 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		if (properties.isEmpty){
 			model.prefix = if(component.prefix == null) "is" else component.prefix
 		}
+		if(component.contextRef != null){		
+			model.contexNames = newHashSet(component.contextRef.context.map[name])
+		}
+		
 		return model
 	}
 	
@@ -420,6 +419,9 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		model.name = alias.name
 		model.unique = alias.unique
 		model.properties = newHashMap("value" -> alias.typeName)
+		if(alias.contextRef != null){		
+			model.contexNames = newHashSet(alias.contextRef.context.map[name])
+		}
 		return model
 	}
 	
@@ -427,15 +429,21 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		val model = new ComponentModel()
 		model.name = system.name
 		model.unique = system.unique
-		model.properties = newHashMap("value" -> system.name.toUpperCase + "System")
+		model.properties = newHashMap("value" -> system.name.toFirstUpper + "SystemInterface")
+		if(system.contextRef != null){		
+			model.contexNames = newHashSet(system.contextRef.context.map[name])
+		}
 		return model
 	}
 	
-	def ComponentModel toComponentModel(ParentSystem system){
+	def ComponentModel toComponentModel(Chain system){
 		val model = new ComponentModel()
 		model.name = system.name
 		model.unique = system.unique
-		model.properties = newHashMap("value" -> system.name.toUpperCase + "Systems")
+		model.properties = newHashMap("value" -> system.name.toFirstUpper + "Systems")
+		if(system.contextRef != null){		
+			model.contexNames = newHashSet(system.contextRef.context.map[name])
+		}
 		return model
 	}
 	
@@ -531,24 +539,254 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 				} else {
 					'''«namespace».«contextName»ComponentIds'''
 				}»
-				return CreatePool("«contextName»", «componentIds».TotalComponents, «componentIds».componentNames, «componentIds».componentTypes);
+				return CreatePool("«if(contextName!=""){contextName.toFirstLower}else{"pool"}»", «componentIds».TotalComponents, «componentIds».componentNames, «componentIds».componentTypes);
 			}
 			«ENDFOR»
 		
-			public Pool[] allPools { get { return new [] { «FOR contextName : contextNames SEPARATOR ", "»«contextName.toFirstLower»«ENDFOR» }; } }
+			public Pool[] allPools { get { return new [] { «FOR contextName : contextNames SEPARATOR ", "»«if(contextName!=""){contextName.toFirstLower}else{"pool"}»«ENDFOR» }; } }
 			
 			«FOR contextName : contextNames »
-			public Pool «contextName.toFirstLower»;
+			public Pool «if(contextName!=""){contextName.toFirstLower}else{"pool"}»;
 			«ENDFOR»
 			
 			public void SetAllPools() {
 				«FOR contextName : contextNames »
-				«contextName.toFirstLower» = Create«contextName»Pool();
+				«if(contextName!=""){contextName.toFirstLower}else{"pool"}» = Create«contextName»Pool();
 				«ENDFOR»
 			}
 		}
 	}
-
+	'''
+	
+	def generateSystemFileContent(System system)'''
+		using Entitas;
+		«val interfaceNames = system.interfaceNames»
+		public interface «system.name.toFirstUpper»SystemInterface : «FOR interfaceName : interfaceNames SEPARATOR ", "»«interfaceName»«ENDFOR»{}
+		
+		public abstract class «system.name.toFirstUpper»SystemBase : «system.name.toFirstUpper»SystemInterface {
+			«FOR ctx : system.allContextNames»
+			«val ctxName = ctx?.name.toFirstLower ?: "pool"»
+			protected readonly Pool _«ctxName»;
+			«ENDFOR»
+			protected «system.name.toFirstUpper»SystemBase(«FOR ctx : system.allContextNames SEPARATOR ", "»«val ctxName = ctx?.name.toFirstLower ?: "pool"»Pool «ctxName»«ENDFOR»){
+				«FOR ctx : system.allContextNames»
+				«val ctxName = ctx?.name.toFirstLower ?: "pool"»
+				_«ctxName» = «ctxName»;
+				«ENDFOR»
+			}
+			
+			
+			«FOR uniqueComp : system.uniqueComp»
+			«val ctxName = uniqueComp.contextName?.name.toFirstLower ?: "pool"»
+			«val componentName = uniqueComp.apiRule.component.name.toFirstLower»
+			«val fromPostfix = ""/*if(uniqueComp.contextName == null){""}else{"From"+ctxName.toFirstUpper}*/»
+			«val inPostfix = ""/*if(uniqueComp.contextName == null){""}else{"In"+ctxName.toFirstUpper}*/»
+			«val model = uniqueComp.apiRule.component.toComponentModel»
+			«IF model.properties.isEmpty»
+			protected bool «model.prefix»«componentName.toFirstUpper»«inPostfix» { 
+				get { return _«ctxName».«model.prefix»«componentName.toFirstUpper»; }
+				set { _«ctxName».«model.prefix»«componentName.toFirstUpper» = value; }
+			}
+			«ELSE»
+			protected «uniqueComp.apiRule.component.typeName» «componentName»«fromPostfix» { get { return _«ctxName».«componentName»; } }
+			protected bool has«componentName.toFirstUpper»«inPostfix» { get { return _«ctxName».has«componentName.toFirstUpper»; } }
+			protected void Remove«componentName.toFirstUpper»«fromPostfix»() { 
+				_«ctxName».Remove«componentName.toFirstUpper»();
+			}
+			protected Entity Set«componentName.toFirstUpper»«inPostfix»(«FOR propertyName : model.properties.keySet SEPARATOR ', '»«model.properties.get(propertyName)» new«propertyName.toFirstUpper»«ENDFOR») {
+				return _«ctxName».Set«componentName.toFirstUpper»(«FOR propertyName : model.properties.keySet SEPARATOR ', '»new«propertyName.toFirstUpper»«ENDFOR»);
+			}
+			protected Entity Replace«componentName.toFirstUpper»«inPostfix»(«FOR propertyName : model.properties.keySet SEPARATOR ', '»«model.properties.get(propertyName)» new«propertyName.toFirstUpper»«ENDFOR») { 
+				return _«ctxName».Replace«componentName.toFirstUpper»(«FOR propertyName : model.properties.keySet SEPARATOR ', '»new«propertyName.toFirstUpper»«ENDFOR»);
+			}
+			«ENDIF»
+			«ENDFOR»
+«««			Group
+			«FOR group : system.groups»
+			«val ctxName = group.contextName?.name.toFirstLower ?: "pool"»
+			«val matcherPrefix = group.contextName?.name.toFirstUpper ?: ""»
+			«IF group.isUnique»
+			protected Entity «group.name.toFirstLower» { 
+				get { 
+					return _«ctxName».GetGroup(
+									«IF !group.allOfComponents.empty»
+									Matcher.AllOf(«FOR comp : group.allOfComponents SEPARATOR ", "»«matcherPrefix»Matcher.«comp.name.toFirstUpper»«ENDFOR»)«ENDIF»
+									«IF !group.anyOfComponents.empty»
+									«IF group.allOfComponents.empty»Matcher«ENDIF».AnyOf(«FOR comp : group.anyOfComponents SEPARATOR ", "»«matcherPrefix»Matcher.«comp.name.toFirstUpper»«ENDFOR»)«ENDIF»
+									«IF !group.noneOfComponents.empty»
+									«IF group.allOfComponents.empty && group.anyOfComponents.empty»Matcher«ENDIF».NoneOf(«FOR comp : group.noneOfComponents SEPARATOR ", "»«matcherPrefix»Matcher.«comp.name.toFirstUpper»«ENDFOR»)«ENDIF»
+					).GetSingleEntity(); 
+				} 
+			}
+			«ELSE»
+			protected Group «group.name.toFirstLower» { 
+				get { 
+					return _«ctxName».GetGroup(
+								«IF !group.allOfComponents.empty»
+								Matcher.AllOf(«FOR comp : group.allOfComponents SEPARATOR ", "»«matcherPrefix»Matcher.«comp.name.toFirstUpper»«ENDFOR»)«ENDIF»
+								«IF !group.anyOfComponents.empty»
+								«IF group.allOfComponents.empty»Matcher«ENDIF».AnyOf(«FOR comp : group.anyOfComponents SEPARATOR ", "»«matcherPrefix»Matcher.«comp.name.toFirstUpper»«ENDFOR»)«ENDIF»
+								«IF !group.noneOfComponents.empty»
+								«IF group.allOfComponents.empty && group.anyOfComponents.empty»Matcher«ENDIF».NoneOf(«FOR comp : group.noneOfComponents SEPARATOR ", "»«matcherPrefix»Matcher.«comp.name.toFirstUpper»«ENDFOR»)«ENDIF»
+					);
+				}
+			}
+			«ENDIF»
+			«IF group.isDestroy»
+			protected void Destroy«group.name.toFirstUpper»(Entity e){
+				_«ctxName».DestroyEntity(e);
+			}
+			«ENDIF»
+			«ENDFOR»
+«««			Create
+			«FOR createRule : system.createRules»
+			«val ctxName = createRule.contextName?.name.toFirstLower ?: "pool"»
+			«val inPostfix = ""/*if(createRule.contextName == null){""}else{"In"+ctxName.toFirstUpper}*/»
+			protected Entity Create«createRule.name.toFirstUpper»«inPostfix»(){
+				return _«ctxName».CreateEntity();
+			}
+			«ENDFOR»
+«««			SystemInterfaces
+			«IF system.input == null»
+			public abstract void Execute();
+			«ELSE»
+			public abstract void Execute(System.Collections.Generic.List<Entity> inputEntities);
+			«ENDIF»
+			
+			«IF system.isInit»
+			public abstract void Initialize();
+			«ENDIF»
+			«IF system.isCleanup»
+			public abstract void Cleanup();
+			«ENDIF»
+			«IF system.isTeardown»
+			public abstract void TearDown();
+			«ENDIF»
+			«IF system.input != null»
+			«val inputCtxName = system.input.contextName?.name.toFirstUpper ?: ""»
+			«val inputPoolName = system.input.contextName?.name.toFirstUpper ?: "pool"»
+			public TriggerOnEvent[] triggers { get { return new [] {
+					«FOR trigger : system.input.triggers SEPARATOR ", "»
+					«IF !trigger.enterComponents.empty»
+					Matcher.AllOf(«FOR comp : trigger.enterComponents SEPARATOR ", "»«inputCtxName»Matcher.«comp.name.toFirstUpper»«ENDFOR»).OnEntityAdded()
+					«ENDIF»
+					«IF !trigger.left.empty»
+					Matcher.AllOf(«FOR comp : trigger.left SEPARATOR ", "»«inputCtxName»Matcher.«comp.name.toFirstUpper»«ENDFOR»).OnEntityRemoved()
+					«ENDIF»
+					«IF !trigger.enteredOrLeft.empty»
+					Matcher.AllOf(«FOR comp : trigger.enteredOrLeft SEPARATOR ", "»«inputCtxName»Matcher.«comp.name.toFirstUpper»«ENDFOR»).OnEntityAddedOrRemoved()
+					«ENDIF»
+					«ENDFOR»
+				};
+			}}
+			
+			«IF !system.input.ensureComponents.empty»
+			public IMatcher ensureComponents { get { return «inputCtxName»Matcher.AllOf(«FOR comp : system.input.ensureComponents SEPARATOR ", "»«inputCtxName»Matcher.«comp.name.toFirstUpper»«ENDFOR»); }}
+			«ENDIF»
+			«IF !system.input.excludeComponents.empty»
+			public IMatcher excludeComponents { get { return «inputCtxName»Matcher.AllOf(«FOR comp : system.input.excludeComponents SEPARATOR ", "»«inputCtxName»Matcher.«comp.name.toFirstUpper»«ENDFOR»); }}
+			«ENDIF»
+			«IF system.input.isDestroy»
+			protected void DestroyInput(Entity e){
+				_«inputPoolName».DestroyEntity(e);
+			}
+			«ENDIF»
+			«ENDIF»
+		}
+	'''
+	
+	def List<String>interfaceNames(System system){
+		val interfaceNames = newArrayList()
+		if(system.input == null){
+			interfaceNames.add("IExecuteSystem")
+		} else {
+			interfaceNames.add("IMultiReactiveSystem")
+			if(!system.input.excludeComponents.empty){
+				interfaceNames.add("IExcludeComponents")
+			}
+			if(!system.input.ensureComponents.empty){
+				interfaceNames.add("IEnsureComponents")
+			}
+		}
+		if(system.isInit){
+			interfaceNames.add("IInitializeSystem")
+		}
+		if(system.isCleanup){
+			interfaceNames.add("ICleanupSystem")
+		}
+		if(system.isTeardown){
+			interfaceNames.add("ITearDownSystem")
+		}
+		return interfaceNames
+	}
+	
+	def Set<ContextName> allContextNames(System system){
+		val result = <ContextName>newHashSet()
+		if(system.contextRef != null){
+			system.contextRef.context.forEach[result.add(it)]
+		}
+		system.createRules.forEach[result.add(it.contextName)]
+		if(system.input != null){
+			result.add(system.input.contextName)
+		}
+		system.groups.forEach[result.add(it.contextName)]
+		system.uniqueComp.forEach[result.add(it.contextName)]
+		return result 
+	}
+	
+	def ContextName contextName(CreateRule rule){
+		if (rule.contextRef != null){
+			return rule.contextRef
+		}
+		rule.componentTypes.map[it].commonContextName.last
+	}
+	
+	def ContextName contextName(UniqueComponentAccess rule){
+		if (rule.contextRef != null){
+			return rule.contextRef
+		}
+		newArrayList(rule.apiRule.component).commonContextName.last
+	}
+	
+	def ContextName contextName(Group group){
+		if (group.contextRef != null){
+			return group.contextRef
+		}
+		val componentList = newLinkedList()
+		group.apiRules.forEach[componentList.add(it.component)]
+		group.anyOfComponents.forEach[componentList.add(it)]
+		group.allOfComponents.forEach[componentList.add(it)]
+		group.noneOfComponents.forEach[componentList.add(it)]
+		
+		return componentList.commonContextName.last 
+	}
+	
+	def ContextName contextName(Input input){
+		if (input.contextRef != null){
+			return input.contextRef
+		}
+		val componentList = <AComponent>newArrayList()
+		input.triggers.forEach[
+			it.enterComponents.forEach[componentList.add(it)]
+			it.left.forEach[componentList.add(it)]
+			it.enteredOrLeft.forEach[componentList.add(it)]
+		]
+		input.apiRules.forEach[componentList.add(it.component)]
+		
+		input.ensureComponents.forEach[componentList.add(it)]
+		input.excludeComponents.forEach[componentList.add(it)]
+		
+		return componentList.commonContextName.last
+	}
+	
+	def surroundWithNamespace(CharSequence content, String namespace)'''
+		«IF namespace != null»
+		namespace «namespace» {
+			«content»
+		}
+		«ELSE»
+		«content»
+		«ENDIF»
 	'''
 	
 	def <T> indexedList(List<T> models) {
@@ -572,7 +810,7 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		switch component {
 			Component case component: return component.name.toFirstUpper + "Component" 
 			System case component: return component.name.toFirstUpper + "Component"
-			ParentSystem case component: return component.name.toFirstUpper + "Component"
+			Chain case component: return component.name.toFirstUpper + "Component"
 			Alias case component : return component.name.toFirstUpper + "Component"
 		}
 		
@@ -583,7 +821,7 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		switch component {
 			Component case component: return component.valueType == null && component.properties.empty 
 			System case component: return false
-			ParentSystem case component: return false
+			Chain case component: return false
 			Alias case component : return false
 		}
 		

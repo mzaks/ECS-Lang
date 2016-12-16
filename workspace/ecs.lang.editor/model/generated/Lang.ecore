@@ -6,22 +6,31 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="#//Namespace"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDefinition" eType="#//ContextDefinition"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeAliases" upperBound="-1"
         eType="#//Alias" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
         eType="#//Component" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="procedures" upperBound="-1"
+        eType="#//Procedure" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observers" upperBound="-1"
+        eType="#//Observer" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="systems" upperBound="-1"
         eType="#//System" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentSystems" upperBound="-1"
-        eType="#//ParentSystem" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contextDefinitions" upperBound="-1"
-        eType="#//ContextDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chains" upperBound="-1"
+        eType="#//Chain" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContextDefinition">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="components" unique="false"
-        upperBound="-1" eType="#//AComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="names" upperBound="-1"
+        eType="#//ContextName" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextName">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" unique="false"
+        upperBound="-1" eType="#//ContextName"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Platforms">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ids" upperBound="-1" eType="#//PlatformID"
@@ -55,11 +64,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AComponent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextRef" eType="#//ContextReference"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//AComponent">
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueType" eType="#//Alias"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//ComponentProperty" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -71,12 +84,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//AComponent #//ASystem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="init" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cleanup" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="teardown" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="input" eType="#//Input"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueComp" upperBound="-1"
         eType="#//UniqueComponentAccess" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
         eType="#//Group" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" upperBound="-1"
+        eType="#//Index" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="createRules" upperBound="-1"
         eType="#//CreateRule" containment="true"/>
   </eClassifiers>
@@ -91,6 +108,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="apiRules" upperBound="-1"
         eType="#//ApiRule" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="destroy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextRef" eType="#//ContextName"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputTrigger">
     <eStructuralFeatures xsi:type="ecore:EReference" name="enterComponents" unique="false"
@@ -104,10 +122,20 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="componentTypes" unique="false"
         upperBound="-1" eType="#//AComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextRef" eType="#//ContextName"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Index">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentRef" eType="#//Component"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="apiRules" upperBound="-1"
+        eType="#//ApiRule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="destroy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextRef" eType="#//ContextName"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UniqueComponentAccess">
     <eStructuralFeatures xsi:type="ecore:EReference" name="apiRule" eType="#//ApiRule"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextRef" eType="#//ContextName"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Group">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="group" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -122,6 +150,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="apiRules" upperBound="-1"
         eType="#//ApiRule" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="destroy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextRef" eType="#//ContextName"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApiRule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="#//AComponent"/>
@@ -129,10 +158,47 @@
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ASystem"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ParentSystem" eSuperTypes="#//AComponent #//ASystem">
+  <eClassifiers xsi:type="ecore:EClass" name="Chain" eSuperTypes="#//AComponent #//ASystem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Alias"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="precondition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueComp" upperBound="-1"
+        eType="#//UniqueComponentAccess" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
+        eType="#//Group" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" unique="false"
         upperBound="-1" eType="#//ASystem"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Procedure">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextRef" eType="#//ContextReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueComp" upperBound="-1"
+        eType="#//UniqueComponentAccess" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
+        eType="#//Group" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" upperBound="-1"
+        eType="#//Index" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="createRules" upperBound="-1"
+        eType="#//CreateRule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Alias"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Observer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observedGroup" eType="#//Group"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueComp" upperBound="-1"
+        eType="#//UniqueComponentAccess" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
+        eType="#//Group" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="createRules" upperBound="-1"
+        eType="#//CreateRule" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Alias"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -9,15 +9,22 @@
     <genClasses ecoreClass="Lang.ecore#//Project">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/platformDefinition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/namespace"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/contextDefinition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/typeAliases"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/components"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/procedures"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/observers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/systems"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/parentSystems"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/contextDefinitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Project/chains"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//ContextDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//ContextDefinition/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//ContextDefinition/components"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//ContextDefinition/names"/>
+    </genClasses>
+    <genClasses ecoreClass="Lang.ecore#//ContextName">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//ContextName/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Lang.ecore#//ContextReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//ContextReference/context"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//Platforms">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Platforms/ids"/>
@@ -47,11 +54,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//AliasRule/variableSize"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//AComponent">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//AComponent/contextRef"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//AComponent/unique"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//AComponent/name"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//Component">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//Component/valueType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Component/index"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Component/multiIndex"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Component/properties"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Component/prefix"/>
     </genClasses>
@@ -62,9 +72,12 @@
     <genClasses ecoreClass="Lang.ecore#//System">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//System/componentAlias"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//System/init"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//System/cleanup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//System/teardown"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//System/input"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//System/uniqueComp"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//System/groups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//System/index"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//System/createRules"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//Input">
@@ -74,6 +87,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//Input/excludeComponents"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Input/apiRules"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Input/destroy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//Input/contextRef"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//InputTrigger">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//InputTrigger/enterComponents"/>
@@ -83,9 +97,18 @@
     <genClasses ecoreClass="Lang.ecore#//CreateRule">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//CreateRule/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//CreateRule/componentTypes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//CreateRule/contextRef"/>
+    </genClasses>
+    <genClasses ecoreClass="Lang.ecore#//Index">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Index/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//Index/componentRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Index/apiRules"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Index/destroy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//Index/contextRef"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//UniqueComponentAccess">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//UniqueComponentAccess/apiRule"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//UniqueComponentAccess/contextRef"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//Group">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Group/group"/>
@@ -96,16 +119,42 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//Group/noneOfComponents"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Group/apiRules"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Group/destroy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//Group/contextRef"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//ApiRule">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//ApiRule/component"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//ApiRule/accesors"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//ASystem"/>
-    <genClasses ecoreClass="Lang.ecore#//ParentSystem">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//ParentSystem/componentAlias"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//ParentSystem/parent"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//ParentSystem/children"/>
+    <genClasses ecoreClass="Lang.ecore#//Chain">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Chain/componentAlias"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Chain/precondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Chain/uniqueComp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Chain/groups"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//Chain/children"/>
+    </genClasses>
+    <genClasses ecoreClass="Lang.ecore#//Procedure">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Procedure/componentAlias"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Procedure/contextRef"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Procedure/unique"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Procedure/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Procedure/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Procedure/uniqueComp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Procedure/groups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Procedure/index"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Procedure/createRules"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//Procedure/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Lang.ecore#//Observer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Observer/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Observer/observedGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Observer/uniqueComp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Observer/groups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Observer/createRules"/>
+    </genClasses>
+    <genClasses ecoreClass="Lang.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Parameter/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//Parameter/type"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

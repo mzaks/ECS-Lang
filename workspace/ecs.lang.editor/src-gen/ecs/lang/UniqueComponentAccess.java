@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link ecs.lang.UniqueComponentAccess#getApiRule <em>Api Rule</em>}</li>
+ *   <li>{@link ecs.lang.UniqueComponentAccess#getContextRef <em>Context Ref</em>}</li>
  * </ul>
  *
  * @see ecs.lang.LangPackage#getUniqueComponentAccess()
@@ -48,5 +49,31 @@ public interface UniqueComponentAccess extends EObject
    * @generated
    */
   void setApiRule(ApiRule value);
+
+  /**
+   * Returns the value of the '<em><b>Context Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Context Ref</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Context Ref</em>' reference.
+   * @see #setContextRef(ContextName)
+   * @see ecs.lang.LangPackage#getUniqueComponentAccess_ContextRef()
+   * @model
+   * @generated
+   */
+  ContextName getContextRef();
+
+  /**
+   * Sets the value of the '{@link ecs.lang.UniqueComponentAccess#getContextRef <em>Context Ref</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Context Ref</em>' reference.
+   * @see #getContextRef()
+   * @generated
+   */
+  void setContextRef(ContextName value);
 
 } // UniqueComponentAccess

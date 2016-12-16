@@ -9,19 +9,25 @@ import ecs.lang.Alias;
 import ecs.lang.AliasList;
 import ecs.lang.AliasRule;
 import ecs.lang.ApiRule;
+import ecs.lang.Chain;
 import ecs.lang.Component;
 import ecs.lang.ComponentProperty;
 import ecs.lang.ContextDefinition;
+import ecs.lang.ContextName;
+import ecs.lang.ContextReference;
 import ecs.lang.CreateRule;
 import ecs.lang.Group;
+import ecs.lang.Index;
 import ecs.lang.Input;
 import ecs.lang.InputTrigger;
 import ecs.lang.LangFactory;
 import ecs.lang.LangPackage;
 import ecs.lang.Namespace;
-import ecs.lang.ParentSystem;
+import ecs.lang.Observer;
+import ecs.lang.Parameter;
 import ecs.lang.PlatformID;
 import ecs.lang.Platforms;
+import ecs.lang.Procedure;
 import ecs.lang.Project;
 import ecs.lang.SingleAlias;
 import ecs.lang.UniqueComponentAccess;
@@ -88,6 +94,8 @@ public class LangFactoryImpl extends EFactoryImpl implements LangFactory
     {
       case LangPackage.PROJECT: return createProject();
       case LangPackage.CONTEXT_DEFINITION: return createContextDefinition();
+      case LangPackage.CONTEXT_NAME: return createContextName();
+      case LangPackage.CONTEXT_REFERENCE: return createContextReference();
       case LangPackage.PLATFORMS: return createPlatforms();
       case LangPackage.PLATFORM_ID: return createPlatformID();
       case LangPackage.NAMESPACE: return createNamespace();
@@ -102,11 +110,15 @@ public class LangFactoryImpl extends EFactoryImpl implements LangFactory
       case LangPackage.INPUT: return createInput();
       case LangPackage.INPUT_TRIGGER: return createInputTrigger();
       case LangPackage.CREATE_RULE: return createCreateRule();
+      case LangPackage.INDEX: return createIndex();
       case LangPackage.UNIQUE_COMPONENT_ACCESS: return createUniqueComponentAccess();
       case LangPackage.GROUP: return createGroup();
       case LangPackage.API_RULE: return createApiRule();
       case LangPackage.ASYSTEM: return createASystem();
-      case LangPackage.PARENT_SYSTEM: return createParentSystem();
+      case LangPackage.CHAIN: return createChain();
+      case LangPackage.PROCEDURE: return createProcedure();
+      case LangPackage.OBSERVER: return createObserver();
+      case LangPackage.PARAMETER: return createParameter();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -132,6 +144,28 @@ public class LangFactoryImpl extends EFactoryImpl implements LangFactory
   {
     ContextDefinitionImpl contextDefinition = new ContextDefinitionImpl();
     return contextDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ContextName createContextName()
+  {
+    ContextNameImpl contextName = new ContextNameImpl();
+    return contextName;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ContextReference createContextReference()
+  {
+    ContextReferenceImpl contextReference = new ContextReferenceImpl();
+    return contextReference;
   }
 
   /**
@@ -293,6 +327,17 @@ public class LangFactoryImpl extends EFactoryImpl implements LangFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public Index createIndex()
+  {
+    IndexImpl index = new IndexImpl();
+    return index;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public UniqueComponentAccess createUniqueComponentAccess()
   {
     UniqueComponentAccessImpl uniqueComponentAccess = new UniqueComponentAccessImpl();
@@ -337,10 +382,43 @@ public class LangFactoryImpl extends EFactoryImpl implements LangFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParentSystem createParentSystem()
+  public Chain createChain()
   {
-    ParentSystemImpl parentSystem = new ParentSystemImpl();
-    return parentSystem;
+    ChainImpl chain = new ChainImpl();
+    return chain;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Procedure createProcedure()
+  {
+    ProcedureImpl procedure = new ProcedureImpl();
+    return procedure;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Observer createObserver()
+  {
+    ObserverImpl observer = new ObserverImpl();
+    return observer;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Parameter createParameter()
+  {
+    ParameterImpl parameter = new ParameterImpl();
+    return parameter;
   }
 
   /**

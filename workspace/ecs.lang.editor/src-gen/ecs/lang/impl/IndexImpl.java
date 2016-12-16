@@ -3,11 +3,10 @@
  */
 package ecs.lang.impl;
 
-import ecs.lang.AComponent;
 import ecs.lang.ApiRule;
+import ecs.lang.Component;
 import ecs.lang.ContextName;
-import ecs.lang.Input;
-import ecs.lang.InputTrigger;
+import ecs.lang.Index;
 import ecs.lang.LangPackage;
 
 import java.util.Collection;
@@ -24,79 +23,56 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Input</b></em>'.
+ * An implementation of the model object '<em><b>Index</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.impl.InputImpl#isUnqiue <em>Unqiue</em>}</li>
- *   <li>{@link ecs.lang.impl.InputImpl#getTriggers <em>Triggers</em>}</li>
- *   <li>{@link ecs.lang.impl.InputImpl#getEnsureComponents <em>Ensure Components</em>}</li>
- *   <li>{@link ecs.lang.impl.InputImpl#getExcludeComponents <em>Exclude Components</em>}</li>
- *   <li>{@link ecs.lang.impl.InputImpl#getApiRules <em>Api Rules</em>}</li>
- *   <li>{@link ecs.lang.impl.InputImpl#isDestroy <em>Destroy</em>}</li>
- *   <li>{@link ecs.lang.impl.InputImpl#getContextRef <em>Context Ref</em>}</li>
+ *   <li>{@link ecs.lang.impl.IndexImpl#getName <em>Name</em>}</li>
+ *   <li>{@link ecs.lang.impl.IndexImpl#getComponentRef <em>Component Ref</em>}</li>
+ *   <li>{@link ecs.lang.impl.IndexImpl#getApiRules <em>Api Rules</em>}</li>
+ *   <li>{@link ecs.lang.impl.IndexImpl#isDestroy <em>Destroy</em>}</li>
+ *   <li>{@link ecs.lang.impl.IndexImpl#getContextRef <em>Context Ref</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class InputImpl extends MinimalEObjectImpl.Container implements Input
+public class IndexImpl extends MinimalEObjectImpl.Container implements Index
 {
   /**
-   * The default value of the '{@link #isUnqiue() <em>Unqiue</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isUnqiue()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final boolean UNQIUE_EDEFAULT = false;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #isUnqiue() <em>Unqiue</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isUnqiue()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected boolean unqiue = UNQIUE_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getTriggers() <em>Triggers</em>}' containment reference list.
+   * The cached value of the '{@link #getComponentRef() <em>Component Ref</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTriggers()
+   * @see #getComponentRef()
    * @generated
    * @ordered
    */
-  protected EList<InputTrigger> triggers;
-
-  /**
-   * The cached value of the '{@link #getEnsureComponents() <em>Ensure Components</em>}' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEnsureComponents()
-   * @generated
-   * @ordered
-   */
-  protected EList<AComponent> ensureComponents;
-
-  /**
-   * The cached value of the '{@link #getExcludeComponents() <em>Exclude Components</em>}' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getExcludeComponents()
-   * @generated
-   * @ordered
-   */
-  protected EList<AComponent> excludeComponents;
+  protected Component componentRef;
 
   /**
    * The cached value of the '{@link #getApiRules() <em>Api Rules</em>}' containment reference list.
@@ -143,7 +119,7 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
    * <!-- end-user-doc -->
    * @generated
    */
-  protected InputImpl()
+  protected IndexImpl()
   {
     super();
   }
@@ -156,7 +132,7 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
   @Override
   protected EClass eStaticClass()
   {
-    return LangPackage.Literals.INPUT;
+    return LangPackage.Literals.INDEX;
   }
 
   /**
@@ -164,9 +140,9 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isUnqiue()
+  public String getName()
   {
-    return unqiue;
+    return name;
   }
 
   /**
@@ -174,12 +150,12 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setUnqiue(boolean newUnqiue)
+  public void setName(String newName)
   {
-    boolean oldUnqiue = unqiue;
-    unqiue = newUnqiue;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.INPUT__UNQIUE, oldUnqiue, unqiue));
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.INDEX__NAME, oldName, name));
   }
 
   /**
@@ -187,13 +163,19 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<InputTrigger> getTriggers()
+  public Component getComponentRef()
   {
-    if (triggers == null)
+    if (componentRef != null && componentRef.eIsProxy())
     {
-      triggers = new EObjectContainmentEList<InputTrigger>(InputTrigger.class, this, LangPackage.INPUT__TRIGGERS);
+      InternalEObject oldComponentRef = (InternalEObject)componentRef;
+      componentRef = (Component)eResolveProxy(oldComponentRef);
+      if (componentRef != oldComponentRef)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, LangPackage.INDEX__COMPONENT_REF, oldComponentRef, componentRef));
+      }
     }
-    return triggers;
+    return componentRef;
   }
 
   /**
@@ -201,13 +183,9 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AComponent> getEnsureComponents()
+  public Component basicGetComponentRef()
   {
-    if (ensureComponents == null)
-    {
-      ensureComponents = new EObjectResolvingEList<AComponent>(AComponent.class, this, LangPackage.INPUT__ENSURE_COMPONENTS);
-    }
-    return ensureComponents;
+    return componentRef;
   }
 
   /**
@@ -215,13 +193,12 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AComponent> getExcludeComponents()
+  public void setComponentRef(Component newComponentRef)
   {
-    if (excludeComponents == null)
-    {
-      excludeComponents = new EObjectResolvingEList<AComponent>(AComponent.class, this, LangPackage.INPUT__EXCLUDE_COMPONENTS);
-    }
-    return excludeComponents;
+    Component oldComponentRef = componentRef;
+    componentRef = newComponentRef;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.INDEX__COMPONENT_REF, oldComponentRef, componentRef));
   }
 
   /**
@@ -233,7 +210,7 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
   {
     if (apiRules == null)
     {
-      apiRules = new EObjectContainmentEList<ApiRule>(ApiRule.class, this, LangPackage.INPUT__API_RULES);
+      apiRules = new EObjectContainmentEList<ApiRule>(ApiRule.class, this, LangPackage.INDEX__API_RULES);
     }
     return apiRules;
   }
@@ -258,7 +235,7 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
     boolean oldDestroy = destroy;
     destroy = newDestroy;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.INPUT__DESTROY, oldDestroy, destroy));
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.INDEX__DESTROY, oldDestroy, destroy));
   }
 
   /**
@@ -275,7 +252,7 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
       if (contextRef != oldContextRef)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, LangPackage.INPUT__CONTEXT_REF, oldContextRef, contextRef));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, LangPackage.INDEX__CONTEXT_REF, oldContextRef, contextRef));
       }
     }
     return contextRef;
@@ -301,7 +278,7 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
     ContextName oldContextRef = contextRef;
     contextRef = newContextRef;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.INPUT__CONTEXT_REF, oldContextRef, contextRef));
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.INDEX__CONTEXT_REF, oldContextRef, contextRef));
   }
 
   /**
@@ -314,9 +291,7 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
   {
     switch (featureID)
     {
-      case LangPackage.INPUT__TRIGGERS:
-        return ((InternalEList<?>)getTriggers()).basicRemove(otherEnd, msgs);
-      case LangPackage.INPUT__API_RULES:
+      case LangPackage.INDEX__API_RULES:
         return ((InternalEList<?>)getApiRules()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -332,19 +307,16 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
   {
     switch (featureID)
     {
-      case LangPackage.INPUT__UNQIUE:
-        return isUnqiue();
-      case LangPackage.INPUT__TRIGGERS:
-        return getTriggers();
-      case LangPackage.INPUT__ENSURE_COMPONENTS:
-        return getEnsureComponents();
-      case LangPackage.INPUT__EXCLUDE_COMPONENTS:
-        return getExcludeComponents();
-      case LangPackage.INPUT__API_RULES:
+      case LangPackage.INDEX__NAME:
+        return getName();
+      case LangPackage.INDEX__COMPONENT_REF:
+        if (resolve) return getComponentRef();
+        return basicGetComponentRef();
+      case LangPackage.INDEX__API_RULES:
         return getApiRules();
-      case LangPackage.INPUT__DESTROY:
+      case LangPackage.INDEX__DESTROY:
         return isDestroy();
-      case LangPackage.INPUT__CONTEXT_REF:
+      case LangPackage.INDEX__CONTEXT_REF:
         if (resolve) return getContextRef();
         return basicGetContextRef();
     }
@@ -362,29 +334,20 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
   {
     switch (featureID)
     {
-      case LangPackage.INPUT__UNQIUE:
-        setUnqiue((Boolean)newValue);
+      case LangPackage.INDEX__NAME:
+        setName((String)newValue);
         return;
-      case LangPackage.INPUT__TRIGGERS:
-        getTriggers().clear();
-        getTriggers().addAll((Collection<? extends InputTrigger>)newValue);
+      case LangPackage.INDEX__COMPONENT_REF:
+        setComponentRef((Component)newValue);
         return;
-      case LangPackage.INPUT__ENSURE_COMPONENTS:
-        getEnsureComponents().clear();
-        getEnsureComponents().addAll((Collection<? extends AComponent>)newValue);
-        return;
-      case LangPackage.INPUT__EXCLUDE_COMPONENTS:
-        getExcludeComponents().clear();
-        getExcludeComponents().addAll((Collection<? extends AComponent>)newValue);
-        return;
-      case LangPackage.INPUT__API_RULES:
+      case LangPackage.INDEX__API_RULES:
         getApiRules().clear();
         getApiRules().addAll((Collection<? extends ApiRule>)newValue);
         return;
-      case LangPackage.INPUT__DESTROY:
+      case LangPackage.INDEX__DESTROY:
         setDestroy((Boolean)newValue);
         return;
-      case LangPackage.INPUT__CONTEXT_REF:
+      case LangPackage.INDEX__CONTEXT_REF:
         setContextRef((ContextName)newValue);
         return;
     }
@@ -401,25 +364,19 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
   {
     switch (featureID)
     {
-      case LangPackage.INPUT__UNQIUE:
-        setUnqiue(UNQIUE_EDEFAULT);
+      case LangPackage.INDEX__NAME:
+        setName(NAME_EDEFAULT);
         return;
-      case LangPackage.INPUT__TRIGGERS:
-        getTriggers().clear();
+      case LangPackage.INDEX__COMPONENT_REF:
+        setComponentRef((Component)null);
         return;
-      case LangPackage.INPUT__ENSURE_COMPONENTS:
-        getEnsureComponents().clear();
-        return;
-      case LangPackage.INPUT__EXCLUDE_COMPONENTS:
-        getExcludeComponents().clear();
-        return;
-      case LangPackage.INPUT__API_RULES:
+      case LangPackage.INDEX__API_RULES:
         getApiRules().clear();
         return;
-      case LangPackage.INPUT__DESTROY:
+      case LangPackage.INDEX__DESTROY:
         setDestroy(DESTROY_EDEFAULT);
         return;
-      case LangPackage.INPUT__CONTEXT_REF:
+      case LangPackage.INDEX__CONTEXT_REF:
         setContextRef((ContextName)null);
         return;
     }
@@ -436,19 +393,15 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
   {
     switch (featureID)
     {
-      case LangPackage.INPUT__UNQIUE:
-        return unqiue != UNQIUE_EDEFAULT;
-      case LangPackage.INPUT__TRIGGERS:
-        return triggers != null && !triggers.isEmpty();
-      case LangPackage.INPUT__ENSURE_COMPONENTS:
-        return ensureComponents != null && !ensureComponents.isEmpty();
-      case LangPackage.INPUT__EXCLUDE_COMPONENTS:
-        return excludeComponents != null && !excludeComponents.isEmpty();
-      case LangPackage.INPUT__API_RULES:
+      case LangPackage.INDEX__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case LangPackage.INDEX__COMPONENT_REF:
+        return componentRef != null;
+      case LangPackage.INDEX__API_RULES:
         return apiRules != null && !apiRules.isEmpty();
-      case LangPackage.INPUT__DESTROY:
+      case LangPackage.INDEX__DESTROY:
         return destroy != DESTROY_EDEFAULT;
-      case LangPackage.INPUT__CONTEXT_REF:
+      case LangPackage.INDEX__CONTEXT_REF:
         return contextRef != null;
     }
     return super.eIsSet(featureID);
@@ -465,12 +418,12 @@ public class InputImpl extends MinimalEObjectImpl.Container implements Input
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (unqiue: ");
-    result.append(unqiue);
+    result.append(" (name: ");
+    result.append(name);
     result.append(", destroy: ");
     result.append(destroy);
     result.append(')');
     return result.toString();
   }
 
-} //InputImpl
+} //IndexImpl

@@ -3,17 +3,28 @@
  */
 package ecs.validation
 
-import org.eclipse.xtext.validation.Check
-import ecs.lang.ContextDefinition
-import ecs.lang.Component
-import ecs.lang.ParentSystem
-import ecs.lang.Alias
-import ecs.lang.System
-import ecs.lang.AComponent
-import ecs.lang.LangPackage
-import ecs.lang.Project
-import ecs.lang.PlatformID
 import ecs.generator.LangGenerator
+import ecs.lang.AComponent
+import ecs.lang.Alias
+import ecs.lang.Component
+import ecs.lang.LangPackage
+import ecs.lang.Chain
+import ecs.lang.PlatformID
+import ecs.lang.System
+import org.eclipse.xtext.validation.Check
+import ecs.lang.Input
+import ecs.lang.InputTrigger
+import org.eclipse.emf.ecore.EReference
+import ecs.lang.ApiRule
+import ecs.lang.Index
+import ecs.lang.Group
+import ecs.lang.CreateRule
+import ecs.lang.UniqueComponentAccess
+import org.eclipse.emf.common.util.EList
+import ecs.lang.ContextName
+import java.util.List
+import org.eclipse.emf.ecore.EStructuralFeature
+import static extension ecs.model.ContextNameExtractor.*
 
 /**
  * This class contains custom validation rules. 
@@ -23,38 +34,204 @@ import ecs.generator.LangGenerator
 class LangValidator extends AbstractLangValidator {
 	
 	public static val VALID_COMPONENT_NEEDED = 'validComponentNeeded'
-	public static val COMPONENT_NOT_IN_CONTEXT = 'componentNotInContext'
+	public static val COMPONENT_NOT_UNIQUE = 'componentNotUnique'
+	public static val GROUP_NOT_UNIQUE = 'groupNotUnique'
+	public static val INPUT_NOT_UNIQUE = 'inputNotUnique'
+	public static val COMPONENT_NOT_KEY = 'componentNotKey'
+	public static val AMBIGUOUS_CONTEXT_KEY = 'componentNotKey'
+	
 	public static val PLATFORM_NOT_SUPPORTED = 'platformNotSupported'
 	
+	 
 	@Check
-	def checkContextDefinitionsToContainComponentsOnly(ContextDefinition ctx){
-		for (pair : ctx.components.indexed){
-			if (!pair.value.validComponent()){
-				error('This is not a valid component', 
-					LangPackage.Literals.CONTEXT_DEFINITION__COMPONENTS,
-					pair.key,
-					VALID_COMPONENT_NEEDED)
-			}
+	def checkInputTriggerToContainComponentsOnly(InputTrigger trigger){
+		val unique = (trigger.eContainer as Input)?.isUnqiue
+		for (pair : trigger.enterComponents.indexed){
+			pair.validateComponent(LangPackage.Literals.INPUT_TRIGGER__ENTER_COMPONENTS)
+		}
+		if(unique){
+			trigger.enterComponents.validateOneOfComponentsIsUnique(LangPackage.Literals.INPUT_TRIGGER__ENTER_COMPONENTS)
+		}
+		
+		for (pair : trigger.left.indexed){
+			pair.validateComponent(LangPackage.Literals.INPUT_TRIGGER__LEFT)
+		}
+		if(unique){
+			trigger.left.validateOneOfComponentsIsUnique(LangPackage.Literals.INPUT_TRIGGER__LEFT)
+		}
+		
+		for (pair : trigger.enteredOrLeft.indexed){
+			pair.validateComponent(LangPackage.Literals.INPUT_TRIGGER__ENTERED_OR_LEFT)
+		}
+		if(unique){
+			trigger.enteredOrLeft.validateOneOfComponentsIsUnique(LangPackage.Literals.INPUT_TRIGGER__ENTERED_OR_LEFT)
 		}
 	}
 	
 	@Check
-	def checkComponentIsNotInContext(AComponent component){
-		if (!component.validComponent){
-			return
+	def checkInputToContainComponentsOnly(Input input){
+		val componentsList = newLinkedList()
+		for (pair : input.ensureComponents.indexed){
+			pair.validateComponent(LangPackage.Literals.INPUT__EXCLUDE_COMPONENTS)
+			componentsList.add(pair.value)
 		}
-		val project = component.eResource.contents.filter(typeof(Project)).get(0) as Project
-		if (project.contextDefinitions.isNullOrEmpty){
-			return
+		for (pair : input.excludeComponents.indexed){
+			pair.validateComponent(LangPackage.Literals.INPUT__ENSURE_COMPONENTS)
+			componentsList.add(pair.value)
 		}
-		for (ctx : project.contextDefinitions){
-			if (ctx.components.contains(component)){
-				return
+		if (input.isUnqiue && input.triggers.size > 1){
+			error("Unique input can't have multiple triggers", 
+					LangPackage.Literals.INPUT__TRIGGERS, 
+					INPUT_NOT_UNIQUE)
+		}
+		input.triggers.forEach[
+			it.enterComponents.forEach[componentsList.add(it)]
+			it.left.forEach[componentsList.add(it)]
+			it.enteredOrLeft.forEach[componentsList.add(it)]
+		]
+		input.apiRules.forEach[componentsList.add(it.component)]
+		componentsList.validateContext(input.contextRef, LangPackage.Literals.INPUT__TRIGGERS)
+	}
+	
+	@Check
+	def checkGroupToContainValidComponents(Group group){
+		val componentsList = newLinkedList()
+		for (pair : group.allOfComponents.indexed){
+			pair.validateComponent(LangPackage.Literals.GROUP__ALL_OF_COMPONENTS)
+			componentsList.add(pair.value)
+		}
+		for (pair : group.anyOfComponents.indexed){
+			pair.validateComponent(LangPackage.Literals.GROUP__ANY_OF_COMPONENTS)
+			componentsList.add(pair.value)
+		}
+		for (pair : group.noneOfComponents.indexed){
+			pair.validateComponent(LangPackage.Literals.GROUP__NONE_OF_COMPONENTS)
+			componentsList.add(pair.value)
+		}
+		if(group.isUnique){
+			if (group.allOfComponents.filter[it.isUnique].isEmpty && group.anyOfComponents.filter[it.isUnique].isEmpty){
+				error('This group is not unique', 
+					LangPackage.Literals.GROUP__NAME,
+					GROUP_NOT_UNIQUE)
 			}
 		}
-		error('This component is not assigned to a context',
-					LangPackage.Literals.ACOMPONENT__NAME,
-					COMPONENT_NOT_IN_CONTEXT)
+		
+		group.apiRules.forEach[componentsList.add(it.component)]
+		
+		componentsList.validateContext(group.contextRef, LangPackage.Literals.GROUP__NAME)
+	}
+	
+	@Check
+	def checkCreateRuleToContainComponentsOnly(CreateRule rule){
+		val componentsList = newLinkedList()
+		for (pair : rule.componentTypes.indexed){
+			pair.validateComponent(LangPackage.Literals.CREATE_RULE__COMPONENT_TYPES)
+			componentsList.add(pair.value)
+		}
+		componentsList.validateContext(rule.contextRef, LangPackage.Literals.CREATE_RULE__COMPONENT_TYPES)
+	}
+	
+	@Check
+	def checkApiRuleToContainComponentsOnly(ApiRule rule){
+		rule.component.validateComponent(LangPackage.Literals.API_RULE__COMPONENT)
+	}
+	
+	@Check
+	def checkIndexToContainComponentsOnly(Index index){
+		val componentsList = newLinkedList()
+		index.componentRef.validateComponent(LangPackage.Literals.INDEX__COMPONENT_REF)
+		componentsList.add(index.componentRef)
+		if(!index.componentRef.isIndex && !index.componentRef.isMultiIndex) {
+			error('This component is not marked asIndexKey nor asMultiIndexKey', 
+					LangPackage.Literals.INDEX__COMPONENT_REF,
+					COMPONENT_NOT_KEY)
+		}
+		index.apiRules.forEach[componentsList.add(it.component)]
+		
+		componentsList.validateContext(index.contextRef, LangPackage.Literals.GROUP__NAME)
+	}
+	
+	@Check
+	def checkUniqueComponentAccessToContainUniqueComponentsOnly(UniqueComponentAccess access){
+		access.apiRule.component.validateUniqueComponent(LangPackage.Literals.UNIQUE_COMPONENT_ACCESS__API_RULE)
+		val componentsList = newLinkedList(access.apiRule.component)
+		componentsList.validateContext(access.contextRef, LangPackage.Literals.UNIQUE_COMPONENT_ACCESS__API_RULE)
+	}
+	
+	def validateComponent(Pair<Integer, AComponent> pair, EReference ref){
+		if (!pair.value.validComponent){
+				error('This is not a valid component', 
+					ref,
+					pair.key,
+					VALID_COMPONENT_NEEDED)
+			}
+	}
+	
+	def validateComponent(AComponent component, EReference ref){
+		if (!component.validComponent){
+				error('This is not a valid component', 
+					ref,
+					VALID_COMPONENT_NEEDED)
+			}
+	}
+	
+	def validateUniqueComponent(Pair<Integer, AComponent> pair, EReference ref){
+		if (!pair.value.isUnique){
+				error('This is not a unique component', 
+					ref,
+					pair.key,
+					COMPONENT_NOT_UNIQUE)
+			}
+	}
+	
+	def validateUniqueComponent(AComponent component, EReference ref){
+		if (!component.isUnique){
+				error('This is not a unique component', 
+					ref,
+					COMPONENT_NOT_UNIQUE)
+			}
+	}
+	
+	def validateOneOfComponentsIsUnique(EList<AComponent> components, EReference ref){
+		if(components.isEmpty == false && components.filter[it.isUnique].isEmpty){
+			error('This group is not unique', 
+					ref,
+					GROUP_NOT_UNIQUE)
+		}
+	}
+	
+	def validateContext(List<AComponent> components, ContextName contextName, EStructuralFeature ref){
+		val contextNames = components.commonContextName
+		if (contextNames.isEmpty){
+			error('Components do not belong to distinct context', 
+					ref,
+					AMBIGUOUS_CONTEXT_KEY)
+			return
+		}
+		if(contextNames.size == 1 && contextName != null && !contextNames.contains(contextName)){
+			error("Components belong to context[" + contextNames.map[it.name].join(', ') + "] not ["+ contextName.name +"]", 
+					ref,
+					AMBIGUOUS_CONTEXT_KEY)
+			return
+		}
+		if(contextNames.size > 1 && !contextNames.contains(contextName)){
+			error("Components belong to multiple contexts[" + contextNames.map[it.name].join(', ') + "] please specify one", 
+					ref,
+					AMBIGUOUS_CONTEXT_KEY)
+			return
+		}
+	}
+	
+	
+	
+	def boolean validComponent(AComponent component){
+		switch component {
+			Component case component: return true 
+			System case component: return component.componentAlias
+			Chain case component: return component.componentAlias
+			Alias case component : return component.componentAlias
+			}
+		return false
 	}
 	
 	@Check
@@ -64,16 +241,6 @@ class LangValidator extends AbstractLangValidator {
 					LangPackage.Literals.PLATFORM_ID__NAME,
 					PLATFORM_NOT_SUPPORTED)
 		}
-	}
-	
-	def boolean validComponent(AComponent component){
-		switch component {
-			Component case component: return true 
-			System case component: return component.componentAlias
-			ParentSystem case component: return component.componentAlias
-			Alias case component : return component.componentAlias
-			}
-		return false
 	}
 	
 }

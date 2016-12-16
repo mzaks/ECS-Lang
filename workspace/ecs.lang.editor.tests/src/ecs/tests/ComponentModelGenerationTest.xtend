@@ -34,21 +34,19 @@ class ComponentModelGenerationTest{
 	@Test 
 	def void collectAllComponentsFromMixedContextAndCheckIndex() {
 		val project = parseHelper.parse('''
-			platform smothing
-			comp A
-			comp B
-			comp C
-			comp D
-			comp E
-			comp F
-			comp G
-			ctx P1 { A B C D E F G }
-			ctx P2 { B G F }
-			ctx P3 { A G }
-			ctx P4 { B G }
+			ctx P1 P2 P3 P4
+			
+			comp[P1, P3] A
+			comp[P1, P2, P4] B
+			comp[P1] C
+			comp[P1] D
+			comp[P1] E
+			comp[P1, P2] F
+			comp[P1, P2, P3, P4] G
 		''')
 		
-		val componentModels = generator.collectAllComponents(project).sortBy[it.name]
+		generator.setupModels(newHashSet(project))
+		val componentModels = generator.collectAllComponents().sortBy[it.name]
 		
 		Assert.assertEquals(componentModels.size, 7)
 		Assert.assertEquals(componentModels.map[it.name], newLinkedList("A", "B", "C", "D", "E", "F", "G"))
@@ -80,19 +78,19 @@ class ComponentModelGenerationTest{
 	@Test 
 	def void collectAllComponentsFromDistinctContextAndCheckIndex() {
 		val project = parseHelper.parse('''
-			platform smothing
-			comp A
-			comp B
-			comp C
-			comp D
-			comp E
-			comp F
-			comp G
-			ctx P1 { A B C }
-			ctx P2 { D E F G }
+			ctx P1 P2
+			
+			comp[P1] A
+			comp[P1] B
+			comp[P1] C
+			comp[P2] D
+			comp[P2] E
+			comp[P2] F
+			comp[P2] G
 		''')
 		
-		val componentModels = generator.collectAllComponents(project).sortBy[it.name]
+		generator.setupModels(newHashSet(project))
+		val componentModels = generator.collectAllComponents().sortBy[it.name]
 		
 		Assert.assertEquals(componentModels.size, 7)
 		Assert.assertEquals(componentModels.map[it.name], newLinkedList("A", "B", "C", "D", "E", "F", "G"))
@@ -124,21 +122,19 @@ class ComponentModelGenerationTest{
 	@Test 
 	def void collectAllComponentsFromMixedContextAndCheckIndex2() {
 		val project = parseHelper.parse('''
-			platform smothing
-			comp A
-			comp B
-			comp C
-			comp D
-			comp E
-			comp F
-			comp G
-			ctx P1 { C D E F G }
-			ctx P2 { B G F }
-			ctx P3 { A }
-			ctx P4 { B G }
+			ctx P1, P2, P3, P4
+			
+			comp[P3] A
+			comp[P2, P4] B
+			comp[P1] C
+			comp[P1] D
+			comp[P1] E
+			comp[P1, P2] F
+			comp[P1, P2, P4] G
 		''')
 		
-		val componentModels = generator.collectAllComponents(project).sortBy[it.name]
+		generator.setupModels(newHashSet(project))
+		val componentModels = generator.collectAllComponents().sortBy[it.name]
 		
 		Assert.assertEquals(componentModels.size, 7)
 		Assert.assertEquals(componentModels.map[it.name], newLinkedList("A", "B", "C", "D", "E", "F", "G"))
@@ -170,21 +166,19 @@ class ComponentModelGenerationTest{
 	@Test 
 	def void collectAllComponentsFromMixedContextAndCheckIndex3() {
 		val project = parseHelper.parse('''
-			platform smothing
-			comp A
-			comp B
-			comp C
-			comp D
-			comp E
-			comp F
-			comp G
-			ctx P1 { C D E G }
-			ctx P2 { B G F }
-			ctx P3 { A }
-			ctx P4 { B G }
+			ctx P1, P2, P3, P4
+						
+			comp[P3] A
+			comp[P2, P4] B
+			comp[P1] C
+			comp[P1] D
+			comp[P1] E
+			comp[P2] F
+			comp[P1, P2, P4] G
 		''')
 		
-		val componentModels = generator.collectAllComponents(project).sortBy[it.name]
+		generator.setupModels(newHashSet(project))
+		val componentModels = generator.collectAllComponents().sortBy[it.name]
 		
 		Assert.assertEquals(componentModels.size, 7)
 		Assert.assertEquals(componentModels.map[it.name], newLinkedList("A", "B", "C", "D", "E", "F", "G"))
@@ -216,68 +210,19 @@ class ComponentModelGenerationTest{
 	@Test 
 	def void collectAllComponentsFromMixedContextAndCheckIndex4() {
 		val project = parseHelper.parse('''
-			platform smothing
-			comp A
-			comp B
-			comp C
-			comp D
-			comp E
-			comp F
-			comp G
-			ctx P1 { A B C D E F G }
-			ctx P2 { A B C D E }
-			ctx P3 { F }
-			ctx P4 { G }
+			ctx P1, P2, P3, P4
+			
+			comp[P1, P2] A
+			comp[P1, P2] B
+			comp[P1, P2] C
+			comp[P1, P2] D
+			comp[P1, P2] E
+			comp[P1, P3] F
+			comp[P1, P4] G
 		''')
 		
-		val componentModels = generator.collectAllComponents(project).sortBy[it.name]
-		
-		Assert.assertEquals(componentModels.size, 7)
-		Assert.assertEquals(componentModels.map[it.name], newLinkedList("A", "B", "C", "D", "E", "F", "G"))
-		
-		val componentGroup = componentModels.groupBy[it.name]
-		
-		componentGroup.assertComponentContextNames("A", "P1", "P2")
-		componentGroup.assertIndexIs("A", 2)
-		
-		componentGroup.assertComponentContextNames("B", "P1", "P2")
-		componentGroup.assertIndexIs("B", 3)
-		
-		componentGroup.assertComponentContextNames("C", "P1", "P2")
-		componentGroup.assertIndexIs("C", 4)
-		
-		componentGroup.assertComponentContextNames("D", "P1", "P2")
-		componentGroup.assertIndexIs("D", 5)
-		
-		componentGroup.assertComponentContextNames("E", "P1", "P2")
-		componentGroup.assertIndexIs("E", 6)
-		
-		componentGroup.assertComponentContextNames("F", "P1", "P3")
-		componentGroup.assertIndexIs("F", 0)
-		
-		componentGroup.assertComponentContextNames("G", "P1", "P4")
-		componentGroup.assertIndexIs("G", 1)
-	}
-	
-	@Test 
-	def void collectAllComponentsFromMixedContextAndCheckIndex5() {
-		val project = parseHelper.parse('''
-			platform smothing
-			comp A
-			comp B
-			comp C
-			comp D
-			comp E
-			comp F
-			comp G
-			ctx P1 P2 { A B C D }
-			ctx P1 { E F G }
-			ctx P2 { E }
-			ctx P3 { F }
-			ctx P4 { G }
-		''')
-		
-		val componentModels = generator.collectAllComponents(project).sortBy[it.name]
+		generator.setupModels(newHashSet(project))
+		val componentModels = generator.collectAllComponents().sortBy[it.name]
 		
 		Assert.assertEquals(componentModels.size, 7)
 		Assert.assertEquals(componentModels.map[it.name], newLinkedList("A", "B", "C", "D", "E", "F", "G"))
@@ -307,7 +252,7 @@ class ComponentModelGenerationTest{
 	}
 	
 	def assertComponentContextNames(Map<String, List<ComponentModel>> componentGroup, String label, String... groupnames){
-		Assert.assertEquals(componentGroup.get(label).get(0).contexNames.sortBy[it], newLinkedList(groupnames))
+		Assert.assertEquals(newLinkedList(groupnames), componentGroup.get(label).get(0).contexNames.sortBy[it])
 	}
 
 	def assertIndexIs(Map<String, List<ComponentModel>> componentGroup, String label1, Integer index){

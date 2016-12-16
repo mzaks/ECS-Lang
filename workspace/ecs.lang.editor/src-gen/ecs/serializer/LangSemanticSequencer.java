@@ -8,18 +8,23 @@ import ecs.lang.Alias;
 import ecs.lang.AliasList;
 import ecs.lang.AliasRule;
 import ecs.lang.ApiRule;
+import ecs.lang.Chain;
 import ecs.lang.Component;
 import ecs.lang.ComponentProperty;
 import ecs.lang.ContextDefinition;
+import ecs.lang.ContextName;
+import ecs.lang.ContextReference;
 import ecs.lang.CreateRule;
 import ecs.lang.Group;
+import ecs.lang.Index;
 import ecs.lang.Input;
 import ecs.lang.InputTrigger;
 import ecs.lang.LangPackage;
 import ecs.lang.Namespace;
-import ecs.lang.ParentSystem;
+import ecs.lang.Observer;
 import ecs.lang.PlatformID;
 import ecs.lang.Platforms;
+import ecs.lang.Procedure;
 import ecs.lang.Project;
 import ecs.lang.SingleAlias;
 import ecs.lang.UniqueComponentAccess;
@@ -61,6 +66,9 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case LangPackage.API_RULE:
 				sequence_ApiRule(context, (ApiRule) semanticObject); 
 				return; 
+			case LangPackage.CHAIN:
+				sequence_Chain(context, (Chain) semanticObject); 
+				return; 
 			case LangPackage.COMPONENT:
 				sequence_Component(context, (Component) semanticObject); 
 				return; 
@@ -70,11 +78,20 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case LangPackage.CONTEXT_DEFINITION:
 				sequence_ContextDefinition(context, (ContextDefinition) semanticObject); 
 				return; 
+			case LangPackage.CONTEXT_NAME:
+				sequence_ContextName(context, (ContextName) semanticObject); 
+				return; 
+			case LangPackage.CONTEXT_REFERENCE:
+				sequence_ContextReference(context, (ContextReference) semanticObject); 
+				return; 
 			case LangPackage.CREATE_RULE:
 				sequence_CreateRule(context, (CreateRule) semanticObject); 
 				return; 
 			case LangPackage.GROUP:
 				sequence_Group(context, (Group) semanticObject); 
+				return; 
+			case LangPackage.INDEX:
+				sequence_Index(context, (Index) semanticObject); 
 				return; 
 			case LangPackage.INPUT:
 				sequence_Input(context, (Input) semanticObject); 
@@ -85,14 +102,20 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case LangPackage.NAMESPACE:
 				sequence_Namespace(context, (Namespace) semanticObject); 
 				return; 
-			case LangPackage.PARENT_SYSTEM:
-				sequence_ParentSystem(context, (ParentSystem) semanticObject); 
+			case LangPackage.OBSERVER:
+				sequence_Observer(context, (Observer) semanticObject); 
+				return; 
+			case LangPackage.PARAMETER:
+				sequence_Parameter(context, (ecs.lang.Parameter) semanticObject); 
 				return; 
 			case LangPackage.PLATFORM_ID:
 				sequence_PlatformID(context, (PlatformID) semanticObject); 
 				return; 
 			case LangPackage.PLATFORMS:
 				sequence_Platforms(context, (Platforms) semanticObject); 
+				return; 
+			case LangPackage.PROCEDURE:
+				sequence_Procedure(context, (Procedure) semanticObject); 
 				return; 
 			case LangPackage.PROJECT:
 				sequence_Project(context, (Project) semanticObject); 
@@ -141,7 +164,7 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     AComponent returns Alias
 	 *
 	 * Constraint:
-	 *     (componentAlias?='comp'? unique?='unique'? name=ValidID (listOfAliases=AliasList | singleAlias=SingleAlias))
+	 *     ((componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? name=ValidID (listOfAliases=AliasList | singleAlias=SingleAlias))
 	 */
 	protected void sequence_Alias(ISerializationContext context, Alias semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -156,6 +179,25 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (component=[AComponent|ID] accesors+=ComponentApiAccessor*)
 	 */
 	protected void sequence_ApiRule(ISerializationContext context, ApiRule semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AComponent returns Chain
+	 *     ASystem returns Chain
+	 *     Chain returns Chain
+	 *
+	 * Constraint:
+	 *     (
+	 *         (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? 
+	 *         name=ValidID 
+	 *         (precondition?='precondition' uniqueComp+=UniqueComponentAccess* groups+=Group*)? 
+	 *         children+=[ASystem|ID]+
+	 *     )
+	 */
+	protected void sequence_Chain(ISerializationContext context, Chain semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -187,7 +229,12 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Component returns Component
 	 *
 	 * Constraint:
-	 *     (unique?='unique'? name=ValidID (valueType=[Alias|ID] | properties+=ComponentProperty+ | prefix=STRING)?)
+	 *     (
+	 *         contextRef=ContextReference? 
+	 *         unique?='unique'? 
+	 *         name=ValidID 
+	 *         ((valueType=[Alias|ID] (index?='asIndexKey' | multiIndex?='asMultiIndexKey')?) | properties+=ComponentProperty+ | prefix=STRING)?
+	 *     )
 	 */
 	protected void sequence_Component(ISerializationContext context, Component semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -199,9 +246,39 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ContextDefinition returns ContextDefinition
 	 *
 	 * Constraint:
-	 *     (name+=ValidID+ components+=[AComponent|ID]+)
+	 *     names+=ContextName+
 	 */
 	protected void sequence_ContextDefinition(ISerializationContext context, ContextDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ContextName returns ContextName
+	 *
+	 * Constraint:
+	 *     name=ValidID
+	 */
+	protected void sequence_ContextName(ISerializationContext context, ContextName semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LangPackage.Literals.CONTEXT_NAME__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LangPackage.Literals.CONTEXT_NAME__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getContextNameAccess().getNameValidIDParserRuleCall_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ContextReference returns ContextReference
+	 *
+	 * Constraint:
+	 *     context+=[ContextName|ID]+
+	 */
+	protected void sequence_ContextReference(ISerializationContext context, ContextReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -211,7 +288,7 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     CreateRule returns CreateRule
 	 *
 	 * Constraint:
-	 *     (name=ValidID componentTypes+=[AComponent|ID]+)
+	 *     (name=ValidID componentTypes+=[AComponent|ID]+ contextRef=[ContextName|ID]?)
 	 */
 	protected void sequence_CreateRule(ISerializationContext context, CreateRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -229,11 +306,24 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *         allOfComponents+=[AComponent|ID]* 
 	 *         anyOfComponents+=[AComponent|ID]* 
 	 *         noneOfComponents+=[AComponent|ID]* 
-	 *         apiRules+=ApiRule+ 
-	 *         destroy?='destroy'?
+	 *         apiRules+=ApiRule* 
+	 *         destroy?='destroy'? 
+	 *         contextRef=[ContextName|ID]?
 	 *     )
 	 */
 	protected void sequence_Group(ISerializationContext context, Group semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Index returns Index
+	 *
+	 * Constraint:
+	 *     (name=ValidID componentRef=[Component|ID] (apiRules+=ApiRule+ destroy?='destroy'?)? contextRef=[ContextName|ID]?)
+	 */
+	protected void sequence_Index(ISerializationContext context, Index semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -260,8 +350,9 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *         triggers+=InputTrigger+ 
 	 *         ensureComponents+=[AComponent|ID]* 
 	 *         excludeComponents+=[AComponent|ID]* 
-	 *         apiRules+=ApiRule+ 
-	 *         destroy?='destroy'?
+	 *         apiRules+=ApiRule* 
+	 *         destroy?='destroy'? 
+	 *         contextRef=[ContextName|ID]?
 	 *     )
 	 */
 	protected void sequence_Input(ISerializationContext context, Input semanticObject) {
@@ -289,15 +380,34 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     AComponent returns ParentSystem
-	 *     ASystem returns ParentSystem
-	 *     ParentSystem returns ParentSystem
+	 *     Observer returns Observer
 	 *
 	 * Constraint:
-	 *     (componentAlias?='comp'? unique?='unique'? name=ValidID parent=[Alias|ID]? children+=[ASystem|ID]+)
+	 *     (name=ValidID observedGroup=Group uniqueComp+=UniqueComponentAccess* groups+=Group* createRules+=CreateRule*)
 	 */
-	protected void sequence_ParentSystem(ISerializationContext context, ParentSystem semanticObject) {
+	protected void sequence_Observer(ISerializationContext context, Observer semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Parameter returns Parameter
+	 *
+	 * Constraint:
+	 *     (name=ValidID type=[Alias|ID])
+	 */
+	protected void sequence_Parameter(ISerializationContext context, ecs.lang.Parameter semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, LangPackage.Literals.PARAMETER__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LangPackage.Literals.PARAMETER__NAME));
+			if (transientValues.isValueTransient(semanticObject, LangPackage.Literals.PARAMETER__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LangPackage.Literals.PARAMETER__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getParameterAccess().getNameValidIDParserRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getParameterAccess().getTypeAliasIDTerminalRuleCall_2_0_1(), semanticObject.getType());
+		feeder.finish();
 	}
 	
 	
@@ -333,18 +443,131 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     Procedure returns Procedure
+	 *
+	 * Constraint:
+	 *     (
+	 *         (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? 
+	 *         name=ValidID 
+	 *         params+=Parameter* 
+	 *         uniqueComp+=UniqueComponentAccess* 
+	 *         groups+=Group* 
+	 *         index+=Index* 
+	 *         createRules+=CreateRule* 
+	 *         type=[Alias|ID]?
+	 *     )
+	 */
+	protected void sequence_Procedure(ISerializationContext context, Procedure semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Project returns Project
 	 *
 	 * Constraint:
 	 *     (
-	 *         platformDefinition=Platforms 
-	 *         namespace=Namespace? 
-	 *         typeAliases+=Alias* 
-	 *         components+=Component* 
-	 *         systems+=System* 
-	 *         parentSystems+=ParentSystem* 
-	 *         contextDefinitions+=ContextDefinition*
-	 *     )
+	 *         (platformDefinition=Platforms? ((observers+=Observer+ chains+=Chain+) | chains+=Chain+)) | 
+	 *         (
+	 *             platformDefinition=Platforms? 
+	 *             (
+	 *                 (namespace=Namespace? ((observers+=Observer+ chains+=Chain+) | chains+=Chain+)) | 
+	 *                 (
+	 *                     namespace=Namespace? 
+	 *                     (
+	 *                         (contextDefinition=ContextDefinition? ((observers+=Observer+ chains+=Chain+) | chains+=Chain+)) | 
+	 *                         (contextDefinition=ContextDefinition? typeAliases+=Alias+ ((observers+=Observer+ chains+=Chain+) | chains+=Chain+))
+	 *                     )
+	 *                 )
+	 *             )
+	 *         ) | 
+	 *         (
+	 *             (
+	 *                 (platformDefinition=Platforms? components+=Component+) | 
+	 *                 (
+	 *                     platformDefinition=Platforms? 
+	 *                     (
+	 *                         (namespace=Namespace? components+=Component+) | 
+	 *                         (
+	 *                             namespace=Namespace? 
+	 *                             (
+	 *                                 (contextDefinition=ContextDefinition? components+=Component+) | 
+	 *                                 (contextDefinition=ContextDefinition? typeAliases+=Alias+ components+=Component+)
+	 *                             )
+	 *                         )
+	 *                     )
+	 *                 ) | 
+	 *                 components+=Component+
+	 *             ) 
+	 *             ((observers+=Observer+ chains+=Chain+) | chains+=Chain+)
+	 *         ) | 
+	 *         (
+	 *             (
+	 *                 (platformDefinition=Platforms? ((components+=Component+ procedures+=Procedure+) | procedures+=Procedure+)) | 
+	 *                 (
+	 *                     platformDefinition=Platforms? 
+	 *                     (
+	 *                         (namespace=Namespace? ((components+=Component+ procedures+=Procedure+) | procedures+=Procedure+)) | 
+	 *                         (
+	 *                             namespace=Namespace? 
+	 *                             (
+	 *                                 (contextDefinition=ContextDefinition? ((components+=Component+ procedures+=Procedure+) | procedures+=Procedure+)) | 
+	 *                                 (contextDefinition=ContextDefinition? typeAliases+=Alias+ ((components+=Component+ procedures+=Procedure+) | procedures+=Procedure+))
+	 *                             )
+	 *                         )
+	 *                     )
+	 *                 ) | 
+	 *                 (components+=Component+ procedures+=Procedure+) | 
+	 *                 procedures+=Procedure+
+	 *             ) 
+	 *             ((observers+=Observer+ chains+=Chain+) | chains+=Chain+)
+	 *         ) | 
+	 *         (
+	 *             (
+	 *                 (platformDefinition=Platforms? ((procedures+=Procedure+ observers+=Observer+) | observers+=Observer+)) | 
+	 *                 (
+	 *                     platformDefinition=Platforms? 
+	 *                     (
+	 *                         (namespace=Namespace? ((procedures+=Procedure+ observers+=Observer+) | observers+=Observer+)) | 
+	 *                         (
+	 *                             namespace=Namespace? 
+	 *                             (
+	 *                                 (contextDefinition=ContextDefinition? ((procedures+=Procedure+ observers+=Observer+) | observers+=Observer+)) | 
+	 *                                 (contextDefinition=ContextDefinition? typeAliases+=Alias+ ((procedures+=Procedure+ observers+=Observer+) | observers+=Observer+))
+	 *                             )
+	 *                         )
+	 *                     )
+	 *                 ) | 
+	 *                 (
+	 *                     (
+	 *                         (platformDefinition=Platforms? components+=Component+) | 
+	 *                         (
+	 *                             platformDefinition=Platforms? 
+	 *                             (
+	 *                                 (namespace=Namespace? components+=Component+) | 
+	 *                                 (
+	 *                                     namespace=Namespace? 
+	 *                                     (
+	 *                                         (contextDefinition=ContextDefinition? components+=Component+) | 
+	 *                                         (contextDefinition=ContextDefinition? typeAliases+=Alias+ components+=Component+)
+	 *                                     )
+	 *                                 )
+	 *                             )
+	 *                         ) | 
+	 *                         components+=Component+
+	 *                     ) 
+	 *                     ((procedures+=Procedure+ observers+=Observer+) | observers+=Observer+)
+	 *                 ) | 
+	 *                 (procedures+=Procedure+ observers+=Observer+) | 
+	 *                 observers+=Observer+
+	 *             )? 
+	 *             systems+=System+ 
+	 *             chains+=Chain+
+	 *         ) | 
+	 *         (observers+=Observer+ chains+=Chain+) | 
+	 *         chains+=Chain+
+	 *     )?
 	 */
 	protected void sequence_Project(ISerializationContext context, Project semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -371,13 +594,15 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
-	 *         componentAlias?='comp'? 
-	 *         unique?='unique'? 
+	 *         (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? 
 	 *         init?='init'? 
+	 *         cleanup?='cleanup'? 
+	 *         teardown?='teardown'? 
 	 *         name=ValidID 
 	 *         input=Input? 
 	 *         uniqueComp+=UniqueComponentAccess* 
 	 *         groups+=Group* 
+	 *         index+=Index* 
 	 *         createRules+=CreateRule*
 	 *     )
 	 */
@@ -391,16 +616,10 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     UniqueComponentAccess returns UniqueComponentAccess
 	 *
 	 * Constraint:
-	 *     apiRule=ApiRule
+	 *     (apiRule=ApiRule contextRef=[ContextName|ID]?)
 	 */
 	protected void sequence_UniqueComponentAccess(ISerializationContext context, UniqueComponentAccess semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, LangPackage.Literals.UNIQUE_COMPONENT_ACCESS__API_RULE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, LangPackage.Literals.UNIQUE_COMPONENT_ACCESS__API_RULE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getUniqueComponentAccessAccess().getApiRuleApiRuleParserRuleCall_2_0(), semanticObject.getApiRule());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

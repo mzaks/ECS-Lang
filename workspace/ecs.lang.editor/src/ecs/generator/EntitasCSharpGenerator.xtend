@@ -16,7 +16,8 @@ import ecs.lang.UniqueComponentAccess
 import ecs.lang.ApiRule
 import ecs.lang.Component
 import ecs.lang.AComponent
-import ecs.lang.ParentSystem
+import java.util.Set
+import ecs.lang.Chain
 
 /**
  * Generates code from your model files on save.
@@ -25,7 +26,7 @@ import ecs.lang.ParentSystem
  */
 class EntitasCSharpGenerator implements ILangGenerator {
 
-	override void generate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+	override void generate(Set<Project> projects, Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		val namespace = resource.namespace
 		val allComponents = resource.collectAllComponents()
 		for (component : allComponents) {
@@ -175,7 +176,7 @@ class EntitasCSharpGenerator implements ILangGenerator {
 	def apiInterfaces(ApiRule rule) '''
 		«FOR prefix : rule.computePrefix SEPARATOR ", "»«rule.component.name.toFirstUpper»Component.«prefix.toFirstUpper»«ENDFOR»'''
 	
-	def generateFileContent(ParentSystem system)'''
+	def generateFileContent(Chain system)'''
 		using Entitas;
 		
 		public partial class «system.name.toFirstUpper»Systems : Feature
@@ -409,7 +410,7 @@ class EntitasCSharpGenerator implements ILangGenerator {
 			val model = it.toComponentModel
 			result.add(model)
 		]
-		project.parentSystems.filter[it.componentAlias].forEach [
+		project.chains.filter[it.componentAlias].forEach [
 			val model = new ComponentModel()
 			model.name = it.name
 			model.unique = it.unique
@@ -423,7 +424,7 @@ class EntitasCSharpGenerator implements ILangGenerator {
 		switch component {
 			Component case component: return component.toComponentModel 
 			System case component: return component.toComponentModel
-			ParentSystem case component: return component.toComponentModel
+			Chain case component: return component.toComponentModel
 			Alias case component : return component.toComponentModel
 		}
 		
@@ -463,7 +464,7 @@ class EntitasCSharpGenerator implements ILangGenerator {
 		return model
 	}
 	
-	def ComponentModel toComponentModel(ParentSystem system){
+	def ComponentModel toComponentModel(Chain system){
 		val model = new ComponentModel()
 		model.name = system.name
 		model.unique = system.unique
@@ -519,7 +520,7 @@ class EntitasCSharpGenerator implements ILangGenerator {
 		switch component {
 			Component case component: return component.name.toFirstUpper + "Component" 
 			System case component: return component.name.toFirstUpper + "Component"
-			ParentSystem case component: return component.name.toFirstUpper + "Component"
+			Chain case component: return component.name.toFirstUpper + "Component"
 			Alias case component : return component.name.toFirstUpper + "Component"
 		}
 		
@@ -530,7 +531,7 @@ class EntitasCSharpGenerator implements ILangGenerator {
 		switch component {
 			Component case component: return component.valueType == null && component.properties.empty 
 			System case component: return false
-			ParentSystem case component: return false
+			Chain case component: return false
 			Alias case component : return false
 		}
 		

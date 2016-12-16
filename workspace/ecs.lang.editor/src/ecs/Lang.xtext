@@ -3,23 +3,34 @@ grammar ecs.Lang with org.eclipse.xtext.common.Terminals
 generate lang "http://www.Lang.ecs"
 
 Project:
-	platformDefinition = Platforms
+	platformDefinition = Platforms?
 	namespace = Namespace?
+	contextDefinition = ContextDefinition?
 	typeAliases += Alias*
+	
 	components += Component*
+	
+	procedures += Procedure*
+	observers += Observer*
 	systems += System*
-	parentSystems += ParentSystem*
-	contextDefinitions += ContextDefinition*
+	chains += Chain*
+	
 ;
 
 ContextDefinition:
-	'ctx' name += ValidID+ '{'
-		components += [AComponent]+
-	'}'
+	'ctx' (names += ContextName ','?)+
+;
+
+ContextName:
+	name = ValidID
+;
+
+ContextReference:
+	'[' (context+=[ContextName] ','?)+ ']'
 ;
 
 Platforms:
-	'platform' ids += PlatformID+
+	'platform' (ids += PlatformID ','?)+
 ;
 
 PlatformID:
@@ -31,7 +42,7 @@ Namespace:
 ;
 
 Alias:
-	'alias' (componentAlias ?= 'comp')? (unique ?= 'unique')? name = ValidID (listOfAliases = AliasList | singleAlias = SingleAlias)
+	'alias' (componentAlias ?= 'comp' (contextRef = ContextReference)? (unique ?= 'unique')? )? name = ValidID (listOfAliases = AliasList | singleAlias = SingleAlias)
 ;
 
 SingleAlias:
@@ -47,11 +58,11 @@ AliasRule:
 ;
 
 AComponent:
-	Component | Alias | System | ParentSystem
+	Component | Alias | System | Chain
 ;
 
 Component:
-	'comp' (unique ?= 'unique')? name = ValidID (( (':' valueType = [Alias])? | ('{' properties += ComponentProperty+ '}')) | '/' prefix = STRING)
+	'comp' (contextRef = ContextReference)? (unique ?= 'unique')? name = ValidID (( (':' valueType = [Alias] (index?='asIndexKey'|multiIndex?='asMultiIndexKey')? )? | ('{' (properties += ComponentProperty ','?)+ '}')) | '/' prefix = STRING)
 ;
 
 ComponentProperty:
@@ -59,46 +70,56 @@ ComponentProperty:
 ;
 
 System:
-	'sys' (componentAlias ?= 'comp')? (unique ?= 'unique')? (init ?= 'init')? name = ValidID '{'
+	'sys' (componentAlias ?= 'comp' (contextRef = ContextReference)? (unique ?= 'unique')? )? (init ?= 'init')? (cleanup ?= 'cleanup')? (teardown ?= 'teardown')? name = ValidID '{'
 		input = Input?
-		uniqueComp += UniqueComponentAccess*
-		groups += Group*
-		createRules += CreateRule*
+		(uniqueComp += UniqueComponentAccess)*
+		(groups += Group)*
+		(index += Index)*
+		(createRules += CreateRule)*
 	'}'
 ;
 
 Input:
 	'input' unqiue ?= 'unique'? '{'
-		'trigger' ':' triggers += InputTrigger+
-		 ('ensure' ':' ensureComponents += [AComponent]+)?
-		 ('exclude' ':' excludeComponents += [AComponent]+)?
-		 'api' ':' apiRules += ApiRule+ (destroy ?= 'destroy')?
-	'}'
+		'trigger' ':' (triggers += InputTrigger ','?)+
+		 ('ensure' ':' (ensureComponents += [AComponent] ','?)+)?
+		 ('exclude' ':' (excludeComponents += [AComponent] ','?)+)?
+		 ('api' ':' (apiRules += ApiRule ','?)+ )?
+		 (destroy ?= 'destroy')?
+	'}' ('@' contextRef = [ContextName])?
 ;
 
 InputTrigger:
-	'enteredGroup' '(' enterComponents += [AComponent]+ ')' |
-	'leftGroup' '(' left += [AComponent]+ ')' |
-	'enteredOrLeftGroup' '(' enteredOrLeft += [AComponent]+ ')'	
+	'enteredGroup' '(' (enterComponents += [AComponent]','?)+ ')' |
+	'leftGroup' '(' (left += [AComponent]','?)+ ')' |
+	'enteredOrLeftGroup' '(' (enteredOrLeft += [AComponent]','?)+ ')'	
 ;
 
 CreateRule:
-	'create' name = ValidID ':' componentTypes += [AComponent]+
+	'create' name = ValidID ':' (componentTypes += [AComponent]','?)+ ('@' contextRef = [ContextName])?
+;
+
+Index:
+	'index' name = ValidID '{'
+		'key' ':' componentRef=[Component]
+		('api' ':' (apiRules += ApiRule ','?)+ (destroy ?= 'destroy')?)?  
+	'}'('@' contextRef = [ContextName])?
 ;
 
 UniqueComponentAccess:
-	'unique' ':' apiRule = ApiRule
+	'unique' ':' apiRule = ApiRule ('@' contextRef = [ContextName])?
 ;
 
 Group:
 	(group?='group' | unique?='unique') name = ValidID '{'
-		'matcher' ':' ('allOf' '(' allOfComponents += [AComponent]+ ')')? ('anyOf' '(' anyOfComponents += [AComponent]+ ')')? ('noneOf' '(' noneOfComponents += [AComponent]+ ')')?
-		'api' ':' apiRules += ApiRule+ (destroy ?= 'destroy')?
-	'}'
+		'matcher' ':' ('allOf' '(' (allOfComponents += [AComponent]','?)+ ')')? ('anyOf' '(' anyOfComponents += [AComponent]+ ')')? ('noneOf' '(' noneOfComponents += [AComponent]+ ')')?
+		('api' ':' (apiRules += ApiRule ','?)+)?
+		(destroy ?= 'destroy')?
+	'}' ('@' contextRef = [ContextName])?
 ;
 
 ApiRule:
-	component = [AComponent] ('(' accesors += ComponentApiAccessor+ ')')?
+	component = [AComponent] ('(' (accesors += ComponentApiAccessor','?)+ ')')?
 ;
 
 ComponentApiAccessor:
@@ -106,15 +127,49 @@ ComponentApiAccessor:
 ;
 
 ASystem:
-	System | ParentSystem
+	System | Chain
 ;
 
-ParentSystem:
-	'parent_sys' (componentAlias ?= 'comp')? (unique ?= 'unique')? name = ValidID ('extends' parent = [Alias])? '{' children += [ASystem]+ '}' 
+Chain:
+	'chain' (componentAlias ?= 'comp' (contextRef = ContextReference)? (unique ?= 'unique')? )? name = ValidID '{'
+		(
+		precondition ?= 'precondition' ('{' 
+			(uniqueComp += UniqueComponentAccess)*
+			(groups += Group)*
+		'}')?
+		)? 
+		(children += [ASystem]','?)+ 
+	'}' 
+;
+
+Procedure:
+	'proc' (componentAlias ?= 'comp' (contextRef = ContextReference)? (unique ?= 'unique')? )? name = ValidID '{'
+		('params' '{' 
+			(params += Parameter)+
+		'}')?
+		(uniqueComp += UniqueComponentAccess)*
+		(groups += Group)*
+		(index += Index)*
+		(createRules += CreateRule)*
+	'}' ('->' type=[Alias])?
+;
+
+Observer: 
+	'observer' name = ValidID '{'
+		observedGroup = Group
+		(uniqueComp += UniqueComponentAccess)*
+		(groups += Group)*
+		(createRules += CreateRule)*
+	'}'
+;
+
+Parameter :
+	name = ValidID ':' type=[Alias]
 ;
 
 QualifiedName:
   ValidID ('.' ValidID)*;
   
 ValidID:
-  ID;
+  ID | 'input' | 'trigger' | 'api' | 'matcher' | 'group' | 'alias' | 'platform' | 'chain' | 'precondition' | 'proc' | 'procs' | 'key' | 'index' | 'observer';
+  

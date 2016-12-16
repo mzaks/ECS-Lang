@@ -86,13 +86,22 @@ public interface LangPackage extends EPackage
   int PROJECT__NAMESPACE = 1;
 
   /**
+   * The feature id for the '<em><b>Context Definition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROJECT__CONTEXT_DEFINITION = 2;
+
+  /**
    * The feature id for the '<em><b>Type Aliases</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROJECT__TYPE_ALIASES = 2;
+  int PROJECT__TYPE_ALIASES = 3;
 
   /**
    * The feature id for the '<em><b>Components</b></em>' containment reference list.
@@ -101,7 +110,25 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROJECT__COMPONENTS = 3;
+  int PROJECT__COMPONENTS = 4;
+
+  /**
+   * The feature id for the '<em><b>Procedures</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROJECT__PROCEDURES = 5;
+
+  /**
+   * The feature id for the '<em><b>Observers</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROJECT__OBSERVERS = 6;
 
   /**
    * The feature id for the '<em><b>Systems</b></em>' containment reference list.
@@ -110,25 +137,16 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROJECT__SYSTEMS = 4;
+  int PROJECT__SYSTEMS = 7;
 
   /**
-   * The feature id for the '<em><b>Parent Systems</b></em>' containment reference list.
+   * The feature id for the '<em><b>Chains</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PROJECT__PARENT_SYSTEMS = 5;
-
-  /**
-   * The feature id for the '<em><b>Context Definitions</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PROJECT__CONTEXT_DEFINITIONS = 6;
+  int PROJECT__CHAINS = 8;
 
   /**
    * The number of structural features of the '<em>Project</em>' class.
@@ -137,7 +155,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROJECT_FEATURE_COUNT = 7;
+  int PROJECT_FEATURE_COUNT = 9;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.ContextDefinitionImpl <em>Context Definition</em>}' class.
@@ -150,22 +168,13 @@ public interface LangPackage extends EPackage
   int CONTEXT_DEFINITION = 1;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute list.
+   * The feature id for the '<em><b>Names</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONTEXT_DEFINITION__NAME = 0;
-
-  /**
-   * The feature id for the '<em><b>Components</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTEXT_DEFINITION__COMPONENTS = 1;
+  int CONTEXT_DEFINITION__NAMES = 0;
 
   /**
    * The number of structural features of the '<em>Context Definition</em>' class.
@@ -174,7 +183,63 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CONTEXT_DEFINITION_FEATURE_COUNT = 2;
+  int CONTEXT_DEFINITION_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link ecs.lang.impl.ContextNameImpl <em>Context Name</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ecs.lang.impl.ContextNameImpl
+   * @see ecs.lang.impl.LangPackageImpl#getContextName()
+   * @generated
+   */
+  int CONTEXT_NAME = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTEXT_NAME__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Context Name</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTEXT_NAME_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link ecs.lang.impl.ContextReferenceImpl <em>Context Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ecs.lang.impl.ContextReferenceImpl
+   * @see ecs.lang.impl.LangPackageImpl#getContextReference()
+   * @generated
+   */
+  int CONTEXT_REFERENCE = 3;
+
+  /**
+   * The feature id for the '<em><b>Context</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTEXT_REFERENCE__CONTEXT = 0;
+
+  /**
+   * The number of structural features of the '<em>Context Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTEXT_REFERENCE_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.PlatformsImpl <em>Platforms</em>}' class.
@@ -184,7 +249,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getPlatforms()
    * @generated
    */
-  int PLATFORMS = 2;
+  int PLATFORMS = 4;
 
   /**
    * The feature id for the '<em><b>Ids</b></em>' containment reference list.
@@ -212,7 +277,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getPlatformID()
    * @generated
    */
-  int PLATFORM_ID = 3;
+  int PLATFORM_ID = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -240,7 +305,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getNamespace()
    * @generated
    */
-  int NAMESPACE = 4;
+  int NAMESPACE = 6;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -268,7 +333,16 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getAComponent()
    * @generated
    */
-  int ACOMPONENT = 9;
+  int ACOMPONENT = 11;
+
+  /**
+   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACOMPONENT__CONTEXT_REF = 0;
 
   /**
    * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -277,7 +351,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACOMPONENT__UNIQUE = 0;
+  int ACOMPONENT__UNIQUE = 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -286,7 +360,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACOMPONENT__NAME = 1;
+  int ACOMPONENT__NAME = 2;
 
   /**
    * The number of structural features of the '<em>AComponent</em>' class.
@@ -295,7 +369,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACOMPONENT_FEATURE_COUNT = 2;
+  int ACOMPONENT_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.AliasImpl <em>Alias</em>}' class.
@@ -305,7 +379,16 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getAlias()
    * @generated
    */
-  int ALIAS = 5;
+  int ALIAS = 7;
+
+  /**
+   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALIAS__CONTEXT_REF = ACOMPONENT__CONTEXT_REF;
 
   /**
    * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -369,7 +452,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getSingleAlias()
    * @generated
    */
-  int SINGLE_ALIAS = 6;
+  int SINGLE_ALIAS = 8;
 
   /**
    * The feature id for the '<em><b>Type Alias</b></em>' attribute.
@@ -406,7 +489,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getAliasList()
    * @generated
    */
-  int ALIAS_LIST = 7;
+  int ALIAS_LIST = 9;
 
   /**
    * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -434,7 +517,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getAliasRule()
    * @generated
    */
-  int ALIAS_RULE = 8;
+  int ALIAS_RULE = 10;
 
   /**
    * The feature id for the '<em><b>Platform</b></em>' reference.
@@ -489,7 +572,16 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getComponent()
    * @generated
    */
-  int COMPONENT = 10;
+  int COMPONENT = 12;
+
+  /**
+   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPONENT__CONTEXT_REF = ACOMPONENT__CONTEXT_REF;
 
   /**
    * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -519,13 +611,31 @@ public interface LangPackage extends EPackage
   int COMPONENT__VALUE_TYPE = ACOMPONENT_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPONENT__INDEX = ACOMPONENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Multi Index</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPONENT__MULTI_INDEX = ACOMPONENT_FEATURE_COUNT + 2;
+
+  /**
    * The feature id for the '<em><b>Properties</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int COMPONENT__PROPERTIES = ACOMPONENT_FEATURE_COUNT + 1;
+  int COMPONENT__PROPERTIES = ACOMPONENT_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -534,7 +644,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int COMPONENT__PREFIX = ACOMPONENT_FEATURE_COUNT + 2;
+  int COMPONENT__PREFIX = ACOMPONENT_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Component</em>' class.
@@ -543,7 +653,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int COMPONENT_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 3;
+  int COMPONENT_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.ComponentPropertyImpl <em>Component Property</em>}' class.
@@ -553,7 +663,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getComponentProperty()
    * @generated
    */
-  int COMPONENT_PROPERTY = 11;
+  int COMPONENT_PROPERTY = 13;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -590,7 +700,16 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getSystem()
    * @generated
    */
-  int SYSTEM = 12;
+  int SYSTEM = 14;
+
+  /**
+   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYSTEM__CONTEXT_REF = ACOMPONENT__CONTEXT_REF;
 
   /**
    * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -629,13 +748,31 @@ public interface LangPackage extends EPackage
   int SYSTEM__INIT = ACOMPONENT_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Cleanup</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYSTEM__CLEANUP = ACOMPONENT_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Teardown</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYSTEM__TEARDOWN = ACOMPONENT_FEATURE_COUNT + 3;
+
+  /**
    * The feature id for the '<em><b>Input</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SYSTEM__INPUT = ACOMPONENT_FEATURE_COUNT + 2;
+  int SYSTEM__INPUT = ACOMPONENT_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Unique Comp</b></em>' containment reference list.
@@ -644,7 +781,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM__UNIQUE_COMP = ACOMPONENT_FEATURE_COUNT + 3;
+  int SYSTEM__UNIQUE_COMP = ACOMPONENT_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Groups</b></em>' containment reference list.
@@ -653,7 +790,16 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM__GROUPS = ACOMPONENT_FEATURE_COUNT + 4;
+  int SYSTEM__GROUPS = ACOMPONENT_FEATURE_COUNT + 6;
+
+  /**
+   * The feature id for the '<em><b>Index</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYSTEM__INDEX = ACOMPONENT_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Create Rules</b></em>' containment reference list.
@@ -662,7 +808,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM__CREATE_RULES = ACOMPONENT_FEATURE_COUNT + 5;
+  int SYSTEM__CREATE_RULES = ACOMPONENT_FEATURE_COUNT + 8;
 
   /**
    * The number of structural features of the '<em>System</em>' class.
@@ -671,7 +817,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 6;
+  int SYSTEM_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 9;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.InputImpl <em>Input</em>}' class.
@@ -681,7 +827,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getInput()
    * @generated
    */
-  int INPUT = 13;
+  int INPUT = 15;
 
   /**
    * The feature id for the '<em><b>Unqiue</b></em>' attribute.
@@ -738,13 +884,22 @@ public interface LangPackage extends EPackage
   int INPUT__DESTROY = 5;
 
   /**
+   * The feature id for the '<em><b>Context Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INPUT__CONTEXT_REF = 6;
+
+  /**
    * The number of structural features of the '<em>Input</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int INPUT_FEATURE_COUNT = 6;
+  int INPUT_FEATURE_COUNT = 7;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.InputTriggerImpl <em>Input Trigger</em>}' class.
@@ -754,7 +909,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getInputTrigger()
    * @generated
    */
-  int INPUT_TRIGGER = 14;
+  int INPUT_TRIGGER = 16;
 
   /**
    * The feature id for the '<em><b>Enter Components</b></em>' reference list.
@@ -800,7 +955,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getCreateRule()
    * @generated
    */
-  int CREATE_RULE = 15;
+  int CREATE_RULE = 17;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -821,13 +976,86 @@ public interface LangPackage extends EPackage
   int CREATE_RULE__COMPONENT_TYPES = 1;
 
   /**
+   * The feature id for the '<em><b>Context Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CREATE_RULE__CONTEXT_REF = 2;
+
+  /**
    * The number of structural features of the '<em>Create Rule</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CREATE_RULE_FEATURE_COUNT = 2;
+  int CREATE_RULE_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link ecs.lang.impl.IndexImpl <em>Index</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ecs.lang.impl.IndexImpl
+   * @see ecs.lang.impl.LangPackageImpl#getIndex()
+   * @generated
+   */
+  int INDEX = 18;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INDEX__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Component Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INDEX__COMPONENT_REF = 1;
+
+  /**
+   * The feature id for the '<em><b>Api Rules</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INDEX__API_RULES = 2;
+
+  /**
+   * The feature id for the '<em><b>Destroy</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INDEX__DESTROY = 3;
+
+  /**
+   * The feature id for the '<em><b>Context Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INDEX__CONTEXT_REF = 4;
+
+  /**
+   * The number of structural features of the '<em>Index</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INDEX_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.UniqueComponentAccessImpl <em>Unique Component Access</em>}' class.
@@ -837,7 +1065,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getUniqueComponentAccess()
    * @generated
    */
-  int UNIQUE_COMPONENT_ACCESS = 16;
+  int UNIQUE_COMPONENT_ACCESS = 19;
 
   /**
    * The feature id for the '<em><b>Api Rule</b></em>' containment reference.
@@ -849,13 +1077,22 @@ public interface LangPackage extends EPackage
   int UNIQUE_COMPONENT_ACCESS__API_RULE = 0;
 
   /**
+   * The feature id for the '<em><b>Context Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNIQUE_COMPONENT_ACCESS__CONTEXT_REF = 1;
+
+  /**
    * The number of structural features of the '<em>Unique Component Access</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int UNIQUE_COMPONENT_ACCESS_FEATURE_COUNT = 1;
+  int UNIQUE_COMPONENT_ACCESS_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.GroupImpl <em>Group</em>}' class.
@@ -865,7 +1102,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getGroup()
    * @generated
    */
-  int GROUP = 17;
+  int GROUP = 20;
 
   /**
    * The feature id for the '<em><b>Group</b></em>' attribute.
@@ -940,13 +1177,22 @@ public interface LangPackage extends EPackage
   int GROUP__DESTROY = 7;
 
   /**
+   * The feature id for the '<em><b>Context Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP__CONTEXT_REF = 8;
+
+  /**
    * The number of structural features of the '<em>Group</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GROUP_FEATURE_COUNT = 8;
+  int GROUP_FEATURE_COUNT = 9;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.ApiRuleImpl <em>Api Rule</em>}' class.
@@ -956,7 +1202,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getApiRule()
    * @generated
    */
-  int API_RULE = 18;
+  int API_RULE = 21;
 
   /**
    * The feature id for the '<em><b>Component</b></em>' reference.
@@ -993,7 +1239,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getASystem()
    * @generated
    */
-  int ASYSTEM = 19;
+  int ASYSTEM = 22;
 
   /**
    * The number of structural features of the '<em>ASystem</em>' class.
@@ -1005,14 +1251,23 @@ public interface LangPackage extends EPackage
   int ASYSTEM_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link ecs.lang.impl.ParentSystemImpl <em>Parent System</em>}' class.
+   * The meta object id for the '{@link ecs.lang.impl.ChainImpl <em>Chain</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see ecs.lang.impl.ParentSystemImpl
-   * @see ecs.lang.impl.LangPackageImpl#getParentSystem()
+   * @see ecs.lang.impl.ChainImpl
+   * @see ecs.lang.impl.LangPackageImpl#getChain()
    * @generated
    */
-  int PARENT_SYSTEM = 20;
+  int CHAIN = 23;
+
+  /**
+   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHAIN__CONTEXT_REF = ACOMPONENT__CONTEXT_REF;
 
   /**
    * The feature id for the '<em><b>Unique</b></em>' attribute.
@@ -1021,7 +1276,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PARENT_SYSTEM__UNIQUE = ACOMPONENT__UNIQUE;
+  int CHAIN__UNIQUE = ACOMPONENT__UNIQUE;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1030,7 +1285,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PARENT_SYSTEM__NAME = ACOMPONENT__NAME;
+  int CHAIN__NAME = ACOMPONENT__NAME;
 
   /**
    * The feature id for the '<em><b>Component Alias</b></em>' attribute.
@@ -1039,16 +1294,34 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PARENT_SYSTEM__COMPONENT_ALIAS = ACOMPONENT_FEATURE_COUNT + 0;
+  int CHAIN__COMPONENT_ALIAS = ACOMPONENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Parent</b></em>' reference.
+   * The feature id for the '<em><b>Precondition</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PARENT_SYSTEM__PARENT = ACOMPONENT_FEATURE_COUNT + 1;
+  int CHAIN__PRECONDITION = ACOMPONENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Unique Comp</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHAIN__UNIQUE_COMP = ACOMPONENT_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Groups</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHAIN__GROUPS = ACOMPONENT_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Children</b></em>' reference list.
@@ -1057,16 +1330,226 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PARENT_SYSTEM__CHILDREN = ACOMPONENT_FEATURE_COUNT + 2;
+  int CHAIN__CHILDREN = ACOMPONENT_FEATURE_COUNT + 4;
 
   /**
-   * The number of structural features of the '<em>Parent System</em>' class.
+   * The number of structural features of the '<em>Chain</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PARENT_SYSTEM_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 3;
+  int CHAIN_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 5;
+
+  /**
+   * The meta object id for the '{@link ecs.lang.impl.ProcedureImpl <em>Procedure</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ecs.lang.impl.ProcedureImpl
+   * @see ecs.lang.impl.LangPackageImpl#getProcedure()
+   * @generated
+   */
+  int PROCEDURE = 24;
+
+  /**
+   * The feature id for the '<em><b>Component Alias</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE__COMPONENT_ALIAS = 0;
+
+  /**
+   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE__CONTEXT_REF = 1;
+
+  /**
+   * The feature id for the '<em><b>Unique</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE__UNIQUE = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE__NAME = 3;
+
+  /**
+   * The feature id for the '<em><b>Params</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE__PARAMS = 4;
+
+  /**
+   * The feature id for the '<em><b>Unique Comp</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE__UNIQUE_COMP = 5;
+
+  /**
+   * The feature id for the '<em><b>Groups</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE__GROUPS = 6;
+
+  /**
+   * The feature id for the '<em><b>Index</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE__INDEX = 7;
+
+  /**
+   * The feature id for the '<em><b>Create Rules</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE__CREATE_RULES = 8;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE__TYPE = 9;
+
+  /**
+   * The number of structural features of the '<em>Procedure</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROCEDURE_FEATURE_COUNT = 10;
+
+  /**
+   * The meta object id for the '{@link ecs.lang.impl.ObserverImpl <em>Observer</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ecs.lang.impl.ObserverImpl
+   * @see ecs.lang.impl.LangPackageImpl#getObserver()
+   * @generated
+   */
+  int OBSERVER = 25;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBSERVER__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Observed Group</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBSERVER__OBSERVED_GROUP = 1;
+
+  /**
+   * The feature id for the '<em><b>Unique Comp</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBSERVER__UNIQUE_COMP = 2;
+
+  /**
+   * The feature id for the '<em><b>Groups</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBSERVER__GROUPS = 3;
+
+  /**
+   * The feature id for the '<em><b>Create Rules</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBSERVER__CREATE_RULES = 4;
+
+  /**
+   * The number of structural features of the '<em>Observer</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OBSERVER_FEATURE_COUNT = 5;
+
+  /**
+   * The meta object id for the '{@link ecs.lang.impl.ParameterImpl <em>Parameter</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ecs.lang.impl.ParameterImpl
+   * @see ecs.lang.impl.LangPackageImpl#getParameter()
+   * @generated
+   */
+  int PARAMETER = 26;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER__TYPE = 1;
+
+  /**
+   * The number of structural features of the '<em>Parameter</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER_FEATURE_COUNT = 2;
 
 
   /**
@@ -1102,6 +1585,17 @@ public interface LangPackage extends EPackage
   EReference getProject_Namespace();
 
   /**
+   * Returns the meta object for the containment reference '{@link ecs.lang.Project#getContextDefinition <em>Context Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Context Definition</em>'.
+   * @see ecs.lang.Project#getContextDefinition()
+   * @see #getProject()
+   * @generated
+   */
+  EReference getProject_ContextDefinition();
+
+  /**
    * Returns the meta object for the containment reference list '{@link ecs.lang.Project#getTypeAliases <em>Type Aliases</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1124,6 +1618,28 @@ public interface LangPackage extends EPackage
   EReference getProject_Components();
 
   /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Project#getProcedures <em>Procedures</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Procedures</em>'.
+   * @see ecs.lang.Project#getProcedures()
+   * @see #getProject()
+   * @generated
+   */
+  EReference getProject_Procedures();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Project#getObservers <em>Observers</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Observers</em>'.
+   * @see ecs.lang.Project#getObservers()
+   * @see #getProject()
+   * @generated
+   */
+  EReference getProject_Observers();
+
+  /**
    * Returns the meta object for the containment reference list '{@link ecs.lang.Project#getSystems <em>Systems</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1135,26 +1651,15 @@ public interface LangPackage extends EPackage
   EReference getProject_Systems();
 
   /**
-   * Returns the meta object for the containment reference list '{@link ecs.lang.Project#getParentSystems <em>Parent Systems</em>}'.
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Project#getChains <em>Chains</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Parent Systems</em>'.
-   * @see ecs.lang.Project#getParentSystems()
+   * @return the meta object for the containment reference list '<em>Chains</em>'.
+   * @see ecs.lang.Project#getChains()
    * @see #getProject()
    * @generated
    */
-  EReference getProject_ParentSystems();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link ecs.lang.Project#getContextDefinitions <em>Context Definitions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Context Definitions</em>'.
-   * @see ecs.lang.Project#getContextDefinitions()
-   * @see #getProject()
-   * @generated
-   */
-  EReference getProject_ContextDefinitions();
+  EReference getProject_Chains();
 
   /**
    * Returns the meta object for class '{@link ecs.lang.ContextDefinition <em>Context Definition</em>}'.
@@ -1167,26 +1672,57 @@ public interface LangPackage extends EPackage
   EClass getContextDefinition();
 
   /**
-   * Returns the meta object for the attribute list '{@link ecs.lang.ContextDefinition#getName <em>Name</em>}'.
+   * Returns the meta object for the containment reference list '{@link ecs.lang.ContextDefinition#getNames <em>Names</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Name</em>'.
-   * @see ecs.lang.ContextDefinition#getName()
+   * @return the meta object for the containment reference list '<em>Names</em>'.
+   * @see ecs.lang.ContextDefinition#getNames()
    * @see #getContextDefinition()
    * @generated
    */
-  EAttribute getContextDefinition_Name();
+  EReference getContextDefinition_Names();
 
   /**
-   * Returns the meta object for the reference list '{@link ecs.lang.ContextDefinition#getComponents <em>Components</em>}'.
+   * Returns the meta object for class '{@link ecs.lang.ContextName <em>Context Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>Components</em>'.
-   * @see ecs.lang.ContextDefinition#getComponents()
-   * @see #getContextDefinition()
+   * @return the meta object for class '<em>Context Name</em>'.
+   * @see ecs.lang.ContextName
    * @generated
    */
-  EReference getContextDefinition_Components();
+  EClass getContextName();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.ContextName#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see ecs.lang.ContextName#getName()
+   * @see #getContextName()
+   * @generated
+   */
+  EAttribute getContextName_Name();
+
+  /**
+   * Returns the meta object for class '{@link ecs.lang.ContextReference <em>Context Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Context Reference</em>'.
+   * @see ecs.lang.ContextReference
+   * @generated
+   */
+  EClass getContextReference();
+
+  /**
+   * Returns the meta object for the reference list '{@link ecs.lang.ContextReference#getContext <em>Context</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Context</em>'.
+   * @see ecs.lang.ContextReference#getContext()
+   * @see #getContextReference()
+   * @generated
+   */
+  EReference getContextReference_Context();
 
   /**
    * Returns the meta object for class '{@link ecs.lang.Platforms <em>Platforms</em>}'.
@@ -1412,6 +1948,17 @@ public interface LangPackage extends EPackage
   EClass getAComponent();
 
   /**
+   * Returns the meta object for the containment reference '{@link ecs.lang.AComponent#getContextRef <em>Context Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Context Ref</em>'.
+   * @see ecs.lang.AComponent#getContextRef()
+   * @see #getAComponent()
+   * @generated
+   */
+  EReference getAComponent_ContextRef();
+
+  /**
    * Returns the meta object for the attribute '{@link ecs.lang.AComponent#isUnique <em>Unique</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1453,6 +2000,28 @@ public interface LangPackage extends EPackage
    * @generated
    */
   EReference getComponent_ValueType();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.Component#isIndex <em>Index</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Index</em>'.
+   * @see ecs.lang.Component#isIndex()
+   * @see #getComponent()
+   * @generated
+   */
+  EAttribute getComponent_Index();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.Component#isMultiIndex <em>Multi Index</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Multi Index</em>'.
+   * @see ecs.lang.Component#isMultiIndex()
+   * @see #getComponent()
+   * @generated
+   */
+  EAttribute getComponent_MultiIndex();
 
   /**
    * Returns the meta object for the containment reference list '{@link ecs.lang.Component#getProperties <em>Properties</em>}'.
@@ -1541,6 +2110,28 @@ public interface LangPackage extends EPackage
   EAttribute getSystem_Init();
 
   /**
+   * Returns the meta object for the attribute '{@link ecs.lang.System#isCleanup <em>Cleanup</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Cleanup</em>'.
+   * @see ecs.lang.System#isCleanup()
+   * @see #getSystem()
+   * @generated
+   */
+  EAttribute getSystem_Cleanup();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.System#isTeardown <em>Teardown</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Teardown</em>'.
+   * @see ecs.lang.System#isTeardown()
+   * @see #getSystem()
+   * @generated
+   */
+  EAttribute getSystem_Teardown();
+
+  /**
    * Returns the meta object for the containment reference '{@link ecs.lang.System#getInput <em>Input</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1572,6 +2163,17 @@ public interface LangPackage extends EPackage
    * @generated
    */
   EReference getSystem_Groups();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.System#getIndex <em>Index</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Index</em>'.
+   * @see ecs.lang.System#getIndex()
+   * @see #getSystem()
+   * @generated
+   */
+  EReference getSystem_Index();
 
   /**
    * Returns the meta object for the containment reference list '{@link ecs.lang.System#getCreateRules <em>Create Rules</em>}'.
@@ -1661,6 +2263,17 @@ public interface LangPackage extends EPackage
   EAttribute getInput_Destroy();
 
   /**
+   * Returns the meta object for the reference '{@link ecs.lang.Input#getContextRef <em>Context Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Context Ref</em>'.
+   * @see ecs.lang.Input#getContextRef()
+   * @see #getInput()
+   * @generated
+   */
+  EReference getInput_ContextRef();
+
+  /**
    * Returns the meta object for class '{@link ecs.lang.InputTrigger <em>Input Trigger</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1736,6 +2349,82 @@ public interface LangPackage extends EPackage
   EReference getCreateRule_ComponentTypes();
 
   /**
+   * Returns the meta object for the reference '{@link ecs.lang.CreateRule#getContextRef <em>Context Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Context Ref</em>'.
+   * @see ecs.lang.CreateRule#getContextRef()
+   * @see #getCreateRule()
+   * @generated
+   */
+  EReference getCreateRule_ContextRef();
+
+  /**
+   * Returns the meta object for class '{@link ecs.lang.Index <em>Index</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Index</em>'.
+   * @see ecs.lang.Index
+   * @generated
+   */
+  EClass getIndex();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.Index#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see ecs.lang.Index#getName()
+   * @see #getIndex()
+   * @generated
+   */
+  EAttribute getIndex_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link ecs.lang.Index#getComponentRef <em>Component Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Component Ref</em>'.
+   * @see ecs.lang.Index#getComponentRef()
+   * @see #getIndex()
+   * @generated
+   */
+  EReference getIndex_ComponentRef();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Index#getApiRules <em>Api Rules</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Api Rules</em>'.
+   * @see ecs.lang.Index#getApiRules()
+   * @see #getIndex()
+   * @generated
+   */
+  EReference getIndex_ApiRules();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.Index#isDestroy <em>Destroy</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Destroy</em>'.
+   * @see ecs.lang.Index#isDestroy()
+   * @see #getIndex()
+   * @generated
+   */
+  EAttribute getIndex_Destroy();
+
+  /**
+   * Returns the meta object for the reference '{@link ecs.lang.Index#getContextRef <em>Context Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Context Ref</em>'.
+   * @see ecs.lang.Index#getContextRef()
+   * @see #getIndex()
+   * @generated
+   */
+  EReference getIndex_ContextRef();
+
+  /**
    * Returns the meta object for class '{@link ecs.lang.UniqueComponentAccess <em>Unique Component Access</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1755,6 +2444,17 @@ public interface LangPackage extends EPackage
    * @generated
    */
   EReference getUniqueComponentAccess_ApiRule();
+
+  /**
+   * Returns the meta object for the reference '{@link ecs.lang.UniqueComponentAccess#getContextRef <em>Context Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Context Ref</em>'.
+   * @see ecs.lang.UniqueComponentAccess#getContextRef()
+   * @see #getUniqueComponentAccess()
+   * @generated
+   */
+  EReference getUniqueComponentAccess_ContextRef();
 
   /**
    * Returns the meta object for class '{@link ecs.lang.Group <em>Group</em>}'.
@@ -1855,6 +2555,17 @@ public interface LangPackage extends EPackage
   EAttribute getGroup_Destroy();
 
   /**
+   * Returns the meta object for the reference '{@link ecs.lang.Group#getContextRef <em>Context Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Context Ref</em>'.
+   * @see ecs.lang.Group#getContextRef()
+   * @see #getGroup()
+   * @generated
+   */
+  EReference getGroup_ContextRef();
+
+  /**
    * Returns the meta object for class '{@link ecs.lang.ApiRule <em>Api Rule</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1897,47 +2608,286 @@ public interface LangPackage extends EPackage
   EClass getASystem();
 
   /**
-   * Returns the meta object for class '{@link ecs.lang.ParentSystem <em>Parent System</em>}'.
+   * Returns the meta object for class '{@link ecs.lang.Chain <em>Chain</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Parent System</em>'.
-   * @see ecs.lang.ParentSystem
+   * @return the meta object for class '<em>Chain</em>'.
+   * @see ecs.lang.Chain
    * @generated
    */
-  EClass getParentSystem();
+  EClass getChain();
 
   /**
-   * Returns the meta object for the attribute '{@link ecs.lang.ParentSystem#isComponentAlias <em>Component Alias</em>}'.
+   * Returns the meta object for the attribute '{@link ecs.lang.Chain#isComponentAlias <em>Component Alias</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Component Alias</em>'.
-   * @see ecs.lang.ParentSystem#isComponentAlias()
-   * @see #getParentSystem()
+   * @see ecs.lang.Chain#isComponentAlias()
+   * @see #getChain()
    * @generated
    */
-  EAttribute getParentSystem_ComponentAlias();
+  EAttribute getChain_ComponentAlias();
 
   /**
-   * Returns the meta object for the reference '{@link ecs.lang.ParentSystem#getParent <em>Parent</em>}'.
+   * Returns the meta object for the attribute '{@link ecs.lang.Chain#isPrecondition <em>Precondition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Parent</em>'.
-   * @see ecs.lang.ParentSystem#getParent()
-   * @see #getParentSystem()
+   * @return the meta object for the attribute '<em>Precondition</em>'.
+   * @see ecs.lang.Chain#isPrecondition()
+   * @see #getChain()
    * @generated
    */
-  EReference getParentSystem_Parent();
+  EAttribute getChain_Precondition();
 
   /**
-   * Returns the meta object for the reference list '{@link ecs.lang.ParentSystem#getChildren <em>Children</em>}'.
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Chain#getUniqueComp <em>Unique Comp</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Unique Comp</em>'.
+   * @see ecs.lang.Chain#getUniqueComp()
+   * @see #getChain()
+   * @generated
+   */
+  EReference getChain_UniqueComp();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Chain#getGroups <em>Groups</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Groups</em>'.
+   * @see ecs.lang.Chain#getGroups()
+   * @see #getChain()
+   * @generated
+   */
+  EReference getChain_Groups();
+
+  /**
+   * Returns the meta object for the reference list '{@link ecs.lang.Chain#getChildren <em>Children</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the reference list '<em>Children</em>'.
-   * @see ecs.lang.ParentSystem#getChildren()
-   * @see #getParentSystem()
+   * @see ecs.lang.Chain#getChildren()
+   * @see #getChain()
    * @generated
    */
-  EReference getParentSystem_Children();
+  EReference getChain_Children();
+
+  /**
+   * Returns the meta object for class '{@link ecs.lang.Procedure <em>Procedure</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Procedure</em>'.
+   * @see ecs.lang.Procedure
+   * @generated
+   */
+  EClass getProcedure();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.Procedure#isComponentAlias <em>Component Alias</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Component Alias</em>'.
+   * @see ecs.lang.Procedure#isComponentAlias()
+   * @see #getProcedure()
+   * @generated
+   */
+  EAttribute getProcedure_ComponentAlias();
+
+  /**
+   * Returns the meta object for the containment reference '{@link ecs.lang.Procedure#getContextRef <em>Context Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Context Ref</em>'.
+   * @see ecs.lang.Procedure#getContextRef()
+   * @see #getProcedure()
+   * @generated
+   */
+  EReference getProcedure_ContextRef();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.Procedure#isUnique <em>Unique</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Unique</em>'.
+   * @see ecs.lang.Procedure#isUnique()
+   * @see #getProcedure()
+   * @generated
+   */
+  EAttribute getProcedure_Unique();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.Procedure#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see ecs.lang.Procedure#getName()
+   * @see #getProcedure()
+   * @generated
+   */
+  EAttribute getProcedure_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Procedure#getParams <em>Params</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Params</em>'.
+   * @see ecs.lang.Procedure#getParams()
+   * @see #getProcedure()
+   * @generated
+   */
+  EReference getProcedure_Params();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Procedure#getUniqueComp <em>Unique Comp</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Unique Comp</em>'.
+   * @see ecs.lang.Procedure#getUniqueComp()
+   * @see #getProcedure()
+   * @generated
+   */
+  EReference getProcedure_UniqueComp();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Procedure#getGroups <em>Groups</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Groups</em>'.
+   * @see ecs.lang.Procedure#getGroups()
+   * @see #getProcedure()
+   * @generated
+   */
+  EReference getProcedure_Groups();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Procedure#getIndex <em>Index</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Index</em>'.
+   * @see ecs.lang.Procedure#getIndex()
+   * @see #getProcedure()
+   * @generated
+   */
+  EReference getProcedure_Index();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Procedure#getCreateRules <em>Create Rules</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Create Rules</em>'.
+   * @see ecs.lang.Procedure#getCreateRules()
+   * @see #getProcedure()
+   * @generated
+   */
+  EReference getProcedure_CreateRules();
+
+  /**
+   * Returns the meta object for the reference '{@link ecs.lang.Procedure#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Type</em>'.
+   * @see ecs.lang.Procedure#getType()
+   * @see #getProcedure()
+   * @generated
+   */
+  EReference getProcedure_Type();
+
+  /**
+   * Returns the meta object for class '{@link ecs.lang.Observer <em>Observer</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Observer</em>'.
+   * @see ecs.lang.Observer
+   * @generated
+   */
+  EClass getObserver();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.Observer#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see ecs.lang.Observer#getName()
+   * @see #getObserver()
+   * @generated
+   */
+  EAttribute getObserver_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link ecs.lang.Observer#getObservedGroup <em>Observed Group</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Observed Group</em>'.
+   * @see ecs.lang.Observer#getObservedGroup()
+   * @see #getObserver()
+   * @generated
+   */
+  EReference getObserver_ObservedGroup();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Observer#getUniqueComp <em>Unique Comp</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Unique Comp</em>'.
+   * @see ecs.lang.Observer#getUniqueComp()
+   * @see #getObserver()
+   * @generated
+   */
+  EReference getObserver_UniqueComp();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Observer#getGroups <em>Groups</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Groups</em>'.
+   * @see ecs.lang.Observer#getGroups()
+   * @see #getObserver()
+   * @generated
+   */
+  EReference getObserver_Groups();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link ecs.lang.Observer#getCreateRules <em>Create Rules</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Create Rules</em>'.
+   * @see ecs.lang.Observer#getCreateRules()
+   * @see #getObserver()
+   * @generated
+   */
+  EReference getObserver_CreateRules();
+
+  /**
+   * Returns the meta object for class '{@link ecs.lang.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parameter</em>'.
+   * @see ecs.lang.Parameter
+   * @generated
+   */
+  EClass getParameter();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.Parameter#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see ecs.lang.Parameter#getName()
+   * @see #getParameter()
+   * @generated
+   */
+  EAttribute getParameter_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link ecs.lang.Parameter#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Type</em>'.
+   * @see ecs.lang.Parameter#getType()
+   * @see #getParameter()
+   * @generated
+   */
+  EReference getParameter_Type();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1989,6 +2939,14 @@ public interface LangPackage extends EPackage
     EReference PROJECT__NAMESPACE = eINSTANCE.getProject_Namespace();
 
     /**
+     * The meta object literal for the '<em><b>Context Definition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROJECT__CONTEXT_DEFINITION = eINSTANCE.getProject_ContextDefinition();
+
+    /**
      * The meta object literal for the '<em><b>Type Aliases</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2005,6 +2963,22 @@ public interface LangPackage extends EPackage
     EReference PROJECT__COMPONENTS = eINSTANCE.getProject_Components();
 
     /**
+     * The meta object literal for the '<em><b>Procedures</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROJECT__PROCEDURES = eINSTANCE.getProject_Procedures();
+
+    /**
+     * The meta object literal for the '<em><b>Observers</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROJECT__OBSERVERS = eINSTANCE.getProject_Observers();
+
+    /**
      * The meta object literal for the '<em><b>Systems</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2013,20 +2987,12 @@ public interface LangPackage extends EPackage
     EReference PROJECT__SYSTEMS = eINSTANCE.getProject_Systems();
 
     /**
-     * The meta object literal for the '<em><b>Parent Systems</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Chains</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PROJECT__PARENT_SYSTEMS = eINSTANCE.getProject_ParentSystems();
-
-    /**
-     * The meta object literal for the '<em><b>Context Definitions</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PROJECT__CONTEXT_DEFINITIONS = eINSTANCE.getProject_ContextDefinitions();
+    EReference PROJECT__CHAINS = eINSTANCE.getProject_Chains();
 
     /**
      * The meta object literal for the '{@link ecs.lang.impl.ContextDefinitionImpl <em>Context Definition</em>}' class.
@@ -2039,20 +3005,48 @@ public interface LangPackage extends EPackage
     EClass CONTEXT_DEFINITION = eINSTANCE.getContextDefinition();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Names</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute CONTEXT_DEFINITION__NAME = eINSTANCE.getContextDefinition_Name();
+    EReference CONTEXT_DEFINITION__NAMES = eINSTANCE.getContextDefinition_Names();
 
     /**
-     * The meta object literal for the '<em><b>Components</b></em>' reference list feature.
+     * The meta object literal for the '{@link ecs.lang.impl.ContextNameImpl <em>Context Name</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ecs.lang.impl.ContextNameImpl
+     * @see ecs.lang.impl.LangPackageImpl#getContextName()
+     * @generated
+     */
+    EClass CONTEXT_NAME = eINSTANCE.getContextName();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference CONTEXT_DEFINITION__COMPONENTS = eINSTANCE.getContextDefinition_Components();
+    EAttribute CONTEXT_NAME__NAME = eINSTANCE.getContextName_Name();
+
+    /**
+     * The meta object literal for the '{@link ecs.lang.impl.ContextReferenceImpl <em>Context Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ecs.lang.impl.ContextReferenceImpl
+     * @see ecs.lang.impl.LangPackageImpl#getContextReference()
+     * @generated
+     */
+    EClass CONTEXT_REFERENCE = eINSTANCE.getContextReference();
+
+    /**
+     * The meta object literal for the '<em><b>Context</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONTEXT_REFERENCE__CONTEXT = eINSTANCE.getContextReference_Context();
 
     /**
      * The meta object literal for the '{@link ecs.lang.impl.PlatformsImpl <em>Platforms</em>}' class.
@@ -2239,6 +3233,14 @@ public interface LangPackage extends EPackage
     EClass ACOMPONENT = eINSTANCE.getAComponent();
 
     /**
+     * The meta object literal for the '<em><b>Context Ref</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACOMPONENT__CONTEXT_REF = eINSTANCE.getAComponent_ContextRef();
+
+    /**
      * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2271,6 +3273,22 @@ public interface LangPackage extends EPackage
      * @generated
      */
     EReference COMPONENT__VALUE_TYPE = eINSTANCE.getComponent_ValueType();
+
+    /**
+     * The meta object literal for the '<em><b>Index</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPONENT__INDEX = eINSTANCE.getComponent_Index();
+
+    /**
+     * The meta object literal for the '<em><b>Multi Index</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPONENT__MULTI_INDEX = eINSTANCE.getComponent_MultiIndex();
 
     /**
      * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
@@ -2341,6 +3359,22 @@ public interface LangPackage extends EPackage
     EAttribute SYSTEM__INIT = eINSTANCE.getSystem_Init();
 
     /**
+     * The meta object literal for the '<em><b>Cleanup</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SYSTEM__CLEANUP = eINSTANCE.getSystem_Cleanup();
+
+    /**
+     * The meta object literal for the '<em><b>Teardown</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SYSTEM__TEARDOWN = eINSTANCE.getSystem_Teardown();
+
+    /**
      * The meta object literal for the '<em><b>Input</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2363,6 +3397,14 @@ public interface LangPackage extends EPackage
      * @generated
      */
     EReference SYSTEM__GROUPS = eINSTANCE.getSystem_Groups();
+
+    /**
+     * The meta object literal for the '<em><b>Index</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYSTEM__INDEX = eINSTANCE.getSystem_Index();
 
     /**
      * The meta object literal for the '<em><b>Create Rules</b></em>' containment reference list feature.
@@ -2431,6 +3473,14 @@ public interface LangPackage extends EPackage
     EAttribute INPUT__DESTROY = eINSTANCE.getInput_Destroy();
 
     /**
+     * The meta object literal for the '<em><b>Context Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference INPUT__CONTEXT_REF = eINSTANCE.getInput_ContextRef();
+
+    /**
      * The meta object literal for the '{@link ecs.lang.impl.InputTriggerImpl <em>Input Trigger</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2491,6 +3541,64 @@ public interface LangPackage extends EPackage
     EReference CREATE_RULE__COMPONENT_TYPES = eINSTANCE.getCreateRule_ComponentTypes();
 
     /**
+     * The meta object literal for the '<em><b>Context Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CREATE_RULE__CONTEXT_REF = eINSTANCE.getCreateRule_ContextRef();
+
+    /**
+     * The meta object literal for the '{@link ecs.lang.impl.IndexImpl <em>Index</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ecs.lang.impl.IndexImpl
+     * @see ecs.lang.impl.LangPackageImpl#getIndex()
+     * @generated
+     */
+    EClass INDEX = eINSTANCE.getIndex();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INDEX__NAME = eINSTANCE.getIndex_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Component Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference INDEX__COMPONENT_REF = eINSTANCE.getIndex_ComponentRef();
+
+    /**
+     * The meta object literal for the '<em><b>Api Rules</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference INDEX__API_RULES = eINSTANCE.getIndex_ApiRules();
+
+    /**
+     * The meta object literal for the '<em><b>Destroy</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INDEX__DESTROY = eINSTANCE.getIndex_Destroy();
+
+    /**
+     * The meta object literal for the '<em><b>Context Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference INDEX__CONTEXT_REF = eINSTANCE.getIndex_ContextRef();
+
+    /**
      * The meta object literal for the '{@link ecs.lang.impl.UniqueComponentAccessImpl <em>Unique Component Access</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2507,6 +3615,14 @@ public interface LangPackage extends EPackage
      * @generated
      */
     EReference UNIQUE_COMPONENT_ACCESS__API_RULE = eINSTANCE.getUniqueComponentAccess_ApiRule();
+
+    /**
+     * The meta object literal for the '<em><b>Context Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference UNIQUE_COMPONENT_ACCESS__CONTEXT_REF = eINSTANCE.getUniqueComponentAccess_ContextRef();
 
     /**
      * The meta object literal for the '{@link ecs.lang.impl.GroupImpl <em>Group</em>}' class.
@@ -2583,6 +3699,14 @@ public interface LangPackage extends EPackage
     EAttribute GROUP__DESTROY = eINSTANCE.getGroup_Destroy();
 
     /**
+     * The meta object literal for the '<em><b>Context Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GROUP__CONTEXT_REF = eINSTANCE.getGroup_ContextRef();
+
+    /**
      * The meta object literal for the '{@link ecs.lang.impl.ApiRuleImpl <em>Api Rule</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2619,14 +3743,14 @@ public interface LangPackage extends EPackage
     EClass ASYSTEM = eINSTANCE.getASystem();
 
     /**
-     * The meta object literal for the '{@link ecs.lang.impl.ParentSystemImpl <em>Parent System</em>}' class.
+     * The meta object literal for the '{@link ecs.lang.impl.ChainImpl <em>Chain</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see ecs.lang.impl.ParentSystemImpl
-     * @see ecs.lang.impl.LangPackageImpl#getParentSystem()
+     * @see ecs.lang.impl.ChainImpl
+     * @see ecs.lang.impl.LangPackageImpl#getChain()
      * @generated
      */
-    EClass PARENT_SYSTEM = eINSTANCE.getParentSystem();
+    EClass CHAIN = eINSTANCE.getChain();
 
     /**
      * The meta object literal for the '<em><b>Component Alias</b></em>' attribute feature.
@@ -2634,15 +3758,31 @@ public interface LangPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute PARENT_SYSTEM__COMPONENT_ALIAS = eINSTANCE.getParentSystem_ComponentAlias();
+    EAttribute CHAIN__COMPONENT_ALIAS = eINSTANCE.getChain_ComponentAlias();
 
     /**
-     * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Precondition</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PARENT_SYSTEM__PARENT = eINSTANCE.getParentSystem_Parent();
+    EAttribute CHAIN__PRECONDITION = eINSTANCE.getChain_Precondition();
+
+    /**
+     * The meta object literal for the '<em><b>Unique Comp</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CHAIN__UNIQUE_COMP = eINSTANCE.getChain_UniqueComp();
+
+    /**
+     * The meta object literal for the '<em><b>Groups</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CHAIN__GROUPS = eINSTANCE.getChain_Groups();
 
     /**
      * The meta object literal for the '<em><b>Children</b></em>' reference list feature.
@@ -2650,7 +3790,173 @@ public interface LangPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PARENT_SYSTEM__CHILDREN = eINSTANCE.getParentSystem_Children();
+    EReference CHAIN__CHILDREN = eINSTANCE.getChain_Children();
+
+    /**
+     * The meta object literal for the '{@link ecs.lang.impl.ProcedureImpl <em>Procedure</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ecs.lang.impl.ProcedureImpl
+     * @see ecs.lang.impl.LangPackageImpl#getProcedure()
+     * @generated
+     */
+    EClass PROCEDURE = eINSTANCE.getProcedure();
+
+    /**
+     * The meta object literal for the '<em><b>Component Alias</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROCEDURE__COMPONENT_ALIAS = eINSTANCE.getProcedure_ComponentAlias();
+
+    /**
+     * The meta object literal for the '<em><b>Context Ref</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROCEDURE__CONTEXT_REF = eINSTANCE.getProcedure_ContextRef();
+
+    /**
+     * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROCEDURE__UNIQUE = eINSTANCE.getProcedure_Unique();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PROCEDURE__NAME = eINSTANCE.getProcedure_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROCEDURE__PARAMS = eINSTANCE.getProcedure_Params();
+
+    /**
+     * The meta object literal for the '<em><b>Unique Comp</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROCEDURE__UNIQUE_COMP = eINSTANCE.getProcedure_UniqueComp();
+
+    /**
+     * The meta object literal for the '<em><b>Groups</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROCEDURE__GROUPS = eINSTANCE.getProcedure_Groups();
+
+    /**
+     * The meta object literal for the '<em><b>Index</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROCEDURE__INDEX = eINSTANCE.getProcedure_Index();
+
+    /**
+     * The meta object literal for the '<em><b>Create Rules</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROCEDURE__CREATE_RULES = eINSTANCE.getProcedure_CreateRules();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PROCEDURE__TYPE = eINSTANCE.getProcedure_Type();
+
+    /**
+     * The meta object literal for the '{@link ecs.lang.impl.ObserverImpl <em>Observer</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ecs.lang.impl.ObserverImpl
+     * @see ecs.lang.impl.LangPackageImpl#getObserver()
+     * @generated
+     */
+    EClass OBSERVER = eINSTANCE.getObserver();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OBSERVER__NAME = eINSTANCE.getObserver_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Observed Group</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OBSERVER__OBSERVED_GROUP = eINSTANCE.getObserver_ObservedGroup();
+
+    /**
+     * The meta object literal for the '<em><b>Unique Comp</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OBSERVER__UNIQUE_COMP = eINSTANCE.getObserver_UniqueComp();
+
+    /**
+     * The meta object literal for the '<em><b>Groups</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OBSERVER__GROUPS = eINSTANCE.getObserver_Groups();
+
+    /**
+     * The meta object literal for the '<em><b>Create Rules</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OBSERVER__CREATE_RULES = eINSTANCE.getObserver_CreateRules();
+
+    /**
+     * The meta object literal for the '{@link ecs.lang.impl.ParameterImpl <em>Parameter</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ecs.lang.impl.ParameterImpl
+     * @see ecs.lang.impl.LangPackageImpl#getParameter()
+     * @generated
+     */
+    EClass PARAMETER = eINSTANCE.getParameter();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAMETER__NAME = eINSTANCE.getParameter_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARAMETER__TYPE = eINSTANCE.getParameter_Type();
 
   }
 

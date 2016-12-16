@@ -5,6 +5,7 @@ package ecs.lang.impl;
 
 import ecs.lang.AComponent;
 import ecs.lang.ApiRule;
+import ecs.lang.ContextName;
 import ecs.lang.Group;
 import ecs.lang.LangPackage;
 
@@ -41,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link ecs.lang.impl.GroupImpl#getNoneOfComponents <em>None Of Components</em>}</li>
  *   <li>{@link ecs.lang.impl.GroupImpl#getApiRules <em>Api Rules</em>}</li>
  *   <li>{@link ecs.lang.impl.GroupImpl#isDestroy <em>Destroy</em>}</li>
+ *   <li>{@link ecs.lang.impl.GroupImpl#getContextRef <em>Context Ref</em>}</li>
  * </ul>
  *
  * @generated
@@ -166,6 +168,16 @@ public class GroupImpl extends MinimalEObjectImpl.Container implements Group
    * @ordered
    */
   protected boolean destroy = DESTROY_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getContextRef() <em>Context Ref</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getContextRef()
+   * @generated
+   * @ordered
+   */
+  protected ContextName contextRef;
 
   /**
    * <!-- begin-user-doc -->
@@ -341,6 +353,49 @@ public class GroupImpl extends MinimalEObjectImpl.Container implements Group
    * <!-- end-user-doc -->
    * @generated
    */
+  public ContextName getContextRef()
+  {
+    if (contextRef != null && contextRef.eIsProxy())
+    {
+      InternalEObject oldContextRef = (InternalEObject)contextRef;
+      contextRef = (ContextName)eResolveProxy(oldContextRef);
+      if (contextRef != oldContextRef)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, LangPackage.GROUP__CONTEXT_REF, oldContextRef, contextRef));
+      }
+    }
+    return contextRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ContextName basicGetContextRef()
+  {
+    return contextRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setContextRef(ContextName newContextRef)
+  {
+    ContextName oldContextRef = contextRef;
+    contextRef = newContextRef;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.GROUP__CONTEXT_REF, oldContextRef, contextRef));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -378,6 +433,9 @@ public class GroupImpl extends MinimalEObjectImpl.Container implements Group
         return getApiRules();
       case LangPackage.GROUP__DESTROY:
         return isDestroy();
+      case LangPackage.GROUP__CONTEXT_REF:
+        if (resolve) return getContextRef();
+        return basicGetContextRef();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -421,6 +479,9 @@ public class GroupImpl extends MinimalEObjectImpl.Container implements Group
       case LangPackage.GROUP__DESTROY:
         setDestroy((Boolean)newValue);
         return;
+      case LangPackage.GROUP__CONTEXT_REF:
+        setContextRef((ContextName)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -459,6 +520,9 @@ public class GroupImpl extends MinimalEObjectImpl.Container implements Group
       case LangPackage.GROUP__DESTROY:
         setDestroy(DESTROY_EDEFAULT);
         return;
+      case LangPackage.GROUP__CONTEXT_REF:
+        setContextRef((ContextName)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -489,6 +553,8 @@ public class GroupImpl extends MinimalEObjectImpl.Container implements Group
         return apiRules != null && !apiRules.isEmpty();
       case LangPackage.GROUP__DESTROY:
         return destroy != DESTROY_EDEFAULT;
+      case LangPackage.GROUP__CONTEXT_REF:
+        return contextRef != null;
     }
     return super.eIsSet(featureID);
   }

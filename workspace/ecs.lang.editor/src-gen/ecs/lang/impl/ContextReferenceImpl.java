@@ -3,55 +3,51 @@
  */
 package ecs.lang.impl;
 
-import ecs.lang.ContextDefinition;
 import ecs.lang.ContextName;
+import ecs.lang.ContextReference;
 import ecs.lang.LangPackage;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Context Definition</b></em>'.
+ * An implementation of the model object '<em><b>Context Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.impl.ContextDefinitionImpl#getNames <em>Names</em>}</li>
+ *   <li>{@link ecs.lang.impl.ContextReferenceImpl#getContext <em>Context</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ContextDefinitionImpl extends MinimalEObjectImpl.Container implements ContextDefinition
+public class ContextReferenceImpl extends MinimalEObjectImpl.Container implements ContextReference
 {
   /**
-   * The cached value of the '{@link #getNames() <em>Names</em>}' containment reference list.
+   * The cached value of the '{@link #getContext() <em>Context</em>}' reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getNames()
+   * @see #getContext()
    * @generated
    * @ordered
    */
-  protected EList<ContextName> names;
+  protected EList<ContextName> context;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ContextDefinitionImpl()
+  protected ContextReferenceImpl()
   {
     super();
   }
@@ -64,7 +60,7 @@ public class ContextDefinitionImpl extends MinimalEObjectImpl.Container implemen
   @Override
   protected EClass eStaticClass()
   {
-    return LangPackage.Literals.CONTEXT_DEFINITION;
+    return LangPackage.Literals.CONTEXT_REFERENCE;
   }
 
   /**
@@ -72,29 +68,13 @@ public class ContextDefinitionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ContextName> getNames()
+  public EList<ContextName> getContext()
   {
-    if (names == null)
+    if (context == null)
     {
-      names = new EObjectContainmentEList<ContextName>(ContextName.class, this, LangPackage.CONTEXT_DEFINITION__NAMES);
+      context = new EObjectResolvingEList<ContextName>(ContextName.class, this, LangPackage.CONTEXT_REFERENCE__CONTEXT);
     }
-    return names;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case LangPackage.CONTEXT_DEFINITION__NAMES:
-        return ((InternalEList<?>)getNames()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    return context;
   }
 
   /**
@@ -107,8 +87,8 @@ public class ContextDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case LangPackage.CONTEXT_DEFINITION__NAMES:
-        return getNames();
+      case LangPackage.CONTEXT_REFERENCE__CONTEXT:
+        return getContext();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -124,9 +104,9 @@ public class ContextDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case LangPackage.CONTEXT_DEFINITION__NAMES:
-        getNames().clear();
-        getNames().addAll((Collection<? extends ContextName>)newValue);
+      case LangPackage.CONTEXT_REFERENCE__CONTEXT:
+        getContext().clear();
+        getContext().addAll((Collection<? extends ContextName>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -142,8 +122,8 @@ public class ContextDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case LangPackage.CONTEXT_DEFINITION__NAMES:
-        getNames().clear();
+      case LangPackage.CONTEXT_REFERENCE__CONTEXT:
+        getContext().clear();
         return;
     }
     super.eUnset(featureID);
@@ -159,10 +139,10 @@ public class ContextDefinitionImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case LangPackage.CONTEXT_DEFINITION__NAMES:
-        return names != null && !names.isEmpty();
+      case LangPackage.CONTEXT_REFERENCE__CONTEXT:
+        return context != null && !context.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ContextDefinitionImpl
+} //ContextReferenceImpl

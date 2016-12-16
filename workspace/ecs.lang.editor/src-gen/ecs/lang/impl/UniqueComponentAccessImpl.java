@@ -4,6 +4,7 @@
 package ecs.lang.impl;
 
 import ecs.lang.ApiRule;
+import ecs.lang.ContextName;
 import ecs.lang.LangPackage;
 import ecs.lang.UniqueComponentAccess;
 
@@ -25,6 +26,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link ecs.lang.impl.UniqueComponentAccessImpl#getApiRule <em>Api Rule</em>}</li>
+ *   <li>{@link ecs.lang.impl.UniqueComponentAccessImpl#getContextRef <em>Context Ref</em>}</li>
  * </ul>
  *
  * @generated
@@ -40,6 +42,16 @@ public class UniqueComponentAccessImpl extends MinimalEObjectImpl.Container impl
    * @ordered
    */
   protected ApiRule apiRule;
+
+  /**
+   * The cached value of the '{@link #getContextRef() <em>Context Ref</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getContextRef()
+   * @generated
+   * @ordered
+   */
+  protected ContextName contextRef;
 
   /**
    * <!-- begin-user-doc -->
@@ -115,6 +127,49 @@ public class UniqueComponentAccessImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
+  public ContextName getContextRef()
+  {
+    if (contextRef != null && contextRef.eIsProxy())
+    {
+      InternalEObject oldContextRef = (InternalEObject)contextRef;
+      contextRef = (ContextName)eResolveProxy(oldContextRef);
+      if (contextRef != oldContextRef)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, LangPackage.UNIQUE_COMPONENT_ACCESS__CONTEXT_REF, oldContextRef, contextRef));
+      }
+    }
+    return contextRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ContextName basicGetContextRef()
+  {
+    return contextRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setContextRef(ContextName newContextRef)
+  {
+    ContextName oldContextRef = contextRef;
+    contextRef = newContextRef;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.UNIQUE_COMPONENT_ACCESS__CONTEXT_REF, oldContextRef, contextRef));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -138,6 +193,9 @@ public class UniqueComponentAccessImpl extends MinimalEObjectImpl.Container impl
     {
       case LangPackage.UNIQUE_COMPONENT_ACCESS__API_RULE:
         return getApiRule();
+      case LangPackage.UNIQUE_COMPONENT_ACCESS__CONTEXT_REF:
+        if (resolve) return getContextRef();
+        return basicGetContextRef();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -154,6 +212,9 @@ public class UniqueComponentAccessImpl extends MinimalEObjectImpl.Container impl
     {
       case LangPackage.UNIQUE_COMPONENT_ACCESS__API_RULE:
         setApiRule((ApiRule)newValue);
+        return;
+      case LangPackage.UNIQUE_COMPONENT_ACCESS__CONTEXT_REF:
+        setContextRef((ContextName)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -172,6 +233,9 @@ public class UniqueComponentAccessImpl extends MinimalEObjectImpl.Container impl
       case LangPackage.UNIQUE_COMPONENT_ACCESS__API_RULE:
         setApiRule((ApiRule)null);
         return;
+      case LangPackage.UNIQUE_COMPONENT_ACCESS__CONTEXT_REF:
+        setContextRef((ContextName)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -188,6 +252,8 @@ public class UniqueComponentAccessImpl extends MinimalEObjectImpl.Container impl
     {
       case LangPackage.UNIQUE_COMPONENT_ACCESS__API_RULE:
         return apiRule != null;
+      case LangPackage.UNIQUE_COMPONENT_ACCESS__CONTEXT_REF:
+        return contextRef != null;
     }
     return super.eIsSet(featureID);
   }

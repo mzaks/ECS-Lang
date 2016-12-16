@@ -4,12 +4,14 @@
 package ecs.lang.impl;
 
 import ecs.lang.Alias;
+import ecs.lang.Chain;
 import ecs.lang.Component;
 import ecs.lang.ContextDefinition;
 import ecs.lang.LangPackage;
 import ecs.lang.Namespace;
-import ecs.lang.ParentSystem;
+import ecs.lang.Observer;
 import ecs.lang.Platforms;
+import ecs.lang.Procedure;
 import ecs.lang.Project;
 
 import java.util.Collection;
@@ -38,11 +40,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link ecs.lang.impl.ProjectImpl#getPlatformDefinition <em>Platform Definition</em>}</li>
  *   <li>{@link ecs.lang.impl.ProjectImpl#getNamespace <em>Namespace</em>}</li>
+ *   <li>{@link ecs.lang.impl.ProjectImpl#getContextDefinition <em>Context Definition</em>}</li>
  *   <li>{@link ecs.lang.impl.ProjectImpl#getTypeAliases <em>Type Aliases</em>}</li>
  *   <li>{@link ecs.lang.impl.ProjectImpl#getComponents <em>Components</em>}</li>
+ *   <li>{@link ecs.lang.impl.ProjectImpl#getProcedures <em>Procedures</em>}</li>
+ *   <li>{@link ecs.lang.impl.ProjectImpl#getObservers <em>Observers</em>}</li>
  *   <li>{@link ecs.lang.impl.ProjectImpl#getSystems <em>Systems</em>}</li>
- *   <li>{@link ecs.lang.impl.ProjectImpl#getParentSystems <em>Parent Systems</em>}</li>
- *   <li>{@link ecs.lang.impl.ProjectImpl#getContextDefinitions <em>Context Definitions</em>}</li>
+ *   <li>{@link ecs.lang.impl.ProjectImpl#getChains <em>Chains</em>}</li>
  * </ul>
  *
  * @generated
@@ -70,6 +74,16 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
   protected Namespace namespace;
 
   /**
+   * The cached value of the '{@link #getContextDefinition() <em>Context Definition</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getContextDefinition()
+   * @generated
+   * @ordered
+   */
+  protected ContextDefinition contextDefinition;
+
+  /**
    * The cached value of the '{@link #getTypeAliases() <em>Type Aliases</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -90,6 +104,26 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
   protected EList<Component> components;
 
   /**
+   * The cached value of the '{@link #getProcedures() <em>Procedures</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getProcedures()
+   * @generated
+   * @ordered
+   */
+  protected EList<Procedure> procedures;
+
+  /**
+   * The cached value of the '{@link #getObservers() <em>Observers</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getObservers()
+   * @generated
+   * @ordered
+   */
+  protected EList<Observer> observers;
+
+  /**
    * The cached value of the '{@link #getSystems() <em>Systems</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -100,24 +134,14 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
   protected EList<ecs.lang.System> systems;
 
   /**
-   * The cached value of the '{@link #getParentSystems() <em>Parent Systems</em>}' containment reference list.
+   * The cached value of the '{@link #getChains() <em>Chains</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getParentSystems()
+   * @see #getChains()
    * @generated
    * @ordered
    */
-  protected EList<ParentSystem> parentSystems;
-
-  /**
-   * The cached value of the '{@link #getContextDefinitions() <em>Context Definitions</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getContextDefinitions()
-   * @generated
-   * @ordered
-   */
-  protected EList<ContextDefinition> contextDefinitions;
+  protected EList<Chain> chains;
 
   /**
    * <!-- begin-user-doc -->
@@ -241,6 +265,54 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
    * <!-- end-user-doc -->
    * @generated
    */
+  public ContextDefinition getContextDefinition()
+  {
+    return contextDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetContextDefinition(ContextDefinition newContextDefinition, NotificationChain msgs)
+  {
+    ContextDefinition oldContextDefinition = contextDefinition;
+    contextDefinition = newContextDefinition;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LangPackage.PROJECT__CONTEXT_DEFINITION, oldContextDefinition, newContextDefinition);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setContextDefinition(ContextDefinition newContextDefinition)
+  {
+    if (newContextDefinition != contextDefinition)
+    {
+      NotificationChain msgs = null;
+      if (contextDefinition != null)
+        msgs = ((InternalEObject)contextDefinition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LangPackage.PROJECT__CONTEXT_DEFINITION, null, msgs);
+      if (newContextDefinition != null)
+        msgs = ((InternalEObject)newContextDefinition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LangPackage.PROJECT__CONTEXT_DEFINITION, null, msgs);
+      msgs = basicSetContextDefinition(newContextDefinition, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.PROJECT__CONTEXT_DEFINITION, newContextDefinition, newContextDefinition));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Alias> getTypeAliases()
   {
     if (typeAliases == null)
@@ -269,6 +341,34 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Procedure> getProcedures()
+  {
+    if (procedures == null)
+    {
+      procedures = new EObjectContainmentEList<Procedure>(Procedure.class, this, LangPackage.PROJECT__PROCEDURES);
+    }
+    return procedures;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Observer> getObservers()
+  {
+    if (observers == null)
+    {
+      observers = new EObjectContainmentEList<Observer>(Observer.class, this, LangPackage.PROJECT__OBSERVERS);
+    }
+    return observers;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<ecs.lang.System> getSystems()
   {
     if (systems == null)
@@ -283,27 +383,13 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ParentSystem> getParentSystems()
+  public EList<Chain> getChains()
   {
-    if (parentSystems == null)
+    if (chains == null)
     {
-      parentSystems = new EObjectContainmentEList<ParentSystem>(ParentSystem.class, this, LangPackage.PROJECT__PARENT_SYSTEMS);
+      chains = new EObjectContainmentEList<Chain>(Chain.class, this, LangPackage.PROJECT__CHAINS);
     }
-    return parentSystems;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<ContextDefinition> getContextDefinitions()
-  {
-    if (contextDefinitions == null)
-    {
-      contextDefinitions = new EObjectContainmentEList<ContextDefinition>(ContextDefinition.class, this, LangPackage.PROJECT__CONTEXT_DEFINITIONS);
-    }
-    return contextDefinitions;
+    return chains;
   }
 
   /**
@@ -320,16 +406,20 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
         return basicSetPlatformDefinition(null, msgs);
       case LangPackage.PROJECT__NAMESPACE:
         return basicSetNamespace(null, msgs);
+      case LangPackage.PROJECT__CONTEXT_DEFINITION:
+        return basicSetContextDefinition(null, msgs);
       case LangPackage.PROJECT__TYPE_ALIASES:
         return ((InternalEList<?>)getTypeAliases()).basicRemove(otherEnd, msgs);
       case LangPackage.PROJECT__COMPONENTS:
         return ((InternalEList<?>)getComponents()).basicRemove(otherEnd, msgs);
+      case LangPackage.PROJECT__PROCEDURES:
+        return ((InternalEList<?>)getProcedures()).basicRemove(otherEnd, msgs);
+      case LangPackage.PROJECT__OBSERVERS:
+        return ((InternalEList<?>)getObservers()).basicRemove(otherEnd, msgs);
       case LangPackage.PROJECT__SYSTEMS:
         return ((InternalEList<?>)getSystems()).basicRemove(otherEnd, msgs);
-      case LangPackage.PROJECT__PARENT_SYSTEMS:
-        return ((InternalEList<?>)getParentSystems()).basicRemove(otherEnd, msgs);
-      case LangPackage.PROJECT__CONTEXT_DEFINITIONS:
-        return ((InternalEList<?>)getContextDefinitions()).basicRemove(otherEnd, msgs);
+      case LangPackage.PROJECT__CHAINS:
+        return ((InternalEList<?>)getChains()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -348,16 +438,20 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
         return getPlatformDefinition();
       case LangPackage.PROJECT__NAMESPACE:
         return getNamespace();
+      case LangPackage.PROJECT__CONTEXT_DEFINITION:
+        return getContextDefinition();
       case LangPackage.PROJECT__TYPE_ALIASES:
         return getTypeAliases();
       case LangPackage.PROJECT__COMPONENTS:
         return getComponents();
+      case LangPackage.PROJECT__PROCEDURES:
+        return getProcedures();
+      case LangPackage.PROJECT__OBSERVERS:
+        return getObservers();
       case LangPackage.PROJECT__SYSTEMS:
         return getSystems();
-      case LangPackage.PROJECT__PARENT_SYSTEMS:
-        return getParentSystems();
-      case LangPackage.PROJECT__CONTEXT_DEFINITIONS:
-        return getContextDefinitions();
+      case LangPackage.PROJECT__CHAINS:
+        return getChains();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -379,6 +473,9 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
       case LangPackage.PROJECT__NAMESPACE:
         setNamespace((Namespace)newValue);
         return;
+      case LangPackage.PROJECT__CONTEXT_DEFINITION:
+        setContextDefinition((ContextDefinition)newValue);
+        return;
       case LangPackage.PROJECT__TYPE_ALIASES:
         getTypeAliases().clear();
         getTypeAliases().addAll((Collection<? extends Alias>)newValue);
@@ -387,17 +484,21 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
         getComponents().clear();
         getComponents().addAll((Collection<? extends Component>)newValue);
         return;
+      case LangPackage.PROJECT__PROCEDURES:
+        getProcedures().clear();
+        getProcedures().addAll((Collection<? extends Procedure>)newValue);
+        return;
+      case LangPackage.PROJECT__OBSERVERS:
+        getObservers().clear();
+        getObservers().addAll((Collection<? extends Observer>)newValue);
+        return;
       case LangPackage.PROJECT__SYSTEMS:
         getSystems().clear();
         getSystems().addAll((Collection<? extends ecs.lang.System>)newValue);
         return;
-      case LangPackage.PROJECT__PARENT_SYSTEMS:
-        getParentSystems().clear();
-        getParentSystems().addAll((Collection<? extends ParentSystem>)newValue);
-        return;
-      case LangPackage.PROJECT__CONTEXT_DEFINITIONS:
-        getContextDefinitions().clear();
-        getContextDefinitions().addAll((Collection<? extends ContextDefinition>)newValue);
+      case LangPackage.PROJECT__CHAINS:
+        getChains().clear();
+        getChains().addAll((Collection<? extends Chain>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -419,20 +520,26 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
       case LangPackage.PROJECT__NAMESPACE:
         setNamespace((Namespace)null);
         return;
+      case LangPackage.PROJECT__CONTEXT_DEFINITION:
+        setContextDefinition((ContextDefinition)null);
+        return;
       case LangPackage.PROJECT__TYPE_ALIASES:
         getTypeAliases().clear();
         return;
       case LangPackage.PROJECT__COMPONENTS:
         getComponents().clear();
         return;
+      case LangPackage.PROJECT__PROCEDURES:
+        getProcedures().clear();
+        return;
+      case LangPackage.PROJECT__OBSERVERS:
+        getObservers().clear();
+        return;
       case LangPackage.PROJECT__SYSTEMS:
         getSystems().clear();
         return;
-      case LangPackage.PROJECT__PARENT_SYSTEMS:
-        getParentSystems().clear();
-        return;
-      case LangPackage.PROJECT__CONTEXT_DEFINITIONS:
-        getContextDefinitions().clear();
+      case LangPackage.PROJECT__CHAINS:
+        getChains().clear();
         return;
     }
     super.eUnset(featureID);
@@ -452,16 +559,20 @@ public class ProjectImpl extends MinimalEObjectImpl.Container implements Project
         return platformDefinition != null;
       case LangPackage.PROJECT__NAMESPACE:
         return namespace != null;
+      case LangPackage.PROJECT__CONTEXT_DEFINITION:
+        return contextDefinition != null;
       case LangPackage.PROJECT__TYPE_ALIASES:
         return typeAliases != null && !typeAliases.isEmpty();
       case LangPackage.PROJECT__COMPONENTS:
         return components != null && !components.isEmpty();
+      case LangPackage.PROJECT__PROCEDURES:
+        return procedures != null && !procedures.isEmpty();
+      case LangPackage.PROJECT__OBSERVERS:
+        return observers != null && !observers.isEmpty();
       case LangPackage.PROJECT__SYSTEMS:
         return systems != null && !systems.isEmpty();
-      case LangPackage.PROJECT__PARENT_SYSTEMS:
-        return parentSystems != null && !parentSystems.isEmpty();
-      case LangPackage.PROJECT__CONTEXT_DEFINITIONS:
-        return contextDefinitions != null && !contextDefinitions.isEmpty();
+      case LangPackage.PROJECT__CHAINS:
+        return chains != null && !chains.isEmpty();
     }
     return super.eIsSet(featureID);
   }
