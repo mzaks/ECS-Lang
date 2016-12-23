@@ -109,6 +109,7 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		}
 		«ENDIF»
 		
+		«val isInDefaultContext = model.contexNames == null || model.contexNames.size == 0 || model.contexNames.get(0).length == 0»
 		namespace Entitas {
 			«IF namespace != null»
 			using «namespace»;
@@ -208,7 +209,7 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 				«ENDIF»
 			}
 			«ENDIF»
-			«IF model.contexNames == null || model.contexNames.size == 0»
+			«IF isInDefaultContext»
 			public partial class Matcher {
 				static IMatcher _matcher«model.name.toFirstUpper»;
 			
@@ -226,7 +227,7 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 			}
 			«ENDIF»
 		}
-		«IF model.contexNames != null && model.contexNames.size > 0»
+		«IF !isInDefaultContext»
 		«FOR contexName : model.contexNames»
 		public partial class «contexName»Matcher {
 			static IMatcher _matcher«model.name.toFirstUpper»;
