@@ -11,6 +11,7 @@ import ecs.lang.AliasRule;
 import ecs.lang.ApiRule;
 import ecs.lang.Chain;
 import ecs.lang.Component;
+import ecs.lang.ComponentAlias;
 import ecs.lang.ComponentProperty;
 import ecs.lang.ContextDefinition;
 import ecs.lang.ContextName;
@@ -140,6 +141,11 @@ public class LangAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAlias(Alias object)
       {
         return createAliasAdapter();
+      }
+      @Override
+      public Adapter caseComponentAlias(ComponentAlias object)
+      {
+        return createComponentAliasAdapter();
       }
       @Override
       public Adapter caseSingleAlias(SingleAlias object)
@@ -374,6 +380,21 @@ public class LangAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAliasAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link ecs.lang.ComponentAlias <em>Component Alias</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see ecs.lang.ComponentAlias
+   * @generated
+   */
+  public Adapter createComponentAliasAdapter()
   {
     return null;
   }

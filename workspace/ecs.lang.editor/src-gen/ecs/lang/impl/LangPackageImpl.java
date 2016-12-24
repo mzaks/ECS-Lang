@@ -11,6 +11,7 @@ import ecs.lang.AliasRule;
 import ecs.lang.ApiRule;
 import ecs.lang.Chain;
 import ecs.lang.Component;
+import ecs.lang.ComponentAlias;
 import ecs.lang.ComponentProperty;
 import ecs.lang.ContextDefinition;
 import ecs.lang.ContextName;
@@ -102,6 +103,13 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * @generated
    */
   private EClass aliasEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass componentAliasEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -534,19 +542,9 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAlias_ComponentAlias()
-  {
-    return (EAttribute)aliasEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getAlias_ListOfAliases()
   {
-    return (EReference)aliasEClass.getEStructuralFeatures().get(1);
+    return (EReference)aliasEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -556,7 +554,37 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    */
   public EReference getAlias_SingleAlias()
   {
-    return (EReference)aliasEClass.getEStructuralFeatures().get(2);
+    return (EReference)aliasEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getComponentAlias()
+  {
+    return componentAliasEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getComponentAlias_Unique()
+  {
+    return (EAttribute)componentAliasEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getComponentAlias_ContextRef()
+  {
+    return (EReference)componentAliasEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -674,7 +702,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAComponent_ContextRef()
+  public EReference getAComponent_ComponentAlias()
   {
     return (EReference)aComponentEClass.getEStructuralFeatures().get(0);
   }
@@ -684,19 +712,9 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAComponent_Unique()
-  {
-    return (EAttribute)aComponentEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getAComponent_Name()
   {
-    return (EAttribute)aComponentEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)aComponentEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -804,7 +822,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSystem_ComponentAlias()
+  public EAttribute getSystem_Init()
   {
     return (EAttribute)systemEClass.getEStructuralFeatures().get(0);
   }
@@ -814,7 +832,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSystem_Init()
+  public EAttribute getSystem_Cleanup()
   {
     return (EAttribute)systemEClass.getEStructuralFeatures().get(1);
   }
@@ -824,7 +842,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSystem_Cleanup()
+  public EAttribute getSystem_Teardown()
   {
     return (EAttribute)systemEClass.getEStructuralFeatures().get(2);
   }
@@ -834,19 +852,9 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSystem_Teardown()
-  {
-    return (EAttribute)systemEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getSystem_Input()
   {
-    return (EReference)systemEClass.getEStructuralFeatures().get(4);
+    return (EReference)systemEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -856,7 +864,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    */
   public EReference getSystem_UniqueComp()
   {
-    return (EReference)systemEClass.getEStructuralFeatures().get(5);
+    return (EReference)systemEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -866,7 +874,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    */
   public EReference getSystem_Groups()
   {
-    return (EReference)systemEClass.getEStructuralFeatures().get(6);
+    return (EReference)systemEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -876,7 +884,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    */
   public EReference getSystem_Index()
   {
-    return (EReference)systemEClass.getEStructuralFeatures().get(7);
+    return (EReference)systemEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -886,7 +894,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    */
   public EReference getSystem_CreateRules()
   {
-    return (EReference)systemEClass.getEStructuralFeatures().get(8);
+    return (EReference)systemEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -1294,7 +1302,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getChain_ComponentAlias()
+  public EAttribute getChain_Precondition()
   {
     return (EAttribute)chainEClass.getEStructuralFeatures().get(0);
   }
@@ -1304,19 +1312,9 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getChain_Precondition()
-  {
-    return (EAttribute)chainEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getChain_UniqueComp()
   {
-    return (EReference)chainEClass.getEStructuralFeatures().get(2);
+    return (EReference)chainEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1326,7 +1324,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    */
   public EReference getChain_Groups()
   {
-    return (EReference)chainEClass.getEStructuralFeatures().get(3);
+    return (EReference)chainEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1336,7 +1334,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
    */
   public EReference getChain_Children()
   {
-    return (EReference)chainEClass.getEStructuralFeatures().get(4);
+    return (EReference)chainEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1599,9 +1597,12 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     createEAttribute(namespaceEClass, NAMESPACE__NAME);
 
     aliasEClass = createEClass(ALIAS);
-    createEAttribute(aliasEClass, ALIAS__COMPONENT_ALIAS);
     createEReference(aliasEClass, ALIAS__LIST_OF_ALIASES);
     createEReference(aliasEClass, ALIAS__SINGLE_ALIAS);
+
+    componentAliasEClass = createEClass(COMPONENT_ALIAS);
+    createEAttribute(componentAliasEClass, COMPONENT_ALIAS__UNIQUE);
+    createEReference(componentAliasEClass, COMPONENT_ALIAS__CONTEXT_REF);
 
     singleAliasEClass = createEClass(SINGLE_ALIAS);
     createEAttribute(singleAliasEClass, SINGLE_ALIAS__TYPE_ALIAS);
@@ -1617,8 +1618,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     createEAttribute(aliasRuleEClass, ALIAS_RULE__VARIABLE_SIZE);
 
     aComponentEClass = createEClass(ACOMPONENT);
-    createEReference(aComponentEClass, ACOMPONENT__CONTEXT_REF);
-    createEAttribute(aComponentEClass, ACOMPONENT__UNIQUE);
+    createEReference(aComponentEClass, ACOMPONENT__COMPONENT_ALIAS);
     createEAttribute(aComponentEClass, ACOMPONENT__NAME);
 
     componentEClass = createEClass(COMPONENT);
@@ -1633,7 +1633,6 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     createEReference(componentPropertyEClass, COMPONENT_PROPERTY__TYPE);
 
     systemEClass = createEClass(SYSTEM);
-    createEAttribute(systemEClass, SYSTEM__COMPONENT_ALIAS);
     createEAttribute(systemEClass, SYSTEM__INIT);
     createEAttribute(systemEClass, SYSTEM__CLEANUP);
     createEAttribute(systemEClass, SYSTEM__TEARDOWN);
@@ -1691,7 +1690,6 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     aSystemEClass = createEClass(ASYSTEM);
 
     chainEClass = createEClass(CHAIN);
-    createEAttribute(chainEClass, CHAIN__COMPONENT_ALIAS);
     createEAttribute(chainEClass, CHAIN__PRECONDITION);
     createEReference(chainEClass, CHAIN__UNIQUE_COMP);
     createEReference(chainEClass, CHAIN__GROUPS);
@@ -1788,9 +1786,12 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     initEAttribute(getNamespace_Name(), ecorePackage.getEString(), "name", null, 0, 1, Namespace.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(aliasEClass, Alias.class, "Alias", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAlias_ComponentAlias(), ecorePackage.getEBoolean(), "componentAlias", null, 0, 1, Alias.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAlias_ListOfAliases(), this.getAliasList(), null, "listOfAliases", null, 0, 1, Alias.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAlias_SingleAlias(), this.getSingleAlias(), null, "singleAlias", null, 0, 1, Alias.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(componentAliasEClass, ComponentAlias.class, "ComponentAlias", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getComponentAlias_Unique(), ecorePackage.getEBoolean(), "unique", null, 0, 1, ComponentAlias.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getComponentAlias_ContextRef(), this.getContextReference(), null, "contextRef", null, 0, 1, ComponentAlias.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(singleAliasEClass, SingleAlias.class, "SingleAlias", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSingleAlias_TypeAlias(), ecorePackage.getEString(), "typeAlias", null, 0, 1, SingleAlias.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1806,8 +1807,7 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     initEAttribute(getAliasRule_VariableSize(), ecorePackage.getEBoolean(), "variableSize", null, 0, 1, AliasRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(aComponentEClass, AComponent.class, "AComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAComponent_ContextRef(), this.getContextReference(), null, "contextRef", null, 0, 1, AComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAComponent_Unique(), ecorePackage.getEBoolean(), "unique", null, 0, 1, AComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAComponent_ComponentAlias(), this.getComponentAlias(), null, "componentAlias", null, 0, 1, AComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAComponent_Name(), ecorePackage.getEString(), "name", null, 0, 1, AComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(componentEClass, Component.class, "Component", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1822,7 +1822,6 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     initEReference(getComponentProperty_Type(), this.getAlias(), null, "type", null, 0, 1, ComponentProperty.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(systemEClass, ecs.lang.System.class, "System", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSystem_ComponentAlias(), ecorePackage.getEBoolean(), "componentAlias", null, 0, 1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getSystem_Init(), ecorePackage.getEBoolean(), "init", null, 0, 1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getSystem_Cleanup(), ecorePackage.getEBoolean(), "cleanup", null, 0, 1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getSystem_Teardown(), ecorePackage.getEBoolean(), "teardown", null, 0, 1, ecs.lang.System.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1880,7 +1879,6 @@ public class LangPackageImpl extends EPackageImpl implements LangPackage
     initEClass(aSystemEClass, ASystem.class, "ASystem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(chainEClass, Chain.class, "Chain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getChain_ComponentAlias(), ecorePackage.getEBoolean(), "componentAlias", null, 0, 1, Chain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getChain_Precondition(), ecorePackage.getEBoolean(), "precondition", null, 0, 1, Chain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getChain_UniqueComp(), this.getUniqueComponentAccess(), null, "uniqueComp", null, 0, -1, Chain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getChain_Groups(), this.getGroup(), null, "groups", null, 0, -1, Chain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

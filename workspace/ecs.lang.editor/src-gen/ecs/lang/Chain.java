@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.Chain#isComponentAlias <em>Component Alias</em>}</li>
  *   <li>{@link ecs.lang.Chain#isPrecondition <em>Precondition</em>}</li>
  *   <li>{@link ecs.lang.Chain#getUniqueComp <em>Unique Comp</em>}</li>
  *   <li>{@link ecs.lang.Chain#getGroups <em>Groups</em>}</li>
@@ -27,32 +26,6 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Chain extends AComponent, ASystem
 {
-  /**
-   * Returns the value of the '<em><b>Component Alias</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Component Alias</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Component Alias</em>' attribute.
-   * @see #setComponentAlias(boolean)
-   * @see ecs.lang.LangPackage#getChain_ComponentAlias()
-   * @model
-   * @generated
-   */
-  boolean isComponentAlias();
-
-  /**
-   * Sets the value of the '{@link ecs.lang.Chain#isComponentAlias <em>Component Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Component Alias</em>' attribute.
-   * @see #isComponentAlias()
-   * @generated
-   */
-  void setComponentAlias(boolean value);
-
   /**
    * Returns the value of the '<em><b>Precondition</b></em>' attribute.
    * <!-- begin-user-doc -->

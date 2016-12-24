@@ -4,7 +4,7 @@
 package ecs.lang.impl;
 
 import ecs.lang.AComponent;
-import ecs.lang.ContextReference;
+import ecs.lang.ComponentAlias;
 import ecs.lang.LangPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -24,8 +24,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.impl.AComponentImpl#getContextRef <em>Context Ref</em>}</li>
- *   <li>{@link ecs.lang.impl.AComponentImpl#isUnique <em>Unique</em>}</li>
+ *   <li>{@link ecs.lang.impl.AComponentImpl#getComponentAlias <em>Component Alias</em>}</li>
  *   <li>{@link ecs.lang.impl.AComponentImpl#getName <em>Name</em>}</li>
  * </ul>
  *
@@ -34,34 +33,14 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 public class AComponentImpl extends MinimalEObjectImpl.Container implements AComponent
 {
   /**
-   * The cached value of the '{@link #getContextRef() <em>Context Ref</em>}' containment reference.
+   * The cached value of the '{@link #getComponentAlias() <em>Component Alias</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getContextRef()
+   * @see #getComponentAlias()
    * @generated
    * @ordered
    */
-  protected ContextReference contextRef;
-
-  /**
-   * The default value of the '{@link #isUnique() <em>Unique</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isUnique()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean UNIQUE_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isUnique() <em>Unique</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isUnique()
-   * @generated
-   * @ordered
-   */
-  protected boolean unique = UNIQUE_EDEFAULT;
+  protected ComponentAlias componentAlias;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -109,9 +88,9 @@ public class AComponentImpl extends MinimalEObjectImpl.Container implements ACom
    * <!-- end-user-doc -->
    * @generated
    */
-  public ContextReference getContextRef()
+  public ComponentAlias getComponentAlias()
   {
-    return contextRef;
+    return componentAlias;
   }
 
   /**
@@ -119,13 +98,13 @@ public class AComponentImpl extends MinimalEObjectImpl.Container implements ACom
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetContextRef(ContextReference newContextRef, NotificationChain msgs)
+  public NotificationChain basicSetComponentAlias(ComponentAlias newComponentAlias, NotificationChain msgs)
   {
-    ContextReference oldContextRef = contextRef;
-    contextRef = newContextRef;
+    ComponentAlias oldComponentAlias = componentAlias;
+    componentAlias = newComponentAlias;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LangPackage.ACOMPONENT__CONTEXT_REF, oldContextRef, newContextRef);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LangPackage.ACOMPONENT__COMPONENT_ALIAS, oldComponentAlias, newComponentAlias);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -136,43 +115,20 @@ public class AComponentImpl extends MinimalEObjectImpl.Container implements ACom
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setContextRef(ContextReference newContextRef)
+  public void setComponentAlias(ComponentAlias newComponentAlias)
   {
-    if (newContextRef != contextRef)
+    if (newComponentAlias != componentAlias)
     {
       NotificationChain msgs = null;
-      if (contextRef != null)
-        msgs = ((InternalEObject)contextRef).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LangPackage.ACOMPONENT__CONTEXT_REF, null, msgs);
-      if (newContextRef != null)
-        msgs = ((InternalEObject)newContextRef).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LangPackage.ACOMPONENT__CONTEXT_REF, null, msgs);
-      msgs = basicSetContextRef(newContextRef, msgs);
+      if (componentAlias != null)
+        msgs = ((InternalEObject)componentAlias).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - LangPackage.ACOMPONENT__COMPONENT_ALIAS, null, msgs);
+      if (newComponentAlias != null)
+        msgs = ((InternalEObject)newComponentAlias).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - LangPackage.ACOMPONENT__COMPONENT_ALIAS, null, msgs);
+      msgs = basicSetComponentAlias(newComponentAlias, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.ACOMPONENT__CONTEXT_REF, newContextRef, newContextRef));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isUnique()
-  {
-    return unique;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setUnique(boolean newUnique)
-  {
-    boolean oldUnique = unique;
-    unique = newUnique;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.ACOMPONENT__UNIQUE, oldUnique, unique));
+      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.ACOMPONENT__COMPONENT_ALIAS, newComponentAlias, newComponentAlias));
   }
 
   /**
@@ -208,8 +164,8 @@ public class AComponentImpl extends MinimalEObjectImpl.Container implements ACom
   {
     switch (featureID)
     {
-      case LangPackage.ACOMPONENT__CONTEXT_REF:
-        return basicSetContextRef(null, msgs);
+      case LangPackage.ACOMPONENT__COMPONENT_ALIAS:
+        return basicSetComponentAlias(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -224,10 +180,8 @@ public class AComponentImpl extends MinimalEObjectImpl.Container implements ACom
   {
     switch (featureID)
     {
-      case LangPackage.ACOMPONENT__CONTEXT_REF:
-        return getContextRef();
-      case LangPackage.ACOMPONENT__UNIQUE:
-        return isUnique();
+      case LangPackage.ACOMPONENT__COMPONENT_ALIAS:
+        return getComponentAlias();
       case LangPackage.ACOMPONENT__NAME:
         return getName();
     }
@@ -244,11 +198,8 @@ public class AComponentImpl extends MinimalEObjectImpl.Container implements ACom
   {
     switch (featureID)
     {
-      case LangPackage.ACOMPONENT__CONTEXT_REF:
-        setContextRef((ContextReference)newValue);
-        return;
-      case LangPackage.ACOMPONENT__UNIQUE:
-        setUnique((Boolean)newValue);
+      case LangPackage.ACOMPONENT__COMPONENT_ALIAS:
+        setComponentAlias((ComponentAlias)newValue);
         return;
       case LangPackage.ACOMPONENT__NAME:
         setName((String)newValue);
@@ -267,11 +218,8 @@ public class AComponentImpl extends MinimalEObjectImpl.Container implements ACom
   {
     switch (featureID)
     {
-      case LangPackage.ACOMPONENT__CONTEXT_REF:
-        setContextRef((ContextReference)null);
-        return;
-      case LangPackage.ACOMPONENT__UNIQUE:
-        setUnique(UNIQUE_EDEFAULT);
+      case LangPackage.ACOMPONENT__COMPONENT_ALIAS:
+        setComponentAlias((ComponentAlias)null);
         return;
       case LangPackage.ACOMPONENT__NAME:
         setName(NAME_EDEFAULT);
@@ -290,10 +238,8 @@ public class AComponentImpl extends MinimalEObjectImpl.Container implements ACom
   {
     switch (featureID)
     {
-      case LangPackage.ACOMPONENT__CONTEXT_REF:
-        return contextRef != null;
-      case LangPackage.ACOMPONENT__UNIQUE:
-        return unique != UNIQUE_EDEFAULT;
+      case LangPackage.ACOMPONENT__COMPONENT_ALIAS:
+        return componentAlias != null;
       case LangPackage.ACOMPONENT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
@@ -311,9 +257,7 @@ public class AComponentImpl extends MinimalEObjectImpl.Container implements ACom
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (unique: ");
-    result.append(unique);
-    result.append(", name: ");
+    result.append(" (name: ");
     result.append(name);
     result.append(')');
     return result.toString();

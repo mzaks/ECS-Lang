@@ -42,7 +42,11 @@ Namespace:
 ;
 
 Alias:
-	'alias' (componentAlias ?= 'comp' (contextRef = ContextReference)? (unique ?= 'unique')? )? name = ValidID (listOfAliases = AliasList | singleAlias = SingleAlias)
+	'alias' (componentAlias = ComponentAlias )? name = ValidID (listOfAliases = AliasList | singleAlias = SingleAlias)
+;
+
+ComponentAlias:{ComponentAlias}
+	('comp' | unique ?= 'ucomp') (contextRef = ContextReference)? (unique ?= 'unique')?
 ;
 
 SingleAlias:
@@ -62,7 +66,9 @@ AComponent:
 ;
 
 Component:
-	'comp' (contextRef = ContextReference)? (unique ?= 'unique')? name = ValidID (( (':' valueType = [Alias] (index?='asIndexKey'|multiIndex?='asMultiIndexKey')? )? | ('{' (properties += ComponentProperty ','?)+ '}')) | '/' prefix = STRING)
+	//('comp' | unique ?= 'ucomp') (contextRef = ContextReference)? (unique ?= 'unique')?
+	componentAlias = ComponentAlias 
+	name = ValidID (( (':' valueType = [Alias] (index?='asIndexKey'|multiIndex?='asMultiIndexKey')? )? | ('{' (properties += ComponentProperty ','?)+ '}')) | '/' prefix = STRING)
 ;
 
 ComponentProperty:
@@ -70,7 +76,7 @@ ComponentProperty:
 ;
 
 System:
-	'sys' (componentAlias ?= 'comp' (contextRef = ContextReference)? (unique ?= 'unique')? )? (init ?= 'init')? (cleanup ?= 'cleanup')? (teardown ?= 'teardown')? name = ValidID '{'
+	'sys' (componentAlias = ComponentAlias)? (init ?= 'init')? (cleanup ?= 'cleanup')? (teardown ?= 'teardown')? name = ValidID '{'
 		input = Input?
 		(uniqueComp += UniqueComponentAccess)*
 		(groups += Group)*
@@ -131,7 +137,7 @@ ASystem:
 ;
 
 Chain:
-	'chain' (componentAlias ?= 'comp' (contextRef = ContextReference)? (unique ?= 'unique')? )? name = ValidID '{'
+	'chain' (componentAlias = ComponentAlias)? name = ValidID '{'
 		(
 		precondition ?= 'precondition' ('{' 
 			(uniqueComp += UniqueComponentAccess)*

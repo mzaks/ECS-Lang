@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.System#isComponentAlias <em>Component Alias</em>}</li>
  *   <li>{@link ecs.lang.System#isInit <em>Init</em>}</li>
  *   <li>{@link ecs.lang.System#isCleanup <em>Cleanup</em>}</li>
  *   <li>{@link ecs.lang.System#isTeardown <em>Teardown</em>}</li>
@@ -31,32 +30,6 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface System extends AComponent, ASystem
 {
-  /**
-   * Returns the value of the '<em><b>Component Alias</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Component Alias</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Component Alias</em>' attribute.
-   * @see #setComponentAlias(boolean)
-   * @see ecs.lang.LangPackage#getSystem_ComponentAlias()
-   * @model
-   * @generated
-   */
-  boolean isComponentAlias();
-
-  /**
-   * Sets the value of the '{@link ecs.lang.System#isComponentAlias <em>Component Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Component Alias</em>' attribute.
-   * @see #isComponentAlias()
-   * @generated
-   */
-  void setComponentAlias(boolean value);
-
   /**
    * Returns the value of the '<em><b>Init</b></em>' attribute.
    * <!-- begin-user-doc -->

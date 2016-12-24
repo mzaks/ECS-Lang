@@ -25,6 +25,8 @@ import ecs.lang.ContextName
 import java.util.List
 import org.eclipse.emf.ecore.EStructuralFeature
 import static extension ecs.model.ContextNameExtractor.*
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import ecs.lang.ComponentAlias
 
 /**
  * This class contains custom validation rules. 
@@ -35,6 +37,7 @@ class LangValidator extends AbstractLangValidator {
 	
 	public static val VALID_COMPONENT_NEEDED = 'validComponentNeeded'
 	public static val COMPONENT_NOT_UNIQUE = 'componentNotUnique'
+	public static val UNIQUE_COMPONENT_DEFINITION_DEPRICATED = 'uniqueComponentDefinitionDepricated'
 	public static val GROUP_NOT_UNIQUE = 'groupNotUnique'
 	public static val INPUT_NOT_UNIQUE = 'inputNotUnique'
 	public static val COMPONENT_NOT_KEY = 'componentNotKey'
@@ -109,7 +112,7 @@ class LangValidator extends AbstractLangValidator {
 			componentsList.add(pair.value)
 		}
 		if(group.isUnique){
-			if (group.allOfComponents.filter[it.isUnique].isEmpty && group.anyOfComponents.filter[it.isUnique].isEmpty){
+			if (group.allOfComponents.filter[it.componentAlias.isUnique].isEmpty && group.anyOfComponents.filter[it.componentAlias.isUnique].isEmpty){
 				error('This group is not unique', 
 					LangPackage.Literals.GROUP__NAME,
 					GROUP_NOT_UNIQUE)
@@ -158,6 +161,18 @@ class LangValidator extends AbstractLangValidator {
 		componentsList.validateContext(access.contextRef, LangPackage.Literals.UNIQUE_COMPONENT_ACCESS__API_RULE)
 	}
 	
+	@Check
+	def checkUniqueForDeprecatedDefinitionComponent(ComponentAlias componentAlias){
+		if (componentAlias.isUnique){
+			val text = NodeModelUtils.getNode(componentAlias).text
+			if (text.contains("unique")){
+				warning('"unique" is deprecated. Please remove "unique" and use "ucomp" instead', 
+						null,//LangPackage.Literals.COMPONENT__PREFIX,
+						UNIQUE_COMPONENT_DEFINITION_DEPRICATED)
+			}
+		}
+	}
+	
 	def validateComponent(Pair<Integer, AComponent> pair, EReference ref){
 		if (!pair.value.validComponent){
 				error('This is not a valid component', 
@@ -176,7 +191,7 @@ class LangValidator extends AbstractLangValidator {
 	}
 	
 	def validateUniqueComponent(Pair<Integer, AComponent> pair, EReference ref){
-		if (!pair.value.isUnique){
+		if (!pair.value.componentAlias?.isUnique){
 				error('This is not a unique component', 
 					ref,
 					pair.key,
@@ -185,7 +200,7 @@ class LangValidator extends AbstractLangValidator {
 	}
 	
 	def validateUniqueComponent(AComponent component, EReference ref){
-		if (!component.isUnique){
+		if (!component.componentAlias?.isUnique){
 				error('This is not a unique component', 
 					ref,
 					COMPONENT_NOT_UNIQUE)
@@ -193,7 +208,7 @@ class LangValidator extends AbstractLangValidator {
 	}
 	
 	def validateOneOfComponentsIsUnique(EList<AComponent> components, EReference ref){
-		if(components.isEmpty == false && components.filter[it.isUnique].isEmpty){
+		if(components.isEmpty == false && components.filter[it.componentAlias.isUnique].isEmpty){
 			error('This group is not unique', 
 					ref,
 					GROUP_NOT_UNIQUE)
@@ -227,9 +242,9 @@ class LangValidator extends AbstractLangValidator {
 	def boolean validComponent(AComponent component){
 		switch component {
 			Component case component: return true 
-			System case component: return component.componentAlias
-			Chain case component: return component.componentAlias
-			Alias case component : return component.componentAlias
+			System case component: return component.componentAlias != null
+			Chain case component: return component.componentAlias != null
+			Alias case component : return component.componentAlias != null
 			}
 		return false
 	}

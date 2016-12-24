@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.impl.SystemImpl#isComponentAlias <em>Component Alias</em>}</li>
  *   <li>{@link ecs.lang.impl.SystemImpl#isInit <em>Init</em>}</li>
  *   <li>{@link ecs.lang.impl.SystemImpl#isCleanup <em>Cleanup</em>}</li>
  *   <li>{@link ecs.lang.impl.SystemImpl#isTeardown <em>Teardown</em>}</li>
@@ -48,26 +47,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class SystemImpl extends AComponentImpl implements ecs.lang.System
 {
-  /**
-   * The default value of the '{@link #isComponentAlias() <em>Component Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isComponentAlias()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean COMPONENT_ALIAS_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isComponentAlias() <em>Component Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isComponentAlias()
-   * @generated
-   * @ordered
-   */
-  protected boolean componentAlias = COMPONENT_ALIAS_EDEFAULT;
-
   /**
    * The default value of the '{@link #isInit() <em>Init</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -197,29 +176,6 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
   protected EClass eStaticClass()
   {
     return LangPackage.Literals.SYSTEM;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isComponentAlias()
-  {
-    return componentAlias;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setComponentAlias(boolean newComponentAlias)
-  {
-    boolean oldComponentAlias = componentAlias;
-    componentAlias = newComponentAlias;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.SYSTEM__COMPONENT_ALIAS, oldComponentAlias, componentAlias));
   }
 
   /**
@@ -429,8 +385,6 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
   {
     switch (featureID)
     {
-      case LangPackage.SYSTEM__COMPONENT_ALIAS:
-        return isComponentAlias();
       case LangPackage.SYSTEM__INIT:
         return isInit();
       case LangPackage.SYSTEM__CLEANUP:
@@ -462,9 +416,6 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
   {
     switch (featureID)
     {
-      case LangPackage.SYSTEM__COMPONENT_ALIAS:
-        setComponentAlias((Boolean)newValue);
-        return;
       case LangPackage.SYSTEM__INIT:
         setInit((Boolean)newValue);
         return;
@@ -507,9 +458,6 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
   {
     switch (featureID)
     {
-      case LangPackage.SYSTEM__COMPONENT_ALIAS:
-        setComponentAlias(COMPONENT_ALIAS_EDEFAULT);
-        return;
       case LangPackage.SYSTEM__INIT:
         setInit(INIT_EDEFAULT);
         return;
@@ -548,8 +496,6 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
   {
     switch (featureID)
     {
-      case LangPackage.SYSTEM__COMPONENT_ALIAS:
-        return componentAlias != COMPONENT_ALIAS_EDEFAULT;
       case LangPackage.SYSTEM__INIT:
         return init != INIT_EDEFAULT;
       case LangPackage.SYSTEM__CLEANUP:
@@ -581,9 +527,7 @@ public class SystemImpl extends AComponentImpl implements ecs.lang.System
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (componentAlias: ");
-    result.append(componentAlias);
-    result.append(", init: ");
+    result.append(" (init: ");
     result.append(init);
     result.append(", cleanup: ");
     result.append(cleanup);

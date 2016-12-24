@@ -96,6 +96,15 @@ public interface LangFactory extends EFactory
   Alias createAlias();
 
   /**
+   * Returns a new object of class '<em>Component Alias</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Component Alias</em>'.
+   * @generated
+   */
+  ComponentAlias createComponentAlias();
+
+  /**
    * Returns a new object of class '<em>Single Alias</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

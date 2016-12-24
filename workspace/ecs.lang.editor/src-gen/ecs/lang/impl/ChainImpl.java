@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.impl.ChainImpl#isComponentAlias <em>Component Alias</em>}</li>
  *   <li>{@link ecs.lang.impl.ChainImpl#isPrecondition <em>Precondition</em>}</li>
  *   <li>{@link ecs.lang.impl.ChainImpl#getUniqueComp <em>Unique Comp</em>}</li>
  *   <li>{@link ecs.lang.impl.ChainImpl#getGroups <em>Groups</em>}</li>
@@ -44,26 +43,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class ChainImpl extends AComponentImpl implements Chain
 {
-  /**
-   * The default value of the '{@link #isComponentAlias() <em>Component Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isComponentAlias()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean COMPONENT_ALIAS_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isComponentAlias() <em>Component Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isComponentAlias()
-   * @generated
-   * @ordered
-   */
-  protected boolean componentAlias = COMPONENT_ALIAS_EDEFAULT;
-
   /**
    * The default value of the '{@link #isPrecondition() <em>Precondition</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -133,29 +112,6 @@ public class ChainImpl extends AComponentImpl implements Chain
   protected EClass eStaticClass()
   {
     return LangPackage.Literals.CHAIN;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isComponentAlias()
-  {
-    return componentAlias;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setComponentAlias(boolean newComponentAlias)
-  {
-    boolean oldComponentAlias = componentAlias;
-    componentAlias = newComponentAlias;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.CHAIN__COMPONENT_ALIAS, oldComponentAlias, componentAlias));
   }
 
   /**
@@ -251,8 +207,6 @@ public class ChainImpl extends AComponentImpl implements Chain
   {
     switch (featureID)
     {
-      case LangPackage.CHAIN__COMPONENT_ALIAS:
-        return isComponentAlias();
       case LangPackage.CHAIN__PRECONDITION:
         return isPrecondition();
       case LangPackage.CHAIN__UNIQUE_COMP:
@@ -276,9 +230,6 @@ public class ChainImpl extends AComponentImpl implements Chain
   {
     switch (featureID)
     {
-      case LangPackage.CHAIN__COMPONENT_ALIAS:
-        setComponentAlias((Boolean)newValue);
-        return;
       case LangPackage.CHAIN__PRECONDITION:
         setPrecondition((Boolean)newValue);
         return;
@@ -308,9 +259,6 @@ public class ChainImpl extends AComponentImpl implements Chain
   {
     switch (featureID)
     {
-      case LangPackage.CHAIN__COMPONENT_ALIAS:
-        setComponentAlias(COMPONENT_ALIAS_EDEFAULT);
-        return;
       case LangPackage.CHAIN__PRECONDITION:
         setPrecondition(PRECONDITION_EDEFAULT);
         return;
@@ -337,8 +285,6 @@ public class ChainImpl extends AComponentImpl implements Chain
   {
     switch (featureID)
     {
-      case LangPackage.CHAIN__COMPONENT_ALIAS:
-        return componentAlias != COMPONENT_ALIAS_EDEFAULT;
       case LangPackage.CHAIN__PRECONDITION:
         return precondition != PRECONDITION_EDEFAULT;
       case LangPackage.CHAIN__UNIQUE_COMP:
@@ -362,9 +308,7 @@ public class ChainImpl extends AComponentImpl implements Chain
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (componentAlias: ");
-    result.append(componentAlias);
-    result.append(", precondition: ");
+    result.append(" (precondition: ");
     result.append(precondition);
     result.append(')');
     return result.toString();

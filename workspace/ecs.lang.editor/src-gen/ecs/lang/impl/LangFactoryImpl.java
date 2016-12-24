@@ -11,6 +11,7 @@ import ecs.lang.AliasRule;
 import ecs.lang.ApiRule;
 import ecs.lang.Chain;
 import ecs.lang.Component;
+import ecs.lang.ComponentAlias;
 import ecs.lang.ComponentProperty;
 import ecs.lang.ContextDefinition;
 import ecs.lang.ContextName;
@@ -100,6 +101,7 @@ public class LangFactoryImpl extends EFactoryImpl implements LangFactory
       case LangPackage.PLATFORM_ID: return createPlatformID();
       case LangPackage.NAMESPACE: return createNamespace();
       case LangPackage.ALIAS: return createAlias();
+      case LangPackage.COMPONENT_ALIAS: return createComponentAlias();
       case LangPackage.SINGLE_ALIAS: return createSingleAlias();
       case LangPackage.ALIAS_LIST: return createAliasList();
       case LangPackage.ALIAS_RULE: return createAliasRule();
@@ -210,6 +212,17 @@ public class LangFactoryImpl extends EFactoryImpl implements LangFactory
   {
     AliasImpl alias = new AliasImpl();
     return alias;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ComponentAlias createComponentAlias()
+  {
+    ComponentAliasImpl componentAlias = new ComponentAliasImpl();
+    return componentAlias;
   }
 
   /**

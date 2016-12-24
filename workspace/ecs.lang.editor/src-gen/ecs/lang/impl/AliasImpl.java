@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.impl.AliasImpl#isComponentAlias <em>Component Alias</em>}</li>
  *   <li>{@link ecs.lang.impl.AliasImpl#getListOfAliases <em>List Of Aliases</em>}</li>
  *   <li>{@link ecs.lang.impl.AliasImpl#getSingleAlias <em>Single Alias</em>}</li>
  * </ul>
@@ -33,26 +32,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class AliasImpl extends AComponentImpl implements Alias
 {
-  /**
-   * The default value of the '{@link #isComponentAlias() <em>Component Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isComponentAlias()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean COMPONENT_ALIAS_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isComponentAlias() <em>Component Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isComponentAlias()
-   * @generated
-   * @ordered
-   */
-  protected boolean componentAlias = COMPONENT_ALIAS_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getListOfAliases() <em>List Of Aliases</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -92,29 +71,6 @@ public class AliasImpl extends AComponentImpl implements Alias
   protected EClass eStaticClass()
   {
     return LangPackage.Literals.ALIAS;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public boolean isComponentAlias()
-  {
-    return componentAlias;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setComponentAlias(boolean newComponentAlias)
-  {
-    boolean oldComponentAlias = componentAlias;
-    componentAlias = newComponentAlias;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, LangPackage.ALIAS__COMPONENT_ALIAS, oldComponentAlias, componentAlias));
   }
 
   /**
@@ -241,8 +197,6 @@ public class AliasImpl extends AComponentImpl implements Alias
   {
     switch (featureID)
     {
-      case LangPackage.ALIAS__COMPONENT_ALIAS:
-        return isComponentAlias();
       case LangPackage.ALIAS__LIST_OF_ALIASES:
         return getListOfAliases();
       case LangPackage.ALIAS__SINGLE_ALIAS:
@@ -261,9 +215,6 @@ public class AliasImpl extends AComponentImpl implements Alias
   {
     switch (featureID)
     {
-      case LangPackage.ALIAS__COMPONENT_ALIAS:
-        setComponentAlias((Boolean)newValue);
-        return;
       case LangPackage.ALIAS__LIST_OF_ALIASES:
         setListOfAliases((AliasList)newValue);
         return;
@@ -284,9 +235,6 @@ public class AliasImpl extends AComponentImpl implements Alias
   {
     switch (featureID)
     {
-      case LangPackage.ALIAS__COMPONENT_ALIAS:
-        setComponentAlias(COMPONENT_ALIAS_EDEFAULT);
-        return;
       case LangPackage.ALIAS__LIST_OF_ALIASES:
         setListOfAliases((AliasList)null);
         return;
@@ -307,31 +255,12 @@ public class AliasImpl extends AComponentImpl implements Alias
   {
     switch (featureID)
     {
-      case LangPackage.ALIAS__COMPONENT_ALIAS:
-        return componentAlias != COMPONENT_ALIAS_EDEFAULT;
       case LangPackage.ALIAS__LIST_OF_ALIASES:
         return listOfAliases != null;
       case LangPackage.ALIAS__SINGLE_ALIAS:
         return singleAlias != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (componentAlias: ");
-    result.append(componentAlias);
-    result.append(')');
-    return result.toString();
   }
 
 } //AliasImpl

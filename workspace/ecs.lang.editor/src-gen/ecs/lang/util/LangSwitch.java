@@ -11,6 +11,7 @@ import ecs.lang.AliasRule;
 import ecs.lang.ApiRule;
 import ecs.lang.Chain;
 import ecs.lang.Component;
+import ecs.lang.ComponentAlias;
 import ecs.lang.ComponentProperty;
 import ecs.lang.ContextDefinition;
 import ecs.lang.ContextName;
@@ -153,6 +154,13 @@ public class LangSwitch<T> extends Switch<T>
         Alias alias = (Alias)theEObject;
         T result = caseAlias(alias);
         if (result == null) result = caseAComponent(alias);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case LangPackage.COMPONENT_ALIAS:
+      {
+        ComponentAlias componentAlias = (ComponentAlias)theEObject;
+        T result = caseComponentAlias(componentAlias);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -422,6 +430,22 @@ public class LangSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAlias(Alias object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Component Alias</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Component Alias</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseComponentAlias(ComponentAlias object)
   {
     return null;
   }

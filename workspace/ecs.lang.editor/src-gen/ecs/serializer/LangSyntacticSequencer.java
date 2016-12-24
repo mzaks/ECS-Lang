@@ -24,7 +24,7 @@ public class LangSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_ApiRule_CommaKeyword_1_1_1_q;
 	protected AbstractElementAlias match_Chain_CommaKeyword_5_1_q;
 	protected AbstractElementAlias match_Chain___LeftCurlyBracketKeyword_4_1_0_RightCurlyBracketKeyword_4_1_3__q;
-	protected AbstractElementAlias match_Component_CommaKeyword_4_0_1_1_1_q;
+	protected AbstractElementAlias match_Component_CommaKeyword_2_0_1_1_1_q;
 	protected AbstractElementAlias match_ContextDefinition_CommaKeyword_1_1_q;
 	protected AbstractElementAlias match_ContextReference_CommaKeyword_1_1_q;
 	protected AbstractElementAlias match_CreateRule_CommaKeyword_3_1_q;
@@ -46,7 +46,7 @@ public class LangSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_ApiRule_CommaKeyword_1_1_1_q = new TokenAlias(false, true, grammarAccess.getApiRuleAccess().getCommaKeyword_1_1_1());
 		match_Chain_CommaKeyword_5_1_q = new TokenAlias(false, true, grammarAccess.getChainAccess().getCommaKeyword_5_1());
 		match_Chain___LeftCurlyBracketKeyword_4_1_0_RightCurlyBracketKeyword_4_1_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getChainAccess().getLeftCurlyBracketKeyword_4_1_0()), new TokenAlias(false, false, grammarAccess.getChainAccess().getRightCurlyBracketKeyword_4_1_3()));
-		match_Component_CommaKeyword_4_0_1_1_1_q = new TokenAlias(false, true, grammarAccess.getComponentAccess().getCommaKeyword_4_0_1_1_1());
+		match_Component_CommaKeyword_2_0_1_1_1_q = new TokenAlias(false, true, grammarAccess.getComponentAccess().getCommaKeyword_2_0_1_1_1());
 		match_ContextDefinition_CommaKeyword_1_1_q = new TokenAlias(false, true, grammarAccess.getContextDefinitionAccess().getCommaKeyword_1_1());
 		match_ContextReference_CommaKeyword_1_1_q = new TokenAlias(false, true, grammarAccess.getContextReferenceAccess().getCommaKeyword_1_1());
 		match_CreateRule_CommaKeyword_3_1_q = new TokenAlias(false, true, grammarAccess.getCreateRuleAccess().getCommaKeyword_3_1());
@@ -81,8 +81,8 @@ public class LangSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_Chain_CommaKeyword_5_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Chain___LeftCurlyBracketKeyword_4_1_0_RightCurlyBracketKeyword_4_1_3__q.equals(syntax))
 				emit_Chain___LeftCurlyBracketKeyword_4_1_0_RightCurlyBracketKeyword_4_1_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Component_CommaKeyword_4_0_1_1_1_q.equals(syntax))
-				emit_Component_CommaKeyword_4_0_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Component_CommaKeyword_2_0_1_1_1_q.equals(syntax))
+				emit_Component_CommaKeyword_2_0_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ContextDefinition_CommaKeyword_1_1_q.equals(syntax))
 				emit_ContextDefinition_CommaKeyword_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ContextReference_CommaKeyword_1_1_q.equals(syntax))
@@ -158,7 +158,7 @@ public class LangSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     properties+=ComponentProperty (ambiguity) '}' (rule end)
 	 *     properties+=ComponentProperty (ambiguity) properties+=ComponentProperty
 	 */
-	protected void emit_Component_CommaKeyword_4_0_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Component_CommaKeyword_2_0_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

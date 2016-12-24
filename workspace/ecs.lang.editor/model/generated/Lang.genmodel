@@ -36,9 +36,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Namespace/name"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//Alias">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Alias/componentAlias"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Alias/listOfAliases"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Alias/singleAlias"/>
+    </genClasses>
+    <genClasses ecoreClass="Lang.ecore#//ComponentAlias">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//ComponentAlias/unique"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//ComponentAlias/contextRef"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//SingleAlias">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//SingleAlias/typeAlias"/>
@@ -54,8 +57,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//AliasRule/variableSize"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//AComponent">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//AComponent/contextRef"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//AComponent/unique"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//AComponent/componentAlias"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//AComponent/name"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//Component">
@@ -70,7 +72,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Lang.ecore#//ComponentProperty/type"/>
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//System">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//System/componentAlias"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//System/init"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//System/cleanup"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//System/teardown"/>
@@ -127,7 +128,6 @@
     </genClasses>
     <genClasses ecoreClass="Lang.ecore#//ASystem"/>
     <genClasses ecoreClass="Lang.ecore#//Chain">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Chain/componentAlias"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Lang.ecore#//Chain/precondition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Chain/uniqueComp"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Lang.ecore#//Chain/groups"/>

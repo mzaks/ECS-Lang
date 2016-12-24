@@ -333,25 +333,16 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getAComponent()
    * @generated
    */
-  int ACOMPONENT = 11;
+  int ACOMPONENT = 12;
 
   /**
-   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * The feature id for the '<em><b>Component Alias</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACOMPONENT__CONTEXT_REF = 0;
-
-  /**
-   * The feature id for the '<em><b>Unique</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACOMPONENT__UNIQUE = 1;
+  int ACOMPONENT__COMPONENT_ALIAS = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -360,7 +351,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACOMPONENT__NAME = 2;
+  int ACOMPONENT__NAME = 1;
 
   /**
    * The number of structural features of the '<em>AComponent</em>' class.
@@ -369,7 +360,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ACOMPONENT_FEATURE_COUNT = 3;
+  int ACOMPONENT_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.AliasImpl <em>Alias</em>}' class.
@@ -382,22 +373,13 @@ public interface LangPackage extends EPackage
   int ALIAS = 7;
 
   /**
-   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * The feature id for the '<em><b>Component Alias</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ALIAS__CONTEXT_REF = ACOMPONENT__CONTEXT_REF;
-
-  /**
-   * The feature id for the '<em><b>Unique</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ALIAS__UNIQUE = ACOMPONENT__UNIQUE;
+  int ALIAS__COMPONENT_ALIAS = ACOMPONENT__COMPONENT_ALIAS;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -409,22 +391,13 @@ public interface LangPackage extends EPackage
   int ALIAS__NAME = ACOMPONENT__NAME;
 
   /**
-   * The feature id for the '<em><b>Component Alias</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ALIAS__COMPONENT_ALIAS = ACOMPONENT_FEATURE_COUNT + 0;
-
-  /**
    * The feature id for the '<em><b>List Of Aliases</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ALIAS__LIST_OF_ALIASES = ACOMPONENT_FEATURE_COUNT + 1;
+  int ALIAS__LIST_OF_ALIASES = ACOMPONENT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Single Alias</b></em>' containment reference.
@@ -433,7 +406,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ALIAS__SINGLE_ALIAS = ACOMPONENT_FEATURE_COUNT + 2;
+  int ALIAS__SINGLE_ALIAS = ACOMPONENT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Alias</em>' class.
@@ -442,7 +415,44 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ALIAS_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 3;
+  int ALIAS_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link ecs.lang.impl.ComponentAliasImpl <em>Component Alias</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see ecs.lang.impl.ComponentAliasImpl
+   * @see ecs.lang.impl.LangPackageImpl#getComponentAlias()
+   * @generated
+   */
+  int COMPONENT_ALIAS = 8;
+
+  /**
+   * The feature id for the '<em><b>Unique</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPONENT_ALIAS__UNIQUE = 0;
+
+  /**
+   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPONENT_ALIAS__CONTEXT_REF = 1;
+
+  /**
+   * The number of structural features of the '<em>Component Alias</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPONENT_ALIAS_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.SingleAliasImpl <em>Single Alias</em>}' class.
@@ -452,7 +462,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getSingleAlias()
    * @generated
    */
-  int SINGLE_ALIAS = 8;
+  int SINGLE_ALIAS = 9;
 
   /**
    * The feature id for the '<em><b>Type Alias</b></em>' attribute.
@@ -489,7 +499,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getAliasList()
    * @generated
    */
-  int ALIAS_LIST = 9;
+  int ALIAS_LIST = 10;
 
   /**
    * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -517,7 +527,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getAliasRule()
    * @generated
    */
-  int ALIAS_RULE = 10;
+  int ALIAS_RULE = 11;
 
   /**
    * The feature id for the '<em><b>Platform</b></em>' reference.
@@ -572,25 +582,16 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getComponent()
    * @generated
    */
-  int COMPONENT = 12;
+  int COMPONENT = 13;
 
   /**
-   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * The feature id for the '<em><b>Component Alias</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int COMPONENT__CONTEXT_REF = ACOMPONENT__CONTEXT_REF;
-
-  /**
-   * The feature id for the '<em><b>Unique</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPONENT__UNIQUE = ACOMPONENT__UNIQUE;
+  int COMPONENT__COMPONENT_ALIAS = ACOMPONENT__COMPONENT_ALIAS;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -663,7 +664,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getComponentProperty()
    * @generated
    */
-  int COMPONENT_PROPERTY = 13;
+  int COMPONENT_PROPERTY = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -700,25 +701,16 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getSystem()
    * @generated
    */
-  int SYSTEM = 14;
+  int SYSTEM = 15;
 
   /**
-   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * The feature id for the '<em><b>Component Alias</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SYSTEM__CONTEXT_REF = ACOMPONENT__CONTEXT_REF;
-
-  /**
-   * The feature id for the '<em><b>Unique</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SYSTEM__UNIQUE = ACOMPONENT__UNIQUE;
+  int SYSTEM__COMPONENT_ALIAS = ACOMPONENT__COMPONENT_ALIAS;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -730,22 +722,13 @@ public interface LangPackage extends EPackage
   int SYSTEM__NAME = ACOMPONENT__NAME;
 
   /**
-   * The feature id for the '<em><b>Component Alias</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SYSTEM__COMPONENT_ALIAS = ACOMPONENT_FEATURE_COUNT + 0;
-
-  /**
    * The feature id for the '<em><b>Init</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SYSTEM__INIT = ACOMPONENT_FEATURE_COUNT + 1;
+  int SYSTEM__INIT = ACOMPONENT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Cleanup</b></em>' attribute.
@@ -754,7 +737,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM__CLEANUP = ACOMPONENT_FEATURE_COUNT + 2;
+  int SYSTEM__CLEANUP = ACOMPONENT_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Teardown</b></em>' attribute.
@@ -763,7 +746,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM__TEARDOWN = ACOMPONENT_FEATURE_COUNT + 3;
+  int SYSTEM__TEARDOWN = ACOMPONENT_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Input</b></em>' containment reference.
@@ -772,7 +755,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM__INPUT = ACOMPONENT_FEATURE_COUNT + 4;
+  int SYSTEM__INPUT = ACOMPONENT_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Unique Comp</b></em>' containment reference list.
@@ -781,7 +764,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM__UNIQUE_COMP = ACOMPONENT_FEATURE_COUNT + 5;
+  int SYSTEM__UNIQUE_COMP = ACOMPONENT_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Groups</b></em>' containment reference list.
@@ -790,7 +773,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM__GROUPS = ACOMPONENT_FEATURE_COUNT + 6;
+  int SYSTEM__GROUPS = ACOMPONENT_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Index</b></em>' containment reference list.
@@ -799,7 +782,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM__INDEX = ACOMPONENT_FEATURE_COUNT + 7;
+  int SYSTEM__INDEX = ACOMPONENT_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Create Rules</b></em>' containment reference list.
@@ -808,7 +791,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM__CREATE_RULES = ACOMPONENT_FEATURE_COUNT + 8;
+  int SYSTEM__CREATE_RULES = ACOMPONENT_FEATURE_COUNT + 7;
 
   /**
    * The number of structural features of the '<em>System</em>' class.
@@ -817,7 +800,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 9;
+  int SYSTEM_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 8;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.InputImpl <em>Input</em>}' class.
@@ -827,7 +810,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getInput()
    * @generated
    */
-  int INPUT = 15;
+  int INPUT = 16;
 
   /**
    * The feature id for the '<em><b>Unqiue</b></em>' attribute.
@@ -909,7 +892,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getInputTrigger()
    * @generated
    */
-  int INPUT_TRIGGER = 16;
+  int INPUT_TRIGGER = 17;
 
   /**
    * The feature id for the '<em><b>Enter Components</b></em>' reference list.
@@ -955,7 +938,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getCreateRule()
    * @generated
    */
-  int CREATE_RULE = 17;
+  int CREATE_RULE = 18;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1001,7 +984,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getIndex()
    * @generated
    */
-  int INDEX = 18;
+  int INDEX = 19;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1065,7 +1048,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getUniqueComponentAccess()
    * @generated
    */
-  int UNIQUE_COMPONENT_ACCESS = 19;
+  int UNIQUE_COMPONENT_ACCESS = 20;
 
   /**
    * The feature id for the '<em><b>Api Rule</b></em>' containment reference.
@@ -1102,7 +1085,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getGroup()
    * @generated
    */
-  int GROUP = 20;
+  int GROUP = 21;
 
   /**
    * The feature id for the '<em><b>Group</b></em>' attribute.
@@ -1202,7 +1185,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getApiRule()
    * @generated
    */
-  int API_RULE = 21;
+  int API_RULE = 22;
 
   /**
    * The feature id for the '<em><b>Component</b></em>' reference.
@@ -1239,7 +1222,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getASystem()
    * @generated
    */
-  int ASYSTEM = 22;
+  int ASYSTEM = 23;
 
   /**
    * The number of structural features of the '<em>ASystem</em>' class.
@@ -1258,25 +1241,16 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getChain()
    * @generated
    */
-  int CHAIN = 23;
+  int CHAIN = 24;
 
   /**
-   * The feature id for the '<em><b>Context Ref</b></em>' containment reference.
+   * The feature id for the '<em><b>Component Alias</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CHAIN__CONTEXT_REF = ACOMPONENT__CONTEXT_REF;
-
-  /**
-   * The feature id for the '<em><b>Unique</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CHAIN__UNIQUE = ACOMPONENT__UNIQUE;
+  int CHAIN__COMPONENT_ALIAS = ACOMPONENT__COMPONENT_ALIAS;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1288,22 +1262,13 @@ public interface LangPackage extends EPackage
   int CHAIN__NAME = ACOMPONENT__NAME;
 
   /**
-   * The feature id for the '<em><b>Component Alias</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CHAIN__COMPONENT_ALIAS = ACOMPONENT_FEATURE_COUNT + 0;
-
-  /**
    * The feature id for the '<em><b>Precondition</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CHAIN__PRECONDITION = ACOMPONENT_FEATURE_COUNT + 1;
+  int CHAIN__PRECONDITION = ACOMPONENT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Unique Comp</b></em>' containment reference list.
@@ -1312,7 +1277,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CHAIN__UNIQUE_COMP = ACOMPONENT_FEATURE_COUNT + 2;
+  int CHAIN__UNIQUE_COMP = ACOMPONENT_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Groups</b></em>' containment reference list.
@@ -1321,7 +1286,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CHAIN__GROUPS = ACOMPONENT_FEATURE_COUNT + 3;
+  int CHAIN__GROUPS = ACOMPONENT_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Children</b></em>' reference list.
@@ -1330,7 +1295,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CHAIN__CHILDREN = ACOMPONENT_FEATURE_COUNT + 4;
+  int CHAIN__CHILDREN = ACOMPONENT_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Chain</em>' class.
@@ -1339,7 +1304,7 @@ public interface LangPackage extends EPackage
    * @generated
    * @ordered
    */
-  int CHAIN_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 5;
+  int CHAIN_FEATURE_COUNT = ACOMPONENT_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link ecs.lang.impl.ProcedureImpl <em>Procedure</em>}' class.
@@ -1349,7 +1314,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getProcedure()
    * @generated
    */
-  int PROCEDURE = 24;
+  int PROCEDURE = 25;
 
   /**
    * The feature id for the '<em><b>Component Alias</b></em>' attribute.
@@ -1458,7 +1423,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getObserver()
    * @generated
    */
-  int OBSERVER = 25;
+  int OBSERVER = 26;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1522,7 +1487,7 @@ public interface LangPackage extends EPackage
    * @see ecs.lang.impl.LangPackageImpl#getParameter()
    * @generated
    */
-  int PARAMETER = 26;
+  int PARAMETER = 27;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1798,17 +1763,6 @@ public interface LangPackage extends EPackage
   EClass getAlias();
 
   /**
-   * Returns the meta object for the attribute '{@link ecs.lang.Alias#isComponentAlias <em>Component Alias</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Component Alias</em>'.
-   * @see ecs.lang.Alias#isComponentAlias()
-   * @see #getAlias()
-   * @generated
-   */
-  EAttribute getAlias_ComponentAlias();
-
-  /**
    * Returns the meta object for the containment reference '{@link ecs.lang.Alias#getListOfAliases <em>List Of Aliases</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1829,6 +1783,38 @@ public interface LangPackage extends EPackage
    * @generated
    */
   EReference getAlias_SingleAlias();
+
+  /**
+   * Returns the meta object for class '{@link ecs.lang.ComponentAlias <em>Component Alias</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Component Alias</em>'.
+   * @see ecs.lang.ComponentAlias
+   * @generated
+   */
+  EClass getComponentAlias();
+
+  /**
+   * Returns the meta object for the attribute '{@link ecs.lang.ComponentAlias#isUnique <em>Unique</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Unique</em>'.
+   * @see ecs.lang.ComponentAlias#isUnique()
+   * @see #getComponentAlias()
+   * @generated
+   */
+  EAttribute getComponentAlias_Unique();
+
+  /**
+   * Returns the meta object for the containment reference '{@link ecs.lang.ComponentAlias#getContextRef <em>Context Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Context Ref</em>'.
+   * @see ecs.lang.ComponentAlias#getContextRef()
+   * @see #getComponentAlias()
+   * @generated
+   */
+  EReference getComponentAlias_ContextRef();
 
   /**
    * Returns the meta object for class '{@link ecs.lang.SingleAlias <em>Single Alias</em>}'.
@@ -1948,26 +1934,15 @@ public interface LangPackage extends EPackage
   EClass getAComponent();
 
   /**
-   * Returns the meta object for the containment reference '{@link ecs.lang.AComponent#getContextRef <em>Context Ref</em>}'.
+   * Returns the meta object for the containment reference '{@link ecs.lang.AComponent#getComponentAlias <em>Component Alias</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Context Ref</em>'.
-   * @see ecs.lang.AComponent#getContextRef()
+   * @return the meta object for the containment reference '<em>Component Alias</em>'.
+   * @see ecs.lang.AComponent#getComponentAlias()
    * @see #getAComponent()
    * @generated
    */
-  EReference getAComponent_ContextRef();
-
-  /**
-   * Returns the meta object for the attribute '{@link ecs.lang.AComponent#isUnique <em>Unique</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Unique</em>'.
-   * @see ecs.lang.AComponent#isUnique()
-   * @see #getAComponent()
-   * @generated
-   */
-  EAttribute getAComponent_Unique();
+  EReference getAComponent_ComponentAlias();
 
   /**
    * Returns the meta object for the attribute '{@link ecs.lang.AComponent#getName <em>Name</em>}'.
@@ -2086,17 +2061,6 @@ public interface LangPackage extends EPackage
    * @generated
    */
   EClass getSystem();
-
-  /**
-   * Returns the meta object for the attribute '{@link ecs.lang.System#isComponentAlias <em>Component Alias</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Component Alias</em>'.
-   * @see ecs.lang.System#isComponentAlias()
-   * @see #getSystem()
-   * @generated
-   */
-  EAttribute getSystem_ComponentAlias();
 
   /**
    * Returns the meta object for the attribute '{@link ecs.lang.System#isInit <em>Init</em>}'.
@@ -2618,17 +2582,6 @@ public interface LangPackage extends EPackage
   EClass getChain();
 
   /**
-   * Returns the meta object for the attribute '{@link ecs.lang.Chain#isComponentAlias <em>Component Alias</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Component Alias</em>'.
-   * @see ecs.lang.Chain#isComponentAlias()
-   * @see #getChain()
-   * @generated
-   */
-  EAttribute getChain_ComponentAlias();
-
-  /**
    * Returns the meta object for the attribute '{@link ecs.lang.Chain#isPrecondition <em>Precondition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3113,14 +3066,6 @@ public interface LangPackage extends EPackage
     EClass ALIAS = eINSTANCE.getAlias();
 
     /**
-     * The meta object literal for the '<em><b>Component Alias</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ALIAS__COMPONENT_ALIAS = eINSTANCE.getAlias_ComponentAlias();
-
-    /**
      * The meta object literal for the '<em><b>List Of Aliases</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3135,6 +3080,32 @@ public interface LangPackage extends EPackage
      * @generated
      */
     EReference ALIAS__SINGLE_ALIAS = eINSTANCE.getAlias_SingleAlias();
+
+    /**
+     * The meta object literal for the '{@link ecs.lang.impl.ComponentAliasImpl <em>Component Alias</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see ecs.lang.impl.ComponentAliasImpl
+     * @see ecs.lang.impl.LangPackageImpl#getComponentAlias()
+     * @generated
+     */
+    EClass COMPONENT_ALIAS = eINSTANCE.getComponentAlias();
+
+    /**
+     * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute COMPONENT_ALIAS__UNIQUE = eINSTANCE.getComponentAlias_Unique();
+
+    /**
+     * The meta object literal for the '<em><b>Context Ref</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPONENT_ALIAS__CONTEXT_REF = eINSTANCE.getComponentAlias_ContextRef();
 
     /**
      * The meta object literal for the '{@link ecs.lang.impl.SingleAliasImpl <em>Single Alias</em>}' class.
@@ -3233,20 +3204,12 @@ public interface LangPackage extends EPackage
     EClass ACOMPONENT = eINSTANCE.getAComponent();
 
     /**
-     * The meta object literal for the '<em><b>Context Ref</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Component Alias</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ACOMPONENT__CONTEXT_REF = eINSTANCE.getAComponent_ContextRef();
-
-    /**
-     * The meta object literal for the '<em><b>Unique</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ACOMPONENT__UNIQUE = eINSTANCE.getAComponent_Unique();
+    EReference ACOMPONENT__COMPONENT_ALIAS = eINSTANCE.getAComponent_ComponentAlias();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -3341,14 +3304,6 @@ public interface LangPackage extends EPackage
      * @generated
      */
     EClass SYSTEM = eINSTANCE.getSystem();
-
-    /**
-     * The meta object literal for the '<em><b>Component Alias</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute SYSTEM__COMPONENT_ALIAS = eINSTANCE.getSystem_ComponentAlias();
 
     /**
      * The meta object literal for the '<em><b>Init</b></em>' attribute feature.
@@ -3751,14 +3706,6 @@ public interface LangPackage extends EPackage
      * @generated
      */
     EClass CHAIN = eINSTANCE.getChain();
-
-    /**
-     * The meta object literal for the '<em><b>Component Alias</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute CHAIN__COMPONENT_ALIAS = eINSTANCE.getChain_ComponentAlias();
 
     /**
      * The meta object literal for the '<em><b>Precondition</b></em>' attribute feature.

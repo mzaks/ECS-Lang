@@ -11,17 +11,17 @@ class ContextNameExtractor {
 			return newHashSet()
 		}
 		val result = newHashSet()
-		if (components.get(0).contextRef == null){
+		if (components.get(0).componentAlias?.contextRef == null){
 			result.add(null)
 		}else{
-			components.get(0).contextRef.context.forEach[result.add(it)]		
+			components.get(0).componentAlias?.contextRef.context.forEach[result.add(it)]		
 		}
 		for(index : 1..<components.size){
 			val thisSet = newHashSet()
-			if (components.get(0).contextRef == null){
+			if (components.get(0).componentAlias?.contextRef == null){
 				thisSet.add(null)
 			}else{
-				components.get(index).contextRef.context.forEach[thisSet.add(it)]		
+				components.get(index).componentAlias?.contextRef.context.forEach[thisSet.add(it)]		
 			}
 //			components.get(index).contextRef.context.forEach[thisSet.add(it)]
 			result.retainAll(thisSet)

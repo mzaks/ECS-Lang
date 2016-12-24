@@ -43,10 +43,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Alias" eSuperTypes="#//AComponent">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="listOfAliases" eType="#//AliasList"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="singleAlias" eType="#//SingleAlias"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentAlias">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextRef" eType="#//ContextReference"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SingleAlias">
@@ -64,9 +68,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AComponent">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contextRef" eType="#//ContextReference"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentAlias" eType="#//ComponentAlias"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//AComponent">
@@ -82,7 +85,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Alias"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//AComponent #//ASystem">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="init" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="cleanup" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="teardown" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -159,7 +161,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ASystem"/>
   <eClassifiers xsi:type="ecore:EClass" name="Chain" eSuperTypes="#//AComponent #//ASystem">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="precondition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueComp" upperBound="-1"
         eType="#//UniqueComponentAccess" containment="true"/>

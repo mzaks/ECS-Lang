@@ -275,15 +275,15 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 			val model = it.toComponentModel
 			result.add(model)
 		]
-		typeAliases.filter[it.componentAlias].forEach [
+		typeAliases.filter[it.componentAlias != null].forEach [
 			val model = it.toComponentModel
 			result.add(model)
 		]
-		systems.filter[it.componentAlias].forEach [
+		systems.filter[it.componentAlias != null].forEach [
 			val model = it.toComponentModel
 			result.add(model)
 		]
-		chains.filter[it.componentAlias].forEach [
+		chains.filter[it.componentAlias != null].forEach [
 			val model = it.toComponentModel
 			result.add(model)
 		]
@@ -394,7 +394,7 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 	def ComponentModel toComponentModel(Component component){
 		val model = new ComponentModel()
 		model.name = component.name
-		model.unique = component.unique
+		model.unique = component.componentAlias?.unique
 		val properties = newHashMap()
 		if (component.valueType != null) {
 			properties.put("value", component.valueType.typeName)
@@ -408,8 +408,8 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 		if (properties.isEmpty){
 			model.prefix = if(component.prefix == null) "is" else component.prefix
 		}
-		if(component.contextRef != null){		
-			model.contexNames = newHashSet(component.contextRef.context.map[name])
+		if(component.componentAlias?.contextRef != null){		
+			model.contexNames = newHashSet(component.componentAlias?.contextRef.context.map[name])
 		}
 		
 		return model
@@ -418,10 +418,10 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 	def ComponentModel toComponentModel(Alias alias){
 		val model = new ComponentModel()
 		model.name = alias.name
-		model.unique = alias.unique
+		model.unique = alias.componentAlias?.unique
 		model.properties = newHashMap("value" -> alias.typeName)
-		if(alias.contextRef != null){		
-			model.contexNames = newHashSet(alias.contextRef.context.map[name])
+		if(alias.componentAlias?.contextRef != null){		
+			model.contexNames = newHashSet(alias.componentAlias?.contextRef.context.map[name])
 		}
 		return model
 	}
@@ -429,10 +429,10 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 	def ComponentModel toComponentModel(System system){
 		val model = new ComponentModel()
 		model.name = system.name
-		model.unique = system.unique
+		model.unique = system.componentAlias?.unique
 		model.properties = newHashMap("value" -> system.name.toFirstUpper + "SystemInterface")
-		if(system.contextRef != null){		
-			model.contexNames = newHashSet(system.contextRef.context.map[name])
+		if(system.componentAlias?.contextRef != null){		
+			model.contexNames = newHashSet(system.componentAlias?.contextRef.context.map[name])
 		}
 		return model
 	}
@@ -440,10 +440,10 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 	def ComponentModel toComponentModel(Chain system){
 		val model = new ComponentModel()
 		model.name = system.name
-		model.unique = system.unique
+		model.unique = system.componentAlias?.unique
 		model.properties = newHashMap("value" -> system.name.toFirstUpper + "Systems")
-		if(system.contextRef != null){		
-			model.contexNames = newHashSet(system.contextRef.context.map[name])
+		if(system.componentAlias?.contextRef != null){		
+			model.contexNames = newHashSet(system.componentAlias?.contextRef.context.map[name])
 		}
 		return model
 	}
@@ -723,8 +723,8 @@ class EntitasCSharpLightGenerator implements ILangGenerator {
 	
 	def Set<ContextName> allContextNames(System system){
 		val result = <ContextName>newHashSet()
-		if(system.contextRef != null){
-			system.contextRef.context.forEach[result.add(it)]
+		if(system.componentAlias?.contextRef != null){
+			system.componentAlias?.contextRef.context.forEach[result.add(it)]
 		}
 		system.createRules.forEach[result.add(it.contextName)]
 		if(system.input != null){

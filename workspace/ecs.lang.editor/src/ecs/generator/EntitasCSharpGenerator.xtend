@@ -402,18 +402,18 @@ class EntitasCSharpGenerator implements ILangGenerator {
 			val model = it.toComponentModel
 			result.add(model)
 		]
-		project.typeAliases.filter[it.componentAlias].forEach [
+		project.typeAliases.filter[it.componentAlias != null].forEach [
 			val model = it.toComponentModel
 			result.add(model)
 		]
-		project.systems.filter[it.componentAlias].forEach [
+		project.systems.filter[it.componentAlias != null].forEach [
 			val model = it.toComponentModel
 			result.add(model)
 		]
-		project.chains.filter[it.componentAlias].forEach [
+		project.chains.filter[it.componentAlias != null].forEach [
 			val model = new ComponentModel()
 			model.name = it.name
-			model.unique = it.unique
+			model.unique = it.componentAlias?.unique
 			model.properties = newHashMap("value" -> "Entitas.Systems")
 			result.add(model)
 		]
@@ -434,7 +434,7 @@ class EntitasCSharpGenerator implements ILangGenerator {
 	def ComponentModel toComponentModel(Component component){
 		val model = new ComponentModel()
 		model.name = component.name
-		model.unique = component.unique
+		model.unique = component.componentAlias?.unique
 		val properties = newHashMap()
 		if (component.valueType != null) {
 			properties.put("value", component.valueType.typeName)
@@ -451,7 +451,7 @@ class EntitasCSharpGenerator implements ILangGenerator {
 	def ComponentModel toComponentModel(Alias alias){
 		val model = new ComponentModel()
 		model.name = alias.name
-		model.unique = alias.unique
+		model.unique = alias.componentAlias?.unique
 		model.properties = newHashMap("value" -> alias.typeName)
 		return model
 	}
@@ -459,7 +459,7 @@ class EntitasCSharpGenerator implements ILangGenerator {
 	def ComponentModel toComponentModel(System system){
 		val model = new ComponentModel()
 		model.name = system.name
-		model.unique = system.unique
+		model.unique = system.componentAlias?.unique
 		model.properties = newHashMap("value" -> system.name.toUpperCase + "System")
 		return model
 	}
@@ -467,7 +467,7 @@ class EntitasCSharpGenerator implements ILangGenerator {
 	def ComponentModel toComponentModel(Chain system){
 		val model = new ComponentModel()
 		model.name = system.name
-		model.unique = system.unique
+		model.unique = system.componentAlias?.unique
 		model.properties = newHashMap("value" -> system.name.toUpperCase + "Systems")
 		return model
 	}

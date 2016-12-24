@@ -10,6 +10,7 @@ import ecs.lang.AliasRule;
 import ecs.lang.ApiRule;
 import ecs.lang.Chain;
 import ecs.lang.Component;
+import ecs.lang.ComponentAlias;
 import ecs.lang.ComponentProperty;
 import ecs.lang.ContextDefinition;
 import ecs.lang.ContextName;
@@ -71,6 +72,9 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case LangPackage.COMPONENT:
 				sequence_Component(context, (Component) semanticObject); 
+				return; 
+			case LangPackage.COMPONENT_ALIAS:
+				sequence_ComponentAlias(context, (ComponentAlias) semanticObject); 
 				return; 
 			case LangPackage.COMPONENT_PROPERTY:
 				sequence_ComponentProperty(context, (ComponentProperty) semanticObject); 
@@ -164,7 +168,7 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     AComponent returns Alias
 	 *
 	 * Constraint:
-	 *     ((componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? name=ValidID (listOfAliases=AliasList | singleAlias=SingleAlias))
+	 *     (componentAlias=ComponentAlias? name=ValidID (listOfAliases=AliasList | singleAlias=SingleAlias))
 	 */
 	protected void sequence_Alias(ISerializationContext context, Alias semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -191,13 +195,25 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
-	 *         (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? 
+	 *         componentAlias=ComponentAlias? 
 	 *         name=ValidID 
 	 *         (precondition?='precondition' uniqueComp+=UniqueComponentAccess* groups+=Group*)? 
 	 *         children+=[ASystem|ID]+
 	 *     )
 	 */
 	protected void sequence_Chain(ISerializationContext context, Chain semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ComponentAlias returns ComponentAlias
+	 *
+	 * Constraint:
+	 *     (unique?='ucomp'? contextRef=ContextReference? unique?='unique'?)
+	 */
+	protected void sequence_ComponentAlias(ISerializationContext context, ComponentAlias semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -230,8 +246,7 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
-	 *         contextRef=ContextReference? 
-	 *         unique?='unique'? 
+	 *         componentAlias=ComponentAlias 
 	 *         name=ValidID 
 	 *         ((valueType=[Alias|ID] (index?='asIndexKey' | multiIndex?='asMultiIndexKey')?) | properties+=ComponentProperty+ | prefix=STRING)?
 	 *     )
@@ -594,7 +609,7 @@ public class LangSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
-	 *         (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? 
+	 *         componentAlias=ComponentAlias? 
 	 *         init?='init'? 
 	 *         cleanup?='cleanup'? 
 	 *         teardown?='teardown'? 

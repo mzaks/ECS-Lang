@@ -13,7 +13,6 @@ package ecs.lang;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link ecs.lang.Alias#isComponentAlias <em>Component Alias</em>}</li>
  *   <li>{@link ecs.lang.Alias#getListOfAliases <em>List Of Aliases</em>}</li>
  *   <li>{@link ecs.lang.Alias#getSingleAlias <em>Single Alias</em>}</li>
  * </ul>
@@ -24,32 +23,6 @@ package ecs.lang;
  */
 public interface Alias extends AComponent
 {
-  /**
-   * Returns the value of the '<em><b>Component Alias</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Component Alias</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Component Alias</em>' attribute.
-   * @see #setComponentAlias(boolean)
-   * @see ecs.lang.LangPackage#getAlias_ComponentAlias()
-   * @model
-   * @generated
-   */
-  boolean isComponentAlias();
-
-  /**
-   * Sets the value of the '{@link ecs.lang.Alias#isComponentAlias <em>Component Alias</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Component Alias</em>' attribute.
-   * @see #isComponentAlias()
-   * @generated
-   */
-  void setComponentAlias(boolean value);
-
   /**
    * Returns the value of the '<em><b>List Of Aliases</b></em>' containment reference.
    * <!-- begin-user-doc -->

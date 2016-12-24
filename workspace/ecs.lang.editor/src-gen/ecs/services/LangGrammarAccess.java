@@ -6,6 +6,7 @@ package ecs.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -273,13 +274,8 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ecs.Lang.Alias");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAliasKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Assignment cComponentAliasAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final Keyword cComponentAliasCompKeyword_1_0_0 = (Keyword)cComponentAliasAssignment_1_0.eContents().get(0);
-		private final Assignment cContextRefAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cContextRefContextReferenceParserRuleCall_1_1_0 = (RuleCall)cContextRefAssignment_1_1.eContents().get(0);
-		private final Assignment cUniqueAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final Keyword cUniqueUniqueKeyword_1_2_0 = (Keyword)cUniqueAssignment_1_2.eContents().get(0);
+		private final Assignment cComponentAliasAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cComponentAliasComponentAliasParserRuleCall_1_0 = (RuleCall)cComponentAliasAssignment_1.eContents().get(0);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
@@ -289,37 +285,20 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSingleAliasSingleAliasParserRuleCall_3_1_0 = (RuleCall)cSingleAliasAssignment_3_1.eContents().get(0);
 		
 		//Alias:
-		//	'alias' (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? name=ValidID (listOfAliases=AliasList
-		//	| singleAlias=SingleAlias);
+		//	'alias' componentAlias=ComponentAlias? name=ValidID (listOfAliases=AliasList | singleAlias=SingleAlias);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'alias' (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? name=ValidID (listOfAliases=AliasList |
-		//singleAlias=SingleAlias)
+		//'alias' componentAlias=ComponentAlias? name=ValidID (listOfAliases=AliasList | singleAlias=SingleAlias)
 		public Group getGroup() { return cGroup; }
 		
 		//'alias'
 		public Keyword getAliasKeyword_0() { return cAliasKeyword_0; }
 		
-		//(componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)?
-		public Group getGroup_1() { return cGroup_1; }
+		//componentAlias=ComponentAlias?
+		public Assignment getComponentAliasAssignment_1() { return cComponentAliasAssignment_1; }
 		
-		//componentAlias?='comp'
-		public Assignment getComponentAliasAssignment_1_0() { return cComponentAliasAssignment_1_0; }
-		
-		//'comp'
-		public Keyword getComponentAliasCompKeyword_1_0_0() { return cComponentAliasCompKeyword_1_0_0; }
-		
-		//contextRef=ContextReference?
-		public Assignment getContextRefAssignment_1_1() { return cContextRefAssignment_1_1; }
-		
-		//ContextReference
-		public RuleCall getContextRefContextReferenceParserRuleCall_1_1_0() { return cContextRefContextReferenceParserRuleCall_1_1_0; }
-		
-		//unique?='unique'?
-		public Assignment getUniqueAssignment_1_2() { return cUniqueAssignment_1_2; }
-		
-		//'unique'
-		public Keyword getUniqueUniqueKeyword_1_2_0() { return cUniqueUniqueKeyword_1_2_0; }
+		//ComponentAlias
+		public RuleCall getComponentAliasComponentAliasParserRuleCall_1_0() { return cComponentAliasComponentAliasParserRuleCall_1_0; }
 		
 		//name=ValidID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
@@ -341,6 +320,53 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//SingleAlias
 		public RuleCall getSingleAliasSingleAliasParserRuleCall_3_1_0() { return cSingleAliasSingleAliasParserRuleCall_3_1_0; }
+	}
+	public class ComponentAliasElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ecs.Lang.ComponentAlias");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cComponentAliasAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cCompKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Assignment cUniqueAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final Keyword cUniqueUcompKeyword_1_1_0 = (Keyword)cUniqueAssignment_1_1.eContents().get(0);
+		private final Assignment cContextRefAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cContextRefContextReferenceParserRuleCall_2_0 = (RuleCall)cContextRefAssignment_2.eContents().get(0);
+		private final Assignment cUniqueAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final Keyword cUniqueUniqueKeyword_3_0 = (Keyword)cUniqueAssignment_3.eContents().get(0);
+		
+		//ComponentAlias:
+		//	{ComponentAlias} ('comp' | unique?='ucomp') contextRef=ContextReference? unique?='unique'?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{ComponentAlias} ('comp' | unique?='ucomp') contextRef=ContextReference? unique?='unique'?
+		public Group getGroup() { return cGroup; }
+		
+		//{ComponentAlias}
+		public Action getComponentAliasAction_0() { return cComponentAliasAction_0; }
+		
+		//('comp' | unique?='ucomp')
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		
+		//'comp'
+		public Keyword getCompKeyword_1_0() { return cCompKeyword_1_0; }
+		
+		//unique?='ucomp'
+		public Assignment getUniqueAssignment_1_1() { return cUniqueAssignment_1_1; }
+		
+		//'ucomp'
+		public Keyword getUniqueUcompKeyword_1_1_0() { return cUniqueUcompKeyword_1_1_0; }
+		
+		//contextRef=ContextReference?
+		public Assignment getContextRefAssignment_2() { return cContextRefAssignment_2; }
+		
+		//ContextReference
+		public RuleCall getContextRefContextReferenceParserRuleCall_2_0() { return cContextRefContextReferenceParserRuleCall_2_0; }
+		
+		//unique?='unique'?
+		public Assignment getUniqueAssignment_3() { return cUniqueAssignment_3; }
+		
+		//'unique'
+		public Keyword getUniqueUniqueKeyword_3_0() { return cUniqueUniqueKeyword_3_0; }
 	}
 	public class SingleAliasElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ecs.Lang.SingleAlias");
@@ -485,137 +511,128 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 	public class ComponentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ecs.Lang.Component");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cCompKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cContextRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cContextRefContextReferenceParserRuleCall_1_0 = (RuleCall)cContextRefAssignment_1.eContents().get(0);
-		private final Assignment cUniqueAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final Keyword cUniqueUniqueKeyword_2_0 = (Keyword)cUniqueAssignment_2.eContents().get(0);
-		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cNameValidIDParserRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
-		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
-		private final Alternatives cAlternatives_4_0 = (Alternatives)cAlternatives_4.eContents().get(0);
-		private final Group cGroup_4_0_0 = (Group)cAlternatives_4_0.eContents().get(0);
-		private final Keyword cColonKeyword_4_0_0_0 = (Keyword)cGroup_4_0_0.eContents().get(0);
-		private final Assignment cValueTypeAssignment_4_0_0_1 = (Assignment)cGroup_4_0_0.eContents().get(1);
-		private final CrossReference cValueTypeAliasCrossReference_4_0_0_1_0 = (CrossReference)cValueTypeAssignment_4_0_0_1.eContents().get(0);
-		private final RuleCall cValueTypeAliasIDTerminalRuleCall_4_0_0_1_0_1 = (RuleCall)cValueTypeAliasCrossReference_4_0_0_1_0.eContents().get(1);
-		private final Alternatives cAlternatives_4_0_0_2 = (Alternatives)cGroup_4_0_0.eContents().get(2);
-		private final Assignment cIndexAssignment_4_0_0_2_0 = (Assignment)cAlternatives_4_0_0_2.eContents().get(0);
-		private final Keyword cIndexAsIndexKeyKeyword_4_0_0_2_0_0 = (Keyword)cIndexAssignment_4_0_0_2_0.eContents().get(0);
-		private final Assignment cMultiIndexAssignment_4_0_0_2_1 = (Assignment)cAlternatives_4_0_0_2.eContents().get(1);
-		private final Keyword cMultiIndexAsMultiIndexKeyKeyword_4_0_0_2_1_0 = (Keyword)cMultiIndexAssignment_4_0_0_2_1.eContents().get(0);
-		private final Group cGroup_4_0_1 = (Group)cAlternatives_4_0.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_4_0_1_0 = (Keyword)cGroup_4_0_1.eContents().get(0);
-		private final Group cGroup_4_0_1_1 = (Group)cGroup_4_0_1.eContents().get(1);
-		private final Assignment cPropertiesAssignment_4_0_1_1_0 = (Assignment)cGroup_4_0_1_1.eContents().get(0);
-		private final RuleCall cPropertiesComponentPropertyParserRuleCall_4_0_1_1_0_0 = (RuleCall)cPropertiesAssignment_4_0_1_1_0.eContents().get(0);
-		private final Keyword cCommaKeyword_4_0_1_1_1 = (Keyword)cGroup_4_0_1_1.eContents().get(1);
-		private final Keyword cRightCurlyBracketKeyword_4_0_1_2 = (Keyword)cGroup_4_0_1.eContents().get(2);
-		private final Group cGroup_4_1 = (Group)cAlternatives_4.eContents().get(1);
-		private final Keyword cSolidusKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
-		private final Assignment cPrefixAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
-		private final RuleCall cPrefixSTRINGTerminalRuleCall_4_1_1_0 = (RuleCall)cPrefixAssignment_4_1_1.eContents().get(0);
+		private final Assignment cComponentAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cComponentAliasComponentAliasParserRuleCall_0_0 = (RuleCall)cComponentAliasAssignment_0.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Alternatives cAlternatives_2_0 = (Alternatives)cAlternatives_2.eContents().get(0);
+		private final Group cGroup_2_0_0 = (Group)cAlternatives_2_0.eContents().get(0);
+		private final Keyword cColonKeyword_2_0_0_0 = (Keyword)cGroup_2_0_0.eContents().get(0);
+		private final Assignment cValueTypeAssignment_2_0_0_1 = (Assignment)cGroup_2_0_0.eContents().get(1);
+		private final CrossReference cValueTypeAliasCrossReference_2_0_0_1_0 = (CrossReference)cValueTypeAssignment_2_0_0_1.eContents().get(0);
+		private final RuleCall cValueTypeAliasIDTerminalRuleCall_2_0_0_1_0_1 = (RuleCall)cValueTypeAliasCrossReference_2_0_0_1_0.eContents().get(1);
+		private final Alternatives cAlternatives_2_0_0_2 = (Alternatives)cGroup_2_0_0.eContents().get(2);
+		private final Assignment cIndexAssignment_2_0_0_2_0 = (Assignment)cAlternatives_2_0_0_2.eContents().get(0);
+		private final Keyword cIndexAsIndexKeyKeyword_2_0_0_2_0_0 = (Keyword)cIndexAssignment_2_0_0_2_0.eContents().get(0);
+		private final Assignment cMultiIndexAssignment_2_0_0_2_1 = (Assignment)cAlternatives_2_0_0_2.eContents().get(1);
+		private final Keyword cMultiIndexAsMultiIndexKeyKeyword_2_0_0_2_1_0 = (Keyword)cMultiIndexAssignment_2_0_0_2_1.eContents().get(0);
+		private final Group cGroup_2_0_1 = (Group)cAlternatives_2_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2_0_1_0 = (Keyword)cGroup_2_0_1.eContents().get(0);
+		private final Group cGroup_2_0_1_1 = (Group)cGroup_2_0_1.eContents().get(1);
+		private final Assignment cPropertiesAssignment_2_0_1_1_0 = (Assignment)cGroup_2_0_1_1.eContents().get(0);
+		private final RuleCall cPropertiesComponentPropertyParserRuleCall_2_0_1_1_0_0 = (RuleCall)cPropertiesAssignment_2_0_1_1_0.eContents().get(0);
+		private final Keyword cCommaKeyword_2_0_1_1_1 = (Keyword)cGroup_2_0_1_1.eContents().get(1);
+		private final Keyword cRightCurlyBracketKeyword_2_0_1_2 = (Keyword)cGroup_2_0_1.eContents().get(2);
+		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
+		private final Keyword cSolidusKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cPrefixAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cPrefixSTRINGTerminalRuleCall_2_1_1_0 = (RuleCall)cPrefixAssignment_2_1_1.eContents().get(0);
 		
 		//Component:
-		//	'comp' contextRef=ContextReference? unique?='unique'? name=ValidID (((':' valueType=[Alias] (index?='asIndexKey' |
-		//	multiIndex?='asMultiIndexKey')?)? | '{' (properties+=ComponentProperty ','?)+ '}') | '/' prefix=STRING);
+		//	componentAlias=ComponentAlias
+		//	name=ValidID (((':' valueType=[Alias] (index?='asIndexKey' | multiIndex?='asMultiIndexKey')?)? | '{'
+		//	(properties+=ComponentProperty ','?)+ '}') | '/' prefix=STRING);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'comp' contextRef=ContextReference? unique?='unique'? name=ValidID (((':' valueType=[Alias] (index?='asIndexKey' |
+		////('comp' | unique ?= 'ucomp') (contextRef = ContextReference)? (unique ?= 'unique')?
+		//componentAlias=ComponentAlias name=ValidID (((':' valueType=[Alias] (index?='asIndexKey' |
 		//multiIndex?='asMultiIndexKey')?)? | '{' (properties+=ComponentProperty ','?)+ '}') | '/' prefix=STRING)
 		public Group getGroup() { return cGroup; }
 		
-		//'comp'
-		public Keyword getCompKeyword_0() { return cCompKeyword_0; }
+		////('comp' | unique ?= 'ucomp') (contextRef = ContextReference)? (unique ?= 'unique')?
+		//componentAlias=ComponentAlias
+		public Assignment getComponentAliasAssignment_0() { return cComponentAliasAssignment_0; }
 		
-		//contextRef=ContextReference?
-		public Assignment getContextRefAssignment_1() { return cContextRefAssignment_1; }
-		
-		//ContextReference
-		public RuleCall getContextRefContextReferenceParserRuleCall_1_0() { return cContextRefContextReferenceParserRuleCall_1_0; }
-		
-		//unique?='unique'?
-		public Assignment getUniqueAssignment_2() { return cUniqueAssignment_2; }
-		
-		//'unique'
-		public Keyword getUniqueUniqueKeyword_2_0() { return cUniqueUniqueKeyword_2_0; }
+		//ComponentAlias
+		public RuleCall getComponentAliasComponentAliasParserRuleCall_0_0() { return cComponentAliasComponentAliasParserRuleCall_0_0; }
 		
 		//name=ValidID
-		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ValidID
-		public RuleCall getNameValidIDParserRuleCall_3_0() { return cNameValidIDParserRuleCall_3_0; }
+		public RuleCall getNameValidIDParserRuleCall_1_0() { return cNameValidIDParserRuleCall_1_0; }
 		
 		//(((':' valueType=[Alias] (index?='asIndexKey' | multiIndex?='asMultiIndexKey')?)? | '{' (properties+=ComponentProperty
 		//','?)+ '}') | '/' prefix=STRING)
-		public Alternatives getAlternatives_4() { return cAlternatives_4; }
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//((':' valueType=[Alias] (index?='asIndexKey' | multiIndex?='asMultiIndexKey')?)? | '{' (properties+=ComponentProperty
 		//','?)+ '}')
-		public Alternatives getAlternatives_4_0() { return cAlternatives_4_0; }
+		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
 		
 		//(':' valueType=[Alias] (index?='asIndexKey' | multiIndex?='asMultiIndexKey')?)?
-		public Group getGroup_4_0_0() { return cGroup_4_0_0; }
+		public Group getGroup_2_0_0() { return cGroup_2_0_0; }
 		
 		//':'
-		public Keyword getColonKeyword_4_0_0_0() { return cColonKeyword_4_0_0_0; }
+		public Keyword getColonKeyword_2_0_0_0() { return cColonKeyword_2_0_0_0; }
 		
 		//valueType=[Alias]
-		public Assignment getValueTypeAssignment_4_0_0_1() { return cValueTypeAssignment_4_0_0_1; }
+		public Assignment getValueTypeAssignment_2_0_0_1() { return cValueTypeAssignment_2_0_0_1; }
 		
 		//[Alias]
-		public CrossReference getValueTypeAliasCrossReference_4_0_0_1_0() { return cValueTypeAliasCrossReference_4_0_0_1_0; }
+		public CrossReference getValueTypeAliasCrossReference_2_0_0_1_0() { return cValueTypeAliasCrossReference_2_0_0_1_0; }
 		
 		//ID
-		public RuleCall getValueTypeAliasIDTerminalRuleCall_4_0_0_1_0_1() { return cValueTypeAliasIDTerminalRuleCall_4_0_0_1_0_1; }
+		public RuleCall getValueTypeAliasIDTerminalRuleCall_2_0_0_1_0_1() { return cValueTypeAliasIDTerminalRuleCall_2_0_0_1_0_1; }
 		
 		//(index?='asIndexKey' | multiIndex?='asMultiIndexKey')?
-		public Alternatives getAlternatives_4_0_0_2() { return cAlternatives_4_0_0_2; }
+		public Alternatives getAlternatives_2_0_0_2() { return cAlternatives_2_0_0_2; }
 		
 		//index?='asIndexKey'
-		public Assignment getIndexAssignment_4_0_0_2_0() { return cIndexAssignment_4_0_0_2_0; }
+		public Assignment getIndexAssignment_2_0_0_2_0() { return cIndexAssignment_2_0_0_2_0; }
 		
 		//'asIndexKey'
-		public Keyword getIndexAsIndexKeyKeyword_4_0_0_2_0_0() { return cIndexAsIndexKeyKeyword_4_0_0_2_0_0; }
+		public Keyword getIndexAsIndexKeyKeyword_2_0_0_2_0_0() { return cIndexAsIndexKeyKeyword_2_0_0_2_0_0; }
 		
 		//multiIndex?='asMultiIndexKey'
-		public Assignment getMultiIndexAssignment_4_0_0_2_1() { return cMultiIndexAssignment_4_0_0_2_1; }
+		public Assignment getMultiIndexAssignment_2_0_0_2_1() { return cMultiIndexAssignment_2_0_0_2_1; }
 		
 		//'asMultiIndexKey'
-		public Keyword getMultiIndexAsMultiIndexKeyKeyword_4_0_0_2_1_0() { return cMultiIndexAsMultiIndexKeyKeyword_4_0_0_2_1_0; }
+		public Keyword getMultiIndexAsMultiIndexKeyKeyword_2_0_0_2_1_0() { return cMultiIndexAsMultiIndexKeyKeyword_2_0_0_2_1_0; }
 		
 		//'{' (properties+=ComponentProperty ','?)+ '}'
-		public Group getGroup_4_0_1() { return cGroup_4_0_1; }
+		public Group getGroup_2_0_1() { return cGroup_2_0_1; }
 		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_4_0_1_0() { return cLeftCurlyBracketKeyword_4_0_1_0; }
+		public Keyword getLeftCurlyBracketKeyword_2_0_1_0() { return cLeftCurlyBracketKeyword_2_0_1_0; }
 		
 		//(properties+=ComponentProperty ','?)+
-		public Group getGroup_4_0_1_1() { return cGroup_4_0_1_1; }
+		public Group getGroup_2_0_1_1() { return cGroup_2_0_1_1; }
 		
 		//properties+=ComponentProperty
-		public Assignment getPropertiesAssignment_4_0_1_1_0() { return cPropertiesAssignment_4_0_1_1_0; }
+		public Assignment getPropertiesAssignment_2_0_1_1_0() { return cPropertiesAssignment_2_0_1_1_0; }
 		
 		//ComponentProperty
-		public RuleCall getPropertiesComponentPropertyParserRuleCall_4_0_1_1_0_0() { return cPropertiesComponentPropertyParserRuleCall_4_0_1_1_0_0; }
+		public RuleCall getPropertiesComponentPropertyParserRuleCall_2_0_1_1_0_0() { return cPropertiesComponentPropertyParserRuleCall_2_0_1_1_0_0; }
 		
 		//','?
-		public Keyword getCommaKeyword_4_0_1_1_1() { return cCommaKeyword_4_0_1_1_1; }
+		public Keyword getCommaKeyword_2_0_1_1_1() { return cCommaKeyword_2_0_1_1_1; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_4_0_1_2() { return cRightCurlyBracketKeyword_4_0_1_2; }
+		public Keyword getRightCurlyBracketKeyword_2_0_1_2() { return cRightCurlyBracketKeyword_2_0_1_2; }
 		
 		//'/' prefix=STRING
-		public Group getGroup_4_1() { return cGroup_4_1; }
+		public Group getGroup_2_1() { return cGroup_2_1; }
 		
 		//'/'
-		public Keyword getSolidusKeyword_4_1_0() { return cSolidusKeyword_4_1_0; }
+		public Keyword getSolidusKeyword_2_1_0() { return cSolidusKeyword_2_1_0; }
 		
 		//prefix=STRING
-		public Assignment getPrefixAssignment_4_1_1() { return cPrefixAssignment_4_1_1; }
+		public Assignment getPrefixAssignment_2_1_1() { return cPrefixAssignment_2_1_1; }
 		
 		//STRING
-		public RuleCall getPrefixSTRINGTerminalRuleCall_4_1_1_0() { return cPrefixSTRINGTerminalRuleCall_4_1_1_0; }
+		public RuleCall getPrefixSTRINGTerminalRuleCall_2_1_1_0() { return cPrefixSTRINGTerminalRuleCall_2_1_1_0; }
 	}
 	public class ComponentPropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ecs.Lang.ComponentProperty");
@@ -656,13 +673,8 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ecs.Lang.System");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSysKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Assignment cComponentAliasAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final Keyword cComponentAliasCompKeyword_1_0_0 = (Keyword)cComponentAliasAssignment_1_0.eContents().get(0);
-		private final Assignment cContextRefAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cContextRefContextReferenceParserRuleCall_1_1_0 = (RuleCall)cContextRefAssignment_1_1.eContents().get(0);
-		private final Assignment cUniqueAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final Keyword cUniqueUniqueKeyword_1_2_0 = (Keyword)cUniqueAssignment_1_2.eContents().get(0);
+		private final Assignment cComponentAliasAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cComponentAliasComponentAliasParserRuleCall_1_0 = (RuleCall)cComponentAliasAssignment_1.eContents().get(0);
 		private final Assignment cInitAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final Keyword cInitInitKeyword_2_0 = (Keyword)cInitAssignment_2.eContents().get(0);
 		private final Assignment cCleanupAssignment_3 = (Assignment)cGroup.eContents().get(3);
@@ -685,8 +697,7 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 		
 		//System:
-		//	'sys' (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? init?='init'? cleanup?='cleanup'?
-		//	teardown?='teardown'? name=ValidID '{'
+		//	'sys' componentAlias=ComponentAlias? init?='init'? cleanup?='cleanup'? teardown?='teardown'? name=ValidID '{'
 		//	input=Input?
 		//	uniqueComp+=UniqueComponentAccess*
 		//	groups+=Group*
@@ -695,34 +706,18 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'sys' (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? init?='init'? cleanup?='cleanup'?
-		//teardown?='teardown'? name=ValidID '{' input=Input? uniqueComp+=UniqueComponentAccess* groups+=Group* index+=Index*
-		//createRules+=CreateRule* '}'
+		//'sys' componentAlias=ComponentAlias? init?='init'? cleanup?='cleanup'? teardown?='teardown'? name=ValidID '{'
+		//input=Input? uniqueComp+=UniqueComponentAccess* groups+=Group* index+=Index* createRules+=CreateRule* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'sys'
 		public Keyword getSysKeyword_0() { return cSysKeyword_0; }
 		
-		//(componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)?
-		public Group getGroup_1() { return cGroup_1; }
+		//componentAlias=ComponentAlias?
+		public Assignment getComponentAliasAssignment_1() { return cComponentAliasAssignment_1; }
 		
-		//componentAlias?='comp'
-		public Assignment getComponentAliasAssignment_1_0() { return cComponentAliasAssignment_1_0; }
-		
-		//'comp'
-		public Keyword getComponentAliasCompKeyword_1_0_0() { return cComponentAliasCompKeyword_1_0_0; }
-		
-		//contextRef=ContextReference?
-		public Assignment getContextRefAssignment_1_1() { return cContextRefAssignment_1_1; }
-		
-		//ContextReference
-		public RuleCall getContextRefContextReferenceParserRuleCall_1_1_0() { return cContextRefContextReferenceParserRuleCall_1_1_0; }
-		
-		//unique?='unique'?
-		public Assignment getUniqueAssignment_1_2() { return cUniqueAssignment_1_2; }
-		
-		//'unique'
-		public Keyword getUniqueUniqueKeyword_1_2_0() { return cUniqueUniqueKeyword_1_2_0; }
+		//ComponentAlias
+		public RuleCall getComponentAliasComponentAliasParserRuleCall_1_0() { return cComponentAliasComponentAliasParserRuleCall_1_0; }
 		
 		//init?='init'?
 		public Assignment getInitAssignment_2() { return cInitAssignment_2; }
@@ -1625,13 +1620,8 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ecs.Lang.Chain");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cChainKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Assignment cComponentAliasAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final Keyword cComponentAliasCompKeyword_1_0_0 = (Keyword)cComponentAliasAssignment_1_0.eContents().get(0);
-		private final Assignment cContextRefAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cContextRefContextReferenceParserRuleCall_1_1_0 = (RuleCall)cContextRefAssignment_1_1.eContents().get(0);
-		private final Assignment cUniqueAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final Keyword cUniqueUniqueKeyword_1_2_0 = (Keyword)cUniqueAssignment_1_2.eContents().get(0);
+		private final Assignment cComponentAliasAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cComponentAliasComponentAliasParserRuleCall_1_0 = (RuleCall)cComponentAliasAssignment_1.eContents().get(0);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameValidIDParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
@@ -1653,42 +1643,25 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//Chain:
-		//	'chain' (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? name=ValidID '{'
-		//	(precondition?='precondition' ('{'
+		//	'chain' componentAlias=ComponentAlias? name=ValidID '{' (precondition?='precondition' ('{'
 		//	uniqueComp+=UniqueComponentAccess*
 		//	groups+=Group*
 		//	'}')?)? (children+=[ASystem] ','?)+
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'chain' (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? name=ValidID '{'
-		//(precondition?='precondition' ('{' uniqueComp+=UniqueComponentAccess* groups+=Group* '}')?)? (children+=[ASystem]
-		//','?)+ '}'
+		//'chain' componentAlias=ComponentAlias? name=ValidID '{' (precondition?='precondition' ('{'
+		//uniqueComp+=UniqueComponentAccess* groups+=Group* '}')?)? (children+=[ASystem] ','?)+ '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'chain'
 		public Keyword getChainKeyword_0() { return cChainKeyword_0; }
 		
-		//(componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)?
-		public Group getGroup_1() { return cGroup_1; }
+		//componentAlias=ComponentAlias?
+		public Assignment getComponentAliasAssignment_1() { return cComponentAliasAssignment_1; }
 		
-		//componentAlias?='comp'
-		public Assignment getComponentAliasAssignment_1_0() { return cComponentAliasAssignment_1_0; }
-		
-		//'comp'
-		public Keyword getComponentAliasCompKeyword_1_0_0() { return cComponentAliasCompKeyword_1_0_0; }
-		
-		//contextRef=ContextReference?
-		public Assignment getContextRefAssignment_1_1() { return cContextRefAssignment_1_1; }
-		
-		//ContextReference
-		public RuleCall getContextRefContextReferenceParserRuleCall_1_1_0() { return cContextRefContextReferenceParserRuleCall_1_1_0; }
-		
-		//unique?='unique'?
-		public Assignment getUniqueAssignment_1_2() { return cUniqueAssignment_1_2; }
-		
-		//'unique'
-		public Keyword getUniqueUniqueKeyword_1_2_0() { return cUniqueUniqueKeyword_1_2_0; }
+		//ComponentAlias
+		public RuleCall getComponentAliasComponentAliasParserRuleCall_1_0() { return cComponentAliasComponentAliasParserRuleCall_1_0; }
 		
 		//name=ValidID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
@@ -2105,6 +2078,7 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 	private final PlatformIDElements pPlatformID;
 	private final NamespaceElements pNamespace;
 	private final AliasElements pAlias;
+	private final ComponentAliasElements pComponentAlias;
 	private final SingleAliasElements pSingleAlias;
 	private final AliasListElements pAliasList;
 	private final AliasRuleElements pAliasRule;
@@ -2145,6 +2119,7 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 		this.pPlatformID = new PlatformIDElements();
 		this.pNamespace = new NamespaceElements();
 		this.pAlias = new AliasElements();
+		this.pComponentAlias = new ComponentAliasElements();
 		this.pSingleAlias = new SingleAliasElements();
 		this.pAliasList = new AliasListElements();
 		this.pAliasRule = new AliasRuleElements();
@@ -2275,14 +2250,23 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Alias:
-	//	'alias' (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? name=ValidID (listOfAliases=AliasList
-	//	| singleAlias=SingleAlias);
+	//	'alias' componentAlias=ComponentAlias? name=ValidID (listOfAliases=AliasList | singleAlias=SingleAlias);
 	public AliasElements getAliasAccess() {
 		return pAlias;
 	}
 	
 	public ParserRule getAliasRule() {
 		return getAliasAccess().getRule();
+	}
+	
+	//ComponentAlias:
+	//	{ComponentAlias} ('comp' | unique?='ucomp') contextRef=ContextReference? unique?='unique'?;
+	public ComponentAliasElements getComponentAliasAccess() {
+		return pComponentAlias;
+	}
+	
+	public ParserRule getComponentAliasRule() {
+		return getComponentAliasAccess().getRule();
 	}
 	
 	//SingleAlias:
@@ -2326,8 +2310,9 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Component:
-	//	'comp' contextRef=ContextReference? unique?='unique'? name=ValidID (((':' valueType=[Alias] (index?='asIndexKey' |
-	//	multiIndex?='asMultiIndexKey')?)? | '{' (properties+=ComponentProperty ','?)+ '}') | '/' prefix=STRING);
+	//	componentAlias=ComponentAlias
+	//	name=ValidID (((':' valueType=[Alias] (index?='asIndexKey' | multiIndex?='asMultiIndexKey')?)? | '{'
+	//	(properties+=ComponentProperty ','?)+ '}') | '/' prefix=STRING);
 	public ComponentElements getComponentAccess() {
 		return pComponent;
 	}
@@ -2347,8 +2332,7 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//System:
-	//	'sys' (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? init?='init'? cleanup?='cleanup'?
-	//	teardown?='teardown'? name=ValidID '{'
+	//	'sys' componentAlias=ComponentAlias? init?='init'? cleanup?='cleanup'? teardown?='teardown'? name=ValidID '{'
 	//	input=Input?
 	//	uniqueComp+=UniqueComponentAccess*
 	//	groups+=Group*
@@ -2466,8 +2450,7 @@ public class LangGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Chain:
-	//	'chain' (componentAlias?='comp' contextRef=ContextReference? unique?='unique'?)? name=ValidID '{'
-	//	(precondition?='precondition' ('{'
+	//	'chain' componentAlias=ComponentAlias? name=ValidID '{' (precondition?='precondition' ('{'
 	//	uniqueComp+=UniqueComponentAccess*
 	//	groups+=Group*
 	//	'}')?)? (children+=[ASystem] ','?)+
