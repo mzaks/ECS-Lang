@@ -1,3 +1,7 @@
+# This Repo is depricated
+Please visit following repo https://github.com/mzaks/Entitas-Lang
+
+
 # Motivation
 This project explores the posibility of a language designed for entity component system architecture.
 The code is stored as `.ecs` file and is transpiled to different platforms.
